@@ -1,9 +1,9 @@
 configuration{
     modi: "run,drun";
     lines: 5;
-    font: "JetBrainsMono Nerd Font 14";
+    font: "CaskaydiaCove Nerd Font 14";
     show-icons: true;
-    icon-theme: "tela-black";
+    icon-theme: "oomox-aesthetic-dark";
     terminal: "kitty";
     drun-display-format: "{icon} {name}";
     location: 0;
@@ -44,7 +44,7 @@ inputbar {
 }
 
 prompt {
-    background-color: @green-alt;
+    background-color: @purple;
     padding: 6px;
     text-color: @background;
     border-radius: 3px;
@@ -83,7 +83,7 @@ element-icon {
 
 element selected {
     background-color:  @background ;
-    text-color: @purple  ;
+    text-color: @blue;
 }
 
 mode-switcher {
