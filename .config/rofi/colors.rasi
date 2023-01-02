@@ -1,0 +1,22 @@
+* {
+background: #0E1115;
+foreground: #ECF2F2;
+red: #F865A5;
+red-alt: #FF598B;
+yellow: #FFC457;
+yellow-alt: #FFB630;
+green: #29EDBE;
+green-alt: #1FE0A6;
+blue: #33AEFF;
+blue-alt: #36A4EE;
+purple: #AF54FF;
+purple-alt: #B467F9;
+pink: #FC72FF;
+pink-alt: #FE7CBD;
+orange: #FF8364;
+orange-alt: #FF886A;
+cyan: #2BE3FC;
+cyan-alt: #2BCAFC;
+}
+
+
