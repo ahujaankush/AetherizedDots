@@ -3,7 +3,7 @@
 	url = git@github.com:ahujaankush/AetherizedZSH.git
 [submodule ".config/nvim"]
 	path = .config/nvim
-	url = https://github.com/ahujaankush/AetherizedGigachad
+	url = git@github.com:ahujaankush/AetherizedGigachad.git
 [submodule ".config/awesome"]
 	path = .config/awesome
-	url = https://github.com/ahujaankush/awesomeAetherized
+	url = git@github.com:ahujaankush/awesomeAetherized.git
