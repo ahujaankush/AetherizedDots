@@ -29,7 +29,7 @@ window {
     border: 3px;
     border-color: @background;
     background-color: @background;
-    border-radius: 8px;
+    border-radius: 0px;
 }
 
 mainbox {
@@ -47,7 +47,7 @@ prompt {
     background-color: @purple;
     padding: 6px;
     text-color: @background;
-    border-radius: 3px;
+    border-radius: 10px;
     margin: 20px 0px 0px 20px;
 }
 
