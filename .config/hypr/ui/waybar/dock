@@ -1,0 +1,167 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "exclusive": false,
+  "height": 60,
+  "modules-left": [
+    "custom/avatar",
+    "custom/todo",
+    "custom/notif",
+    "custom/script",
+    "custom/wp"
+  ],
+  "modules-center": [
+    "wlr/taskbar"
+  ],
+  "modules-right": [
+    "tray"
+  ],
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 30,
+    "icon-theme": "oomox-aesthetic-dark",
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+  },
+  "tray": {
+    "icon-size": 25,
+    "spacing": 10
+  },
+  "clock": {
+    "format": "<span foreground='#00ffb1'>{:%I</span>\n<span foreground='#2798e4'>%M}</span>",
+    "format-alt": "<span foreground='#2798e4'>{:%d</span>\n<span foreground='#00ffb1'>%m}</span>",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "on-click-right": "$HOME/.config/hypr/scripts/apps/eww.sh open calbox --toggle",
+    "interval": 1
+  },
+  "custom/todo": {
+    "on-click": "$HOME/.config/hypr/scripts/apps/eww.sh open sidebar --toggle",
+    "on-click-right": "$HOME/.config/hypr/scripts/apps/eww.sh open symphony --toggle",
+    "format": "朗"
+  },
+  "custom/notif": {
+    "on-click": "dunstctl set-paused toggle && $HOME/.config/hypr/ui/waybar/dunst.sh",
+    "exec": "$HOME/.config/hypr/ui/waybar/dunst.sh",
+    "interval": 10
+  },
+  "custom/script": {
+    "on-click": "$HOME/.config/hypr/scripts/apps/eww.sh open sidebar --toggle",
+    "on-click-right": "$HOME/.config/hypr/scripts/apps/eww.sh open symphony --toggle",
+    "format": "賂"
+  },
+  "custom/wp": {
+    "on-click": "$HOME/.config/hypr/scripts/apps/eww.sh open sidebar --toggle",
+    "on-click-right": "$HOME/.config/hypr/scripts/apps/eww.sh open symphony --toggle",
+    "format": ""
+  },
+  "custom/avatar": {
+    "on-click": "$HOME/.config/hypr/scripts/apps/eww.sh open powermenu --toggle",
+    "format": " "
+  },
+  "backlight": {
+    "format": "{icon}",
+    "format-icons": [
+      "󰃞",
+      "󰃝",
+      "󰃟",
+      "󰃠"
+    ],
+    "on-click": "killall gammastep || gammastep -O 3500K",
+    "on-click-middle": "$HOME/.config/rofi/applets/bin/brightness.sh",
+    "on-scroll-up": "light -U 5",
+    "on-scroll-down": "light -A 5"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}",
+    "format-charging": "󱐥",
+    "format-plugged": "󱐥",
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "on-click": "hyprctl dispatch exec [float] foot battop",
+    "on-click-right": "$HOME/.config/rofi/applets/bin/battery.sh"
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon}",
+    "format-bluetooth-muted": "󰝟",
+    "format-muted": "󰝟",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "蓼",
+      "headset": "蓼",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ]
+    },
+    "on-click": "$HOME/.config/hypr/scripts/apps/eww.sh open census --toggle",
+    "on-click-right": "killall pavucontrol-qt || pavucontrol-qt",
+    "on-click-middle": "$HOME/.config/rofi/applets/bin/volume.sh"
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{num_connections} connected\t{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "killall blueman-manager || hyprctl dispatch exec [float] blueman-manager"
+  },
+  "network": {
+    "format": "󰖩",
+    "format-wifi": "󰖩",
+    "format-ethernet": "󰱔",
+    "format-disconnected": "󰱟",
+    "tooltip-format": "嬨 {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "  {essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": " {ifname}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "hyprctl dispatch exec [float] foot nmtui"
+  },
+  "wlr/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "on-click": "activate",
+    "active-only": false,
+    "persistent_workspaces": {
+      "0": [],
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": []
+    },
+    "format-icons": {
+      "urgent": "\ufa44",
+      "active": "\uf963",
+      "default": "\uf75a"
+    },
+    "format": "{icon}"
+  }
+}

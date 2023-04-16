@@ -1,0 +1,17 @@
+(include "./src/yuck/_vars.yuck")
+(include "./src/yuck/_modules.yuck")
+
+(include "./src/yuck/census/_widgets.yuck")
+(include "./src/yuck/census/_window.yuck")
+
+(include "./src/yuck/calbox/_widgets.yuck")
+(include "./src/yuck/calbox/_window.yuck")
+
+(include "./src/yuck/power/_widgets.yuck")
+(include "./src/yuck/power/_window.yuck")
+
+(include "./src/yuck/sidebar/_widgets.yuck")
+(include "./src/yuck/sidebar/_window.yuck")
+
+(include "./src/yuck/symphony/_widgets.yuck")
+(include "./src/yuck/symphony/_window.yuck")

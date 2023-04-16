@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" version="1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <linearGradient id="linearGradient986" x1="13.51" x2="54.293" y1="13.195" y2="53.978" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#fefefe" offset="0"/>
+   <stop stop-color="#d2f3ff" offset=".18101"/>
+   <stop stop-color="#9fe7fc" offset=".48345"/>
+   <stop stop-color="#add0d5" offset=".57177"/>
+   <stop stop-color="#f05d06" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="32" cy="32" r="30" fill="url(#linearGradient986)" stroke-width="5.375" style="paint-order:stroke fill markers"/>
+  <path d="m31.855 2a30 30 0 0 0-29.855 30 30 30 0 0 0 30 30 30 30 0 0 0 30-30 30 30 0 0 0-30-30 30 30 0 0 0-0.14453 0zm0.001953 0.5a29.5 29.5 0 0 1 0.14258 0 29.5 29.5 0 0 1 29.5 29.5 29.5 29.5 0 0 1-29.5 29.5 29.5 29.5 0 0 1-29.5-29.5 29.5 29.5 0 0 1 29.357-29.5z" fill="#020202" opacity=".5" stroke-width="5.375" style="paint-order:stroke fill markers"/>
+  <path d="m32 18.5a13.5 13.5 0 0 0-13.5 13.5 13.5 13.5 0 0 0 13.5 13.5 13.5 13.5 0 0 0 13.5-13.5 13.5 13.5 0 0 0-13.5-13.5zm-0.10742 0.5a13 13 0 0 1 0.10742 0 13 13 0 0 1 13 13 13 13 0 0 1-13 13 13 13 0 0 1-13-13 13 13 0 0 1 12.893-13z" fill="#fff" opacity=".3" stroke-width="4.5686" style="paint-order:stroke fill markers"/>
+  <circle cx="32" cy="32" r="12.5" fill="#fff" stroke-width="4.2302" style="paint-order:stroke fill markers"/>
+  <circle cx="32" cy="32" r="11.5" fill="#030001" stroke-width="3.8917" style="paint-order:stroke fill markers"/>
+  <circle cx="32" cy="32" r="6.5" fill="#85909d" stroke-width="2.1997" style="paint-order:stroke fill markers"/>
+  <circle cx="32" cy="32" r="6" fill="#fff" stroke-width="2.0305" style="paint-order:stroke fill markers"/>
+ </g>
+</svg>

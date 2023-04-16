@@ -1,0 +1,48 @@
+window {
+  background: transparent;
+}
+
+button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 25%;
+  border: none;
+  transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+#lock {
+  background-image: url("./lock.png");
+}
+
+#lock:focus {
+  background-image: url("./lock-hover.png");
+}
+
+#logout {
+  background-image: url("./logout.png");
+}
+#logout:focus {
+  background-image: url("./logout-hover.png");
+}
+
+#suspend {
+  background-image: url("./sleep.png");
+}
+#suspend:focus {
+  background-image: url("./sleep-hover.png");
+}
+
+#shutdown {
+  background-image: url("./power.png");
+}
+#shutdown:focus {
+  background-image: url("./power-hover.png");
+}
+
+#reboot {
+  background-image: url("./restart.png");
+}
+#reboot:focus {
+  background-image: url("./restart-hover.png");
+}

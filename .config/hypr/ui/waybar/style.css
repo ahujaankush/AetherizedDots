@@ -1,0 +1,277 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-weight: 400;
+}
+
+window#waybar {
+  background-color: rgba(14, 17, 21, 0.8);
+  color: #b3b7bd;
+}
+
+#custom-launcher {
+  font-family: Phosphor, Dosis, sans-serif;
+  background: linear-gradient(90deg, #00ffb1 0%, #2798e4 80%);
+  color: #0e1115;
+  margin: 10px;
+  padding: 14px 0;
+  font-size: 27px;
+  border-top-left-radius: 25px;
+}
+
+#workspaces {
+  background-color: #171c21;
+  margin: 0 10px;
+  border-bottom-right-radius: 25px;
+}
+
+#custom-todo {
+  font-family: Phosphor, Dosis, sans-serif;
+  background-color: rgba(45, 49, 57, 0.25);
+  color: #2bfcfc;
+  border-bottom: 2px solid #2bfcfc;
+  border-left: 2px solid #2bfcfc;
+  border-top-left-radius: 25px;
+  margin: 10px 0;
+  padding: 0 10px;
+  font-size: 27px;
+}
+
+#custom-notif {
+  font-family: Phosphor, Dosis, sans-serif;
+  background-color: rgba(45, 49, 57, 0.5);
+  color: #b467f9;
+  border-bottom: 2px solid #b467f9;
+  border-left: 2px solid #b467f9;
+  margin: 10px 0;
+  padding: 0 10px;
+  font-size: 25px;
+}
+
+#custom-script {
+  font-family: Phosphor, Dosis, sans-serif;
+  background-color: rgba(45, 49, 57, 0.75);
+  color: #f7467b;
+  border-bottom: 2px solid #f7467b;
+  border-left: 2px solid #f7467b;
+  margin: 10px 0;
+  padding: 0 10px;
+  font-size: 25px;
+}
+
+#custom-wp {
+  font-family: Phosphor, Dosis, sans-serif;
+  background-color: rgba(45, 49, 57, 1);
+  color: #ffc457;
+  border-bottom: 2px solid #ffc457;
+  border-left: 2px solid #ffc457;
+  margin: 10px 0;
+  padding: 0 10px;
+  font-size: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+#workspaces button {
+  font-family: Phosphor, Dosis, sans-serif;
+  color: #ffc457;
+  font-size: 25px;
+  transition: 0.3s;
+}
+
+#workspaces button.focused {
+  color: #171c21;
+  border-bottom: none;
+}
+
+#workspaces button.active {
+  border-right: 2px solid #00ffb1;
+  color: #00ffb1;
+  border-bottom: none;
+}
+
+#workspaces button:hover {
+  background-color: transparent;
+}
+
+#workspaces button:last-child {
+  border-bottom-right-radius: 25px;
+}
+
+#workspaces button.urgent {
+  color: #f7467b;
+}
+
+#tray {
+  background-color: #171c21;
+  margin: 10px 20px;
+  padding: 0 20px;
+  border-top-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-left: 2px solid #00ffb1;
+  border-right: 2px solid #f7467b;
+}
+
+#custom-prev {
+  color: #b3b7bd;
+  font-family: feather, Lato, "Iosevka Nerd Font", sans-serif;
+  font-size: 22px;
+  background-color: #171c21;
+  margin: 0 10px;
+  padding: 15px 0;
+  border-top-left-radius: 25px;
+  /* border-bottom-right-radius: 25px; */
+  border-left: 2px solid #2bfcfc;
+  border-right: 2px solid #b467f9;
+}
+
+#mpris {
+  color: #b3b7bd;
+  font-family: feather, Lato, "Iosevka Nerd Font", sans-serif;
+  font-size: 25px;
+  background-color: #171c21;
+  margin: 0 10px;
+  padding: 8px 0;
+  /* border-top-left-radius: 25px; */
+  /* border-bottom-right-radius: 25px; */
+  border-left: 2px solid #2bfcfc;
+  border-right: 2px solid #b467f9;
+}
+
+#custom-next {
+  color: #b3b7bd;
+  font-family: feather, Lato, "Iosevka Nerd Font", sans-serif;
+  font-size: 22px;
+  background-color: #171c21;
+  margin: 0 10px;
+  padding: 15px 0;
+  /* border-top-left-radius: 25px; */
+  border-bottom-right-radius: 25px;
+  border-left: 2px solid #2bfcfc;
+  border-right: 2px solid #b467f9;
+}
+
+#pulseaudio {
+  background-color: rgba(45, 49, 57, 1);
+  color: #53befc;
+  border-left: 2px solid #53befc;
+  border-bottom: 2px solid #53befc;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+  border-top-left-radius: 25px;
+}
+
+#backlight {
+  background-color: rgba(45, 49, 57, 0.85);
+  color: #ff8a30;
+  border-left: 2px solid #ff8a30;
+  border-bottom: 2px solid #ff8a30;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#battery {
+  background-color: rgba(45, 49, 57, 0.7);
+  color: #00ffb1;
+  border-left: 2px solid #00ffb1;
+  border-bottom: 2px solid #00ffb1;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#bluetooth {
+  background-color: rgba(45, 49, 57, 0.55);
+  color: #2bfcfc;
+  border-left: 2px solid #2bfcfc;
+  border-bottom: 2px solid #2bfcfc;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#network {
+  background-color: rgba(45, 49, 57, 0.4);
+  color: #b467f9;
+  border-bottom: 2px solid #b467f9;
+  border-left: 2px solid #b467f9;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+/* .modules-left>widget>* {
+  margin-left: 12px;
+}
+
+.modules-center>widget>* {
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.modules-right>widget>* {
+  margin-right: 12px;
+} */
+
+@keyframes blink {
+  to {
+    color: #b3b7bd;
+  }
+}
+
+#battery.critical:not(.charging) {
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+tooltip {
+  border-radius: 5px;
+  background: rgba(14, 17, 21, 0.75);
+}
+
+tooltip label {
+  color: #b3b7bd;
+}
+
+#clock {
+  font-family: "Iosevka Nerd Font", sans-serif;
+  background-color: #171c21;
+  color: #b3b7bd;
+  margin: 0px 10px 60px 10px;
+  padding: 10px 6px;
+  font-size: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+#custom-avatar {
+  background-image: url("./avatar.png");
+  background-size: 40px;
+  background-position: center;
+  padding: 0 20px;
+  margin: 10px 20px;
+  border-radius: 99px;
+}
+
+#taskbar {
+  background-color: transparent;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 6px;
+}
+
+#taskbar button.active {
+  border-bottom-color: #b3b7bd;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+#taskbar button:hover {
+  background-color: rgba(45, 49, 57, 0.75);
+  border-bottom-color: transparent;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}

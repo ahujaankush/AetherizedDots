@@ -1,0 +1,2 @@
+vol=$(echo $1 | awk '{print int($1+0.5)}')
+pamixer --set-volume $vol

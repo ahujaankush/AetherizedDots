@@ -1,0 +1,25 @@
+
+(defwidget powerbtn[click classname icon name] 
+    (box :orientation "v" :class "powerbtn" :space-evenly false
+        (button :onclick click :orientation "h" :class "${classname}" icon)
+        (box :class "powerstr" name)
+      )
+  )
+
+(defwidget powermenu[] 
+  (box :orientation "h" :class "lockscreen" :space-evenly false :vexpand true :hexpand true
+          (box :orientation "v" :class "locktext"  :space-evenly false :valign "center" :hexpand true :halign "center"
+            (box :class "locktime" "${hour}:${minute}")
+            (box :class "lockstr" :valign "start" "~ brain.exists() == null; ~")
+          )
+          (box :orientation "v" :class "lockmenu" :spacing 15 :space-evenly false :valign "center"
+            (powerbtn :click "shutdown now" :classname "shutdownicon" :icon "󰐥" :name "Poweroff")
+            (powerbtn :click "reboot" :classname "rebooticon" :icon "󰑙" :name "Restart")
+            (powerbtn :click "$HOME/.config/hypr/scripts/apps/eww.sh close powermenu && swaylock" :classname "lockicon" :icon "󰌾" :name "Lock")
+            (powerbtn :click "$HOME/.config/hypr/scripts/apps/eww.sh close powermenu && systemctl suspend" :classname "suspendicon" :icon "󰤄" :name "Suspend")
+            (powerbtn :click "hyprctl dispatch exit 0" :classname "exiticon" :icon "󰈆" :name "Exit")
+            )
+    )
+)
+
+

@@ -1,0 +1,81 @@
+.lockscreen {
+  font-family: "Iosevka Nerd Font";
+  font-size: 1.6rem;
+  padding: 1.2rem;
+  background-color: rgba(15, 15, 15, 0.5);
+  border-radius: 0px 8px;
+}
+
+.shutdownicon {
+  font-family: "Material Design Icon Desktop";
+  color: $red;
+  font-size: 2.6rem;
+  padding: 1rem;
+  border-radius: 8px 0;
+}
+
+.rebooticon {
+  font-family: "Material Design Icon Desktop";
+  color: $green;
+  font-size: 2.6rem;
+  padding: 1rem;
+  border-radius: 8px 0;
+}
+
+.lockicon {
+  font-family: "Material Design Icon Desktop";
+  color: $blue;
+  font-size: 2.6rem;
+  padding: 1rem;
+  border-radius: 8px 0;
+}
+
+.suspendicon {
+  font-family: "Material Design Icon Desktop";
+  color: $magenta;
+  font-size: 2.6rem;
+  padding: 1rem;
+  border-radius: 8px 0;
+}
+
+.exiticon {
+  font-family: "Material Design Icon Desktop";
+  color: $yellow;
+  font-size: 2.6rem;
+  padding: 1rem;
+  border-radius: 8px 0;
+}
+
+.shutdownicon:hover {
+  color: $red-light;
+}
+
+.rebooticon:hover {
+  color: $green-light;
+}
+
+.lockicon:hover {
+  color: $cyan;
+}
+
+.suspendicon:hover {
+  color: $magenta-light;
+}
+
+.exiticon:hover {
+  color: $yellow-light;
+}
+
+.powerstr {
+  font-size: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+
+.locktime {
+  font-size: 13rem;
+  font-weight: bold;
+}
+
+.lockstr {
+  font-size: 2rem;
+}
