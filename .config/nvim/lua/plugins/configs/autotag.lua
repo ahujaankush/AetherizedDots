@@ -1,0 +1,5 @@
+return {
+  autotag = {
+    enable = true,
+  },
+}
