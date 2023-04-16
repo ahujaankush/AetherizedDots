@@ -1,9 +1,3 @@
-[submodule ".config/zsh"]
-	path = .config/zsh
-	url = git@github.com:ahujaankush/AetherizedZSH.git
-[submodule ".config/AetherizedHypr"]
-	path = .config/hypr
-	url = git@github.com:ahujaankush/AetherizedHypr.git
 [submodule ".config/nvim"]
 	path = .config/nvim
 	url = git@github.com:ahujaankush/nvim.git
