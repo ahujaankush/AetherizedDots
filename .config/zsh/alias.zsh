@@ -374,8 +374,7 @@ alias kittythemes="kitty +kitten themes"
 alias nhist="dbus-monitor \"interface='org.freedesktop.Notifications'\" | grep --line-buffered \"member=Notify\|string\""
 alias strel="xrdb -I$HOME/.config/Xresources $HOME/.config/Xresources/config.x && kill -USR1 $(pidof st)"
 
-alias cock="echo 'centeral operating computed kernel for linux'"
-alias jscarlata="echo 'classic'"
+alias packettracer="QT_QPA_PLATFORM=xcb packettracer"
 alias resrc="source $ZDOTDIR/.zshrc"
 alias rofi-shot='rofi -show drun -normal-window & disown'
 

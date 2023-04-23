@@ -1,6 +1,6 @@
 (defwindow symphony
   :monitor 0
-  :geometry (geometry :x "66px" 
+  :geometry (geometry :x "18px" 
   :anchor "center left")
   :stacking "fg"
 (symphony))

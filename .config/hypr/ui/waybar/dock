@@ -1,10 +1,9 @@
 {
   "layer": "top",
   "position": "bottom",
-  "exclusive": false,
+  "exclusive": true,
   "height": 60,
   "modules-left": [
-    "custom/avatar",
     "custom/todo",
     "custom/notif",
     "custom/script",
@@ -14,6 +13,8 @@
     "wlr/taskbar"
   ],
   "modules-right": [
+    "battery",
+    "backlight",
     "tray"
   ],
   "wlr/taskbar": {

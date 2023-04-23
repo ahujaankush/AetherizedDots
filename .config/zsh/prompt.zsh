@@ -94,7 +94,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=0
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=12
   # Custom icon. הּ ﮼  
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=""
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.

@@ -1,7 +1,7 @@
 {
   "layer": "bottom",
   "position": "left",
-  "exclusive": false,
+  "exclusive": true,
   "width": 80,
   "modules-left": [
     "custom/launcher",
@@ -14,11 +14,10 @@
   ],
   "modules-right": [
     "pulseaudio",
-    "backlight",
-    "battery",
     "bluetooth",
     "network",
-    "clock"
+    "clock",
+    "custom/avatar"
   ],
   "wlr/taskbar": {
     "format": "{icon}",
@@ -57,7 +56,7 @@
     "format": "\uf849"
   },
   "custom/avatar": {
-    "on-click": "$HOME/.config/hypr/scripts/apps/eww.sh open powermenu --toggle",
+    "on-click": "cliphist list | rofi -dmenu -config $HOME/.config/rofi/launchers/type-1/style-4.rasi | cliphist decode | wl-copy",
     "format": " "
   },
   "backlight": {
@@ -104,7 +103,7 @@
     "format-source": "",
     "format-source-muted": "",
     "format-icons": {
-      "headphone": "",
+      "headphone": "󰋋",
       "hands-free": "蓼",
       "headset": "蓼",
       "phone": "",
@@ -142,21 +141,17 @@
     "on-click": "hyprctl dispatch exec [float] foot nmtui"
   },
   "wlr/workspaces": {
+    "sort-by-number": true,
     "disable-scroll": false,
     "all-outputs": false,
     "on-click": "activate",
     "active-only": false,
     "persistent_workspaces": {
-      "0": [],
       "1": [],
       "2": [],
       "3": [],
       "4": [],
-      "5": [],
-      "6": [],
-      "7": [],
-      "8": [],
-      "9": []
+      "5": []
     },
     "format-icons": {
       "urgent": "\ufa44",

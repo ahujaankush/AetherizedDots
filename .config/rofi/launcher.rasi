@@ -1,12 +1,11 @@
 configuration{
     modi: "run,drun,window";
     lines: 5;
-    font: "CaskaydiaCove Nerd Font 14";
+    font: "JetBrainsMono Nerd Font 14";
     show-icons: true;
     icon-theme: "oomox-aesthetic-dark";
     terminal: "kitty";
     drun-display-format: "{icon} {name}";
-    location: 0;
     disable-history: true;
     hide-scrollbar: true;
     display-drun: "   Apps ";
@@ -30,6 +29,8 @@ window {
     border-color: @grey;
     background-color: @background;
     border-radius: 10px;
+    location: west;
+    anchor: west;
 }
 
 mainbox {

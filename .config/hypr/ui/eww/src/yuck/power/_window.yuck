@@ -2,8 +2,8 @@
   :monitor 0
 	:geometry (geometry :x "0"
 	  :y "0"
-    :height "100%"
-    :width "100%"
+    :height "1020px"
+    :width "1840px"
     :anchor "center")
   :stacking "fg"
 (powermenu))
