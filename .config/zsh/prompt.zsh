@@ -92,9 +92,9 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=0
-  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=12
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=13
   # Custom icon. הּ ﮼  
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=""
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=""
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
@@ -110,7 +110,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=11
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=13
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=6
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.
@@ -622,7 +622,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
   # Nvm color.
   typeset -g POWERLEVEL9K_NVM_FOREGROUND=0
-  typeset -g POWERLEVEL9K_NVM_BACKGROUND=5
+  typeset -g POWERLEVEL9K_NVM_BACKGROUND=6
   # Custom icon.
   # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
 

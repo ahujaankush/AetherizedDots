@@ -3,27 +3,10 @@
   transition: 0.1s;
 }
 
-.red {
-  color: $red;
-}
-.yellow {
-  color: $yellow;
-}
-
-.green {
-  color: $green;
-}
-.magenta {
-  color: $magenta;
-}
-
-.blue {
-  color: $blue;
-}
-.cyan {
-  color: $cyan;
-}
-
-.white {
-  color: $foreground-alt;
+tooltip {
+  font-family: Phosphor, Dosis;
+  background-color: $base15;
+  color: $base01;
+  font-size: 14px;
+  border-radius: 10px;
 }

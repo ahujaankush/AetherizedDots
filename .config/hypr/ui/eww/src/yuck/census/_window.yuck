@@ -1,7 +1,9 @@
 (defwindow census
   :monitor 0
-  :geometry (geometry :x "18px" 
-  :y "18px"
-  :anchor "bottom left")
+  :geometry
+  (geometry
+    :anchor "bottom left"
+  )
   :stacking "fg"
-(census))
+  (census)
+)

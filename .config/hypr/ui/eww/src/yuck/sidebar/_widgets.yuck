@@ -1,94 +1,100 @@
 (defwidget setbtn[icon active func]
-  (button :class "setbtn ${active == 'active' ? 'active' : ''}" :onclick "${func}" "${icon}"  )
+  (button :class "setbtn ${active == 'active' ? 'active' : ''}" :onclick "${func}" "${icon}")
 )
 
 (defwidget profile []
-			(box :class "profile" :orientation "h" :space-evenly "false" 
-        (box :class "profile_picture" :halign 'start'  :style "background-image: url('${profilepic}');")
-        (box :orientation "v" :class "profileinfodate" :hexpand true :space-evenly false  :spacing 10
-            (box :class "profilename" :halign 'start' "pyxodaπ" )
-            (box :class "profilehost" :halign 'start' "aahuja@aethypr" )
-          )
-        (box :orientation 'v' :class "profileright" :halign 'end'
-            (button :orientation 'v' :onclick "systemctl poweroff" :class "profilebtn red" "󰤆")
-            (button :orientation 'v' :onclick 'systemctl reboot' :class "profilebtn green" "󰦛")
-            (button :orientation 'v' :onclick "hyprctl dispatch exit 0":class "profilebtn blue" "󰈆")
-          )
-        )
+  (box :class "profile" :orientation "h" :space-evenly "false"
+    (box :class "profile_picture" :halign 'start'  :style "background-image: url('${profilepic}');")
+    (box :orientation "v" :class "profileinfodate" :hexpand true :space-evenly false  :spacing 10
+      (box :class "profilename" :halign 'start' "pyxodaπ" )
+      (box :class "profilehost" :halign 'start' "aahuja@aethypr" )
+    )
+    (box :orientation 'v' :class "profileright" :halign 'end'
+      (button :orientation 'v' :onclick "systemctl poweroff" :class "profilebtn red" "󰤆")
+      (button :orientation 'v' :onclick 'systemctl reboot' :class "profilebtn green" "󰦛")
+      (button :orientation 'v' :onclick "hyprctl dispatch exit 0":class "profilebtn blue" "󰈆")
+    )
+  )
 )
 
 (defwidget time[]
-  (box :orientation "v" :class "time" "${hour}:${minute}")
-)
+  (box :orientation "v" :class "time" "${hour}:${minute}"))
+
 
 (defwidget quote[]
-  (box :orientation "v" :class "quote" "Don't Limit Your Challenges , Challenge Your Limit")
-)
+  (box :orientation "v" :class "quote" "Don't Limit Your Challenges , Challenge Your Limit"))
 
 (defwidget music[]
   (box :orientation "h" :class "musicbox" :space-evenly "false"
-      (box :class "musicicon" "󰎆")
-      (box :orientation "v"  :class "musicinfo" :space-evenly false :hexpand true
-          (box :class "musicname" "${songname}")
-          (box :class "musicartist" "${artist}")
-          (box :class "musicctrl" :orientation "h" :halign 'center' :spacing 20 :space-evenly false
-              (button :onclick "playerctl previous" :class "musicprev" "󰙣")
-              (button :onclick "playerctl play-pause" :class "musicprev" "${icon}")
-              (button :onclick "playerctl next" :class "musicnext" "󰙡")
-            )
-        )
+    (box :class "musicicon" "󰎆")
+    (box :orientation "v"  :class "musicinfo" :space-evenly false :hexpand true
+      (box :class "musicname" "${songname}")
+      (box :class "musicartist" "${artist}")
+      (box :class "musicctrl" :orientation "h" :halign 'center' :spacing 20 :space-evenly false
+        (button :onclick "playerctl previous" :class "musicprev" "󰙣")
+        (button :onclick "playerctl play-pause" :class "musicprev" "${icon}")
+        (button :onclick "playerctl next" :class "musicnext" "󰙡")
+      )
     )
   )
+)
 
 (defwidget volscale[]
-    (box
+  (box
     :orientation "h"
     :space-evenly "false" :class "volscale"
-      (box :orientation "h" :valign "center" :class "scale-label" "VOL")
-      (scale :class " scale volover"
-              :min 0
-              :max 100
-              :orientation "h"
-              :value "${volume}"
-              :onchange "~/.config/hypr/ui/eww/scripts/volume {}"
-              :valign 'center')
-    )
+    (box :orientation "h" :valign "center" :class "scale-label" "VOL")
+    (scale :class " scale volover"
+      :min 0
+      :max 100
+      :orientation "h"
+      :value "${volume}"
+      :onchange "~/.config/hypr/ui/eww/scripts/volume {}"
+    :valign 'center')
+  )
 )
 
 (defwidget brightscale[]
-    (box
+  (box
     :orientation "h"
     :space-evenly "false" :class "brightscale"
-      (box :orientation "h" :valign "center" :class "scale-label" "BRI")
-      (scale :class "scale brightover"
-              :min 0
-              :max 100
-              :orientation "h"
-              :value "${brightness}"
-              :onchange "brightnessctl s {}%"
-              :valign 'center')
-    )
+    (box :orientation "h" :valign "center" :class "scale-label" "BRI")
+    (scale :class "scale brightover"
+      :min 0
+      :max 100
+      :orientation "h"
+      :value "${brightness}"
+      :onchange "brightnessctl s {}%"
+    :valign 'center')
+  )
 )
 
-(defwidget sidebar[] 
-  (box :orientation "v" :class "sidebar" :space-evenly false
-  ;(time)
-  ;(quote)
-  (profile)
-  (box :orientation "v" :class "sidescales"
-    (brightscale)
-    (volscale)
-  )
-  (box :orientation "h" :class "sidecircs" :space-evenly false
-    (circbar :value {EWW_RAM.used_mem_perc} :wholeclass "cpubar" :text "󰍛" :classname "red")
-    (circbar :value {round(EWW_CPU.avg, 0)} :wholeclass "rambar" :text "󰘚" :classname "cyan")
-  )
-  (box :orientation "h" :class "sidebtns" :space-evenly true :spacing 20
-          (setbtn  :icon "󰤨" :active "${wifiactive}" :func "~/.config/hypr/ui/eww/scripts/wifi --toggle &")  
-          (setbtn :icon "󰂯" :active "${btactive}" :func "~/.config/hypr/ui/eww/scripts/bluetooth --toggle &")  
-          (setbtn :icon "󰍶" :active "${dndctive}" :func "~/.config/hypr/ui/eww/scripts/dnd --toggle &") 
-          (setbtn :icon "󰀝" :active "${apactive}" :func "~/.config/hypr/ui/eww/scripts/airplanemode --toggle &")  
-  )
-  (music)
+(defwidget sidebar[]
+  (eventbox :onhoverlost "$SCRIPTS/apps/eww.sh update sidebarreveal=false && sleep 0.5s && $SCRIPTS/apps/eww.sh close sidebar"
+    (revealer
+      :transition "slideright"
+      :reveal "${sidebarreveal}"
+      :duration "500ms"
+      (box :orientation "v" :class "sidebar-layout" :space-evenly false
+        ;(time)
+        ;(quote)
+        (profile)
+        (box :orientation "v" :class "sidescales"
+          (brightscale)
+          (volscale))
+        
+        (box :orientation "h" :class "sidecircs" :space-evenly false
+          (circbar :value {EWW_RAM.used_mem_perc} :wholeclass "cpubar" :text "󰍛" :classname "red")
+          (circbar :value {round(EWW_CPU.avg, 0)} :wholeclass "rambar" :text "󰘚" :classname "cyan"))
+        
+        (box :orientation "h" :class "sidebtns" :space-evenly true :spacing 20
+          (setbtn  :icon "󰤨" :active "${wifiactive}" :func "~/.config/hypr/ui/eww/scripts/wifi --toggle &")
+          (setbtn :icon "󰂯" :active "${btactive}" :func "~/.config/hypr/ui/eww/scripts/bluetooth --toggle &")
+          (setbtn :icon "󰍶" :active "${notifications_dnd_state}" :func "~/.config/hypr/ui/eww/scripts/dnd --toggle &")
+          (setbtn :icon "󰀝" :active "${apactive}" :func "~/.config/hypr/ui/eww/scripts/airplanemode --toggle &")
+        )
+        (music)
+      )
+    )
   )
 )

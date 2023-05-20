@@ -48,8 +48,8 @@ local sources = {
   b.diagnostics.sqlfluff,
 
   -- markdown
-  b.formatting.markdown_toc,
-  b.diagnostics.write_good,
+  b.formatting.markdown_toc.with { filetype = { "markdown", "md" } },
+  b.diagnostics.write_good.with { filetype = { "markdown", "md", "txt" }},
 }
 
 null_ls.setup {

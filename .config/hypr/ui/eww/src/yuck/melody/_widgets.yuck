@@ -1,0 +1,38 @@
+(defwidget _melodyapps [
+  one two three four five six
+  one_icon two_icon three_icon four_icon five_icon six_icon
+  ]
+  (box :space-evenly false :class "melody-apps-box" :spacing 50
+    (button :class "melody-apps-box-one" :onclick one one_icon)
+    (button :class "melody-apps-box-two" :onclick two two_icon)
+    (button :class "melody-apps-box-three" :onclick three three_icon)
+    (button :class "melody-apps-box-four" :onclick four four_icon)
+    (button :class "melody-apps-box-five" :onclick five five_icon)
+    (button :class "melody-apps-box-six" :onclick six six_icon)
+  )
+)
+
+(defwidget melody_layout []
+  (box :class "melody-layout-box"
+    :space-evenly false
+    :spacing 20
+    (box :space-evenly false
+      :class "melody-layout-box"
+      :orientation "vertical"
+      :spacing 30
+      (_melodyapps :one "pushd ~;foot -e nvim;popd"
+        :two "pushd ~;.config/hypr/scripts/utils/wallpaper.sh $HOME/Pictures/Wallpaper/$(ls Pictures/Wallpaper | shuf -n 1);popd"
+        :three "pushd ~;dolphin;popd"
+        :four "pushd ~;gimp;popd"
+        :five "pushd ~;foot;popd"
+        :six "kcalc &"
+        
+        :one_icon ""
+        :two_icon ""
+        :three_icon ""
+        :four_icon ""
+        :five_icon ""
+      :six_icon "")
+    )
+  )
+)

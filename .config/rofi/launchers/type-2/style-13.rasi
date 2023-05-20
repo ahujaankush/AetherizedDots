@@ -10,8 +10,10 @@
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun";
-    show-icons:                 true;
-    display-drun:               " Apps";
+  show-icons:                 true;
+  icon-theme: "oomox-aesthetic-dark";
+  display-drun:               " Apps";
+  display-window:             "";
 	drun-display-format:        "{name}";
 }
 
@@ -25,7 +27,7 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       100%;
+    width:                       60%;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -33,7 +35,7 @@ window {
     margin:                      0px;
     padding:                     0px;
     border:                      0px solid;
-    border-radius:               0px;
+    border-radius:               10px;
     border-color:                @selected;
     background-color:            @background;
     cursor:                      "default";
@@ -46,7 +48,6 @@ mainbox {
     margin:                      0px;
     padding:                     50px;
     border:                      0px solid;
-    border-radius:               0px 0px 0px 0px;
     border-color:                @selected;
     background-color:            transparent;
     children:                    [ "inputbar", "listview" ];
@@ -61,7 +62,7 @@ inputbar {
     border:                      0px;
     border-radius:               0px;
     border-color:                @selected;
-    background-color:            @background;
+    background-color:            transparent;
     text-color:                  @foreground;
     children:                    [ "prompt", "entry" ];
 }
@@ -72,6 +73,7 @@ prompt {
     border-radius:               15px;
     background-color:            @selected;
     text-color:                  @background;
+    font:                        "JetBrainsMono Nerd Font 12";
 }
 textbox-prompt-colon {
     enabled:                     true;
@@ -91,12 +93,13 @@ entry {
     cursor:                      text;
     placeholder:                 "Search...";
     placeholder-color:           inherit;
+    font: "Dosis 12";
 }
 
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    columns:                     10;
+    columns:                     6;
     lines:                       1;
     cycle:                       true;
     dynamic:                     true;
@@ -127,29 +130,30 @@ scrollbar {
 element {
     enabled:                     true;
     spacing:                     20px;
-    margin:                      0px;
+    margin:                      10px;
     padding:                     30px 10px;
-    border:                      0px solid;
+    border:                      1px solid;
     border-radius:               20px;
-    border-color:                @selected;
+    border-color:                transparent;
     background-color:            @background;
     text-color:                  @foreground;
     orientation:                 vertical;
     cursor:                      pointer;
 }
 element normal.normal {
-    background-color:            @background;
+    background-color:            @background-alt;
     text-color:                  @foreground;
 }
 element selected.normal {
-    background-color:            @background-alt;
+    background-color:            @background-light;
+    border-color:                @foreground;
     text-color:                  @foreground;
 }
 element-icon {
     padding:                     0px 0px 0px 0px;
     background-color:            transparent;
     text-color:                  inherit;
-    size:                        96px;
+    size:                        48px;
     cursor:                      inherit;
 }
 element-text {
@@ -170,6 +174,7 @@ error-message {
     background-color:            @background;
     text-color:                  @foreground;
 }
+
 textbox {
     background-color:            @background;
     text-color:                  @foreground;

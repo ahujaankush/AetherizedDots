@@ -7,30 +7,21 @@ function cbright {
 }
 
 function notify {
-    brightness=`cbright`
-    
-    if [ "$brightness" = "0" ]; then
-        icon_name="$ICONDIR/brightness-off"
-    else    
-        if [  "$brightness" -lt "10" ]; then
-            icon_name="$ICONDIR/brightness-low"
-        else
-            if [ "$brightness" -lt "25" ]; then
-                icon_name="$ICONDIR/brightness-low"
-            else
-                if [ "$brightness" -lt "50" ]; then
-                    icon_name="$ICONDIR/brightness-medium"
-                else
-                    if [ "$brightness" -lt "75" ]; then
-                        icon_name="$ICONDIR/brightness-high"
-                    else
-                        icon_name="$ICONDIR/brightness-full"
-                    fi
-                fi
-            fi
-        fi
-    fi
-    notify-send -i "$icon_name.png" -t 2000 -r 1234 "$brightness" "Brightness"
+
+  $SCRIPTS/apps/eww.sh update brightness-level=$(brightnessctl i -m | tr , " " | awk '{print $4}' | cut -c 1-2)
+  $SCRIPTS/apps/eww.sh open brightness-indicator
+  open=$($SCRIPTS/apps/eww.sh get brightnessreveal)
+  echo $open
+  if $open ; then
+    kill $(pgrep -f "notifbrisleep")
+    kill $(pgrep -f "notifbrianimsleep")
+    (exec -a "notifbrisleep" sleep 3s) && $SCRIPTS/apps/eww.sh update brightnessreveal=false && (exec -a "notifbrianimsleep" sleep 1.55s) && $SCRIPTS/apps/eww.sh close brightness-indicator
+  else
+    $SCRIPTS/apps/eww.sh update brightnessreveal=true
+    (exec -a "notifbrianimsleep" sleep 0.55s) 
+    (exec -a "notifbrisleep" sleep 3s) 
+    notify
+  fi
 }
 
 case $1 in

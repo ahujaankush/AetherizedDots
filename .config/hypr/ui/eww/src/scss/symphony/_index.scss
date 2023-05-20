@@ -19,15 +19,15 @@
   font-size: 1.7rem;
   background: linear-gradient(90deg, $blue-light 0%, $blue 100%);
   margin-right: 2rem;
-  color: $background;
+  color: rgba($background, 0.75);
   border-radius: 50%;
   font-family: "Inter Regular";
 }
 
-
-.symphony {
+.symphony-layout {
   background-color: $background;
   padding: 2rem;
+  margin: 16px;
   border-radius: 9px;
 }
 
@@ -54,7 +54,11 @@
 
 .symsonginfo {
   border-radius: 10px;
-  background: linear-gradient(to right, rgba(15, 15, 15, .95), rgba(15, 15, 15, 0.4));
+  background: linear-gradient(
+    to right,
+    rgba(15, 15, 15, 0.95),
+    rgba(15, 15, 15, 0.4)
+  );
   font-size: 1.4rem;
   padding: 1rem;
   font-family: "Inter Medium";
@@ -88,15 +92,15 @@
 
 .activered {
   background-color: $red;
-  color: $background;
+  color: rgba($background, 0.75);
 }
 
 .activeblue {
   background-color: $blue;
-  color: $background;
+  color: rgba($background, 0.75);
 }
 
 .activegreen {
   background-color: $green;
-  color: $background;
+  color: rgba($background, 0.75);
 }

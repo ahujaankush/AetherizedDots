@@ -1,7 +1,8 @@
-.sidebar {
-  background-color: $background;
+.sidebar-layout {
+  background: $background;
   color: $foreground-alt;
   padding: 2rem 2rem;
+  margin: 16px;
   border-radius: 12px;
 }
 
@@ -60,7 +61,7 @@
 
 .active {
   background: linear-gradient(90deg, $green-light 0%, $green 80%);
-  color: $background;
+  color: rgba($background, 0.75);
 }
 
 .musicbox {

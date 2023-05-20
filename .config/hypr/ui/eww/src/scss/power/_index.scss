@@ -2,7 +2,7 @@
   font-family: "Iosevka Nerd Font";
   font-size: 1.6rem;
   padding: 1.2rem;
-  // background-color: rgba(15, 15, 15, 0.5);
+  background-color: $background;
   border-radius: 0px 8px;
 }
 
@@ -69,6 +69,7 @@
 .powerstr {
   font-size: 1.2rem;
   margin-bottom: 1.4rem;
+  font-family: "JetBrainsMono Nerd Font";
 }
 
 .locktime {
@@ -78,4 +79,6 @@
 
 .lockstr {
   font-size: 2rem;
+  font-family: "JetBrainsMono Nerd Font";
+  font-style: italic;
 }

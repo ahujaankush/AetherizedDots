@@ -18,7 +18,6 @@ local options = {
     "beautysh",
     "write-good",
     "shellcheck",
-
     ---------------------------
     -- LSPCONFIG
     ---------------------------

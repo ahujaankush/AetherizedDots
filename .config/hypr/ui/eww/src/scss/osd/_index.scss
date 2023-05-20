@@ -1,0 +1,101 @@
+* {
+  all: unset;
+  transition: 200ms ease-in-out;
+}
+
+.volume-spacer,
+.menu-spacer {
+  transition: all 700ms cubic-bezier(0.1, -0, 0, 1.49);
+}
+
+.volume-window {
+  background-color: transparent;
+  margin-top: 16px;
+}
+
+.indicator-volume-slider {
+  border-radius: 100px;
+}
+
+.indicator-volume-slider trough { 
+  background-color: $background-light;
+  border-radius: 100px;
+  slider {
+
+    background-color: transparent;
+  }
+}
+
+.indicator-volume-slider highlight {
+  background: linear-gradient(90deg, $blue 0%, $cyan 80%);
+  padding: 8px;
+  border-radius: 100px;
+}
+
+.volume-slider-muted trough {
+  background-color: $background-light;
+}
+
+.volume-slider-muted highlight {
+  background: linear-gradient(90deg, $red 0%, $red-light 80%);
+}
+
+.volume-widget {
+  background-color: $background;
+  border-radius: 15px;
+  padding: 0px 15px;
+  min-height: 32px;
+}
+
+.indicator-volume-icon {
+  font-family: "IcoMoon-Free";
+  font-size: 35px;
+  color: $cyan;
+  padding: 20px 0px 20px 0px;
+}
+
+.indicator-volume-icon-muted {
+  color: $red-light;
+}
+
+.brightness-spacer,
+.menu-spacer {
+  transition: all 700ms cubic-bezier(0.1, -0, 0, 1.49);
+}
+
+.brightness-window {
+  background-color: transparent;
+  margin-top: 16px;
+}
+
+.indicator-brightness-slider {
+  border-radius: 100px;
+}
+
+.indicator-brightness-slider trough {
+  background-color: $background-light;
+  border-radius: 100px;
+  slider {
+    background-color: transparent;
+  }
+}
+
+.indicator-brightness-slider highlight {
+  background: linear-gradient(90deg, $yellow 0%, $yellow-light 80%);
+  padding: 8px;
+  border-radius: 100px;
+}
+
+.brightness-widget {
+  background-color: $background;
+  border-radius: 15px;
+  padding: 0px 15px;
+  min-height: 32px;
+}
+
+.indicator-brightness-icon {
+  font-family: "Material Design Icons Desktop";
+  font-size: 35px;
+  color: $yellow-light;
+  padding: 20px 0px 20px 0px;
+}

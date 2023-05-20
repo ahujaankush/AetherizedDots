@@ -713,15 +713,6 @@ local default_plugins = {
     end,
   },
 
-  {
-    "nvim-neorg/neorg",
-    lazy = false,
-    opts = require "plugins.configs.norg",
-    dependencies = {
-      "nvim-neorg/neorg-telescope",
-    },
-  },
-
   -- Only load whichkey after all the gui
   {
     "folke/which-key.nvim",

@@ -1,0 +1,7 @@
+(defwindow melody
+  :monitor 0
+  :stacking "bg"
+  :geometry (geometry :x 50 :y 50 :anchor "right top")
+  (melody_layout))
+
+;; vim:ft=yuck

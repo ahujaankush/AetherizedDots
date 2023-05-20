@@ -4,7 +4,6 @@
   font-family: "Inter Medium";
   font-size: 1.2rem;
   color: $foreground-alt;
-
   .cal-inner-box {
     padding: 1.5rem 1rem;
 
@@ -13,7 +12,7 @@
         padding: 5rem;
       }
 
-      padding: .8rem .25rem 0rem;
+      padding: 0.8rem 0.25rem 0rem;
     }
   }
 }
@@ -47,7 +46,7 @@ calendar:indeterminate {
   font-size: 1.75rem;
   color: $foreground-alt;
   font-weight: bold;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 
 .weatherbox {
@@ -91,12 +90,13 @@ calendar:indeterminate {
   padding: 1.75rem;
   background-color: $background;
   border-radius: 12px;
+  margin: 16px;
 }
 
 .caltime {
   font-family: "Inter Medium";
   margin-bottom: 1rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .caltext {

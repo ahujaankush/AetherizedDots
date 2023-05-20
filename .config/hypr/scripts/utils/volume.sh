@@ -1,33 +1,30 @@
 #!/usr/bin/env bash
 
 # Audio volume changer using pamixer
-ICONDIR=$HOME/.config/hypr/ui/icons/aether/dark
 function cvol {
   pamixer --get-volume
 }
 
 function chkmute {
-  pamixer --get-mute | grep "true"
+  pamixer --get-mute
 }
 
 function notify {
-    volume=`cvol`
-    
-    if [ "$volume" = "0" ]; then
-        icon_name="$ICONDIR/volume-muted"
-    else    
-        if [  "$volume" -lt "33" ]; then
-            icon_name="$ICONDIR/volume-low"
-        else
-          if [ "$volume" -lt "66" ]; then
-            icon_name="$ICONDIR/volume-medium"
-          else
-            icon_name="$ICONDIR/volume-high"
-          fi
-        fi
-    fi
-
-    notify-send -i "$icon_name.png" -t 2000 -r 123 "$volume" "Volume"
+  $SCRIPTS/apps/eww.sh update volume-level=`cvol`
+  $SCRIPTS/apps/eww.sh update volume-muted=`chkmute`
+  $SCRIPTS/apps/eww.sh open volume-indicator
+  open=$($SCRIPTS/apps/eww.sh get volumereveal)
+  echo $open
+  if $open ; then
+    kill $(pgrep -f "notifvolsleep")
+    kill $(pgrep -f "notifvolanimsleep")
+    (exec -a "notifvolsleep" sleep 3s) && $SCRIPTS/apps/eww.sh update volumereveal=false && (exec -a "notifvolanimsleep" sleep 0.55s) && $SCRIPTS/apps/eww.sh close volume-indicator
+  else
+    $SCRIPTS/apps/eww.sh update volumereveal=true
+    (exec -a "notifvolanimsleep" sleep 0.55s) 
+    (exec -a "notifvolsleep" sleep 3s) 
+    notify
+  fi
 }
 
 case $1 in
@@ -44,11 +41,6 @@ case $1 in
     mute)
     # Toggle mute
 	pamixer -t
-	if chkmute; then
-    icon_name="$ICONDIR/volume-muted"
-    notify-send -i "$icon_name.png" -t 2000 -r 123 "Muted" "Volume"
-	else
 	  notify
-	fi
 	;;
 esac     

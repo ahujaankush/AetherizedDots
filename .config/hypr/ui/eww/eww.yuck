@@ -7,6 +7,18 @@
 (include "./src/yuck/calbox/_widgets.yuck")
 (include "./src/yuck/calbox/_window.yuck")
 
+(include "./src/yuck/lumin/_widgets.yuck")
+(include "./src/yuck/lumin/_window.yuck")
+
+(include "./src/yuck/melody/_widgets.yuck")
+(include "./src/yuck/melody/_window.yuck")
+
+(include "./src/yuck/notifications/_window.yuck")
+(include "./src/yuck/notifications/_widgets.yuck")
+
+(include "./src/yuck/osd/_window.yuck")
+(include "./src/yuck/osd/_widgets.yuck")
+
 (include "./src/yuck/power/_widgets.yuck")
 (include "./src/yuck/power/_window.yuck")
 

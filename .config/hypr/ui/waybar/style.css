@@ -5,17 +5,24 @@
 }
 
 window#waybar {
-  background-color: rgba(14, 17, 21, 0.8);
+  background-color: rgba(14, 17, 21, 0.5);
   color: #b3b7bd;
+}
+
+tooltip {
+  font-family: Phosphor, Dosis;
+  background-color: #B467F9;
+  color: #171C21;
+  font-size: 14px;
+  border-radius: 10px;
 }
 
 #custom-launcher {
   font-family: Phosphor, Dosis, sans-serif;
-  background: linear-gradient(90deg, #00ffb1 0%, #2798e4 80%);
   background: radial-gradient(
     circle,
     #f7467b 10%,
-    #FFC457 20%,
+    #ffc457 20%,
     #00ffb1 30%,
     #2798e4 40%,
     #9554ff 50%,
@@ -23,7 +30,7 @@ window#waybar {
     #ff8a30 70%,
     #1addb0 80%,
     #53befc 90%,
-    #B467F9 100%
+    #b467f9 100%
   );
   color: #0e1115;
   margin: 10px;
@@ -31,8 +38,7 @@ window#waybar {
   font-size: 27px;
   border-top-left-radius: 25px;
   background-size: 400% 400%;
-  animation: gradient 15s ease-in-out infinite;
-  transition: all 0.3s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+  animation: gradient 20s ease-in-out infinite;
 }
 
 @keyframes gradient {
@@ -48,54 +54,8 @@ window#waybar {
 }
 
 #workspaces {
-  background-color: #171c21;
+  background-color: rgba(23, 28, 33, 0.5);
   margin: 0 10px;
-  border-bottom-right-radius: 25px;
-}
-
-#custom-todo {
-  font-family: Phosphor, Dosis, sans-serif;
-  background-color: rgba(45, 49, 57, 0.25);
-  color: #2bfcfc;
-  border-bottom: 2px solid #2bfcfc;
-  border-left: 2px solid #2bfcfc;
-  border-top-left-radius: 25px;
-  margin: 10px 0;
-  padding: 0 10px;
-  font-size: 27px;
-}
-
-#custom-notif {
-  font-family: Phosphor, Dosis, sans-serif;
-  background-color: rgba(45, 49, 57, 0.5);
-  color: #b467f9;
-  border-bottom: 2px solid #b467f9;
-  border-left: 2px solid #b467f9;
-  margin: 10px 0;
-  padding: 0 10px;
-  font-size: 25px;
-}
-
-#custom-script {
-  font-family: Phosphor, Dosis, sans-serif;
-  background-color: rgba(45, 49, 57, 0.75);
-  color: #f7467b;
-  border-bottom: 2px solid #f7467b;
-  border-left: 2px solid #f7467b;
-  margin: 10px 0;
-  padding: 0 10px;
-  font-size: 25px;
-}
-
-#custom-wp {
-  font-family: Phosphor, Dosis, sans-serif;
-  background-color: rgba(45, 49, 57, 1);
-  color: #ffc457;
-  border-bottom: 2px solid #ffc457;
-  border-left: 2px solid #ffc457;
-  margin: 10px 0;
-  padding: 0 10px;
-  font-size: 25px;
   border-bottom-right-radius: 25px;
 }
 
@@ -107,7 +67,7 @@ window#waybar {
 }
 
 #workspaces button.focused {
-  color: #171c21;
+  background-color: rgba(23, 28, 33, 0.5);
   border-bottom: none;
 }
 
@@ -130,123 +90,52 @@ window#waybar {
 }
 
 #tray {
-  background-color: rgba(45, 49, 57, 0.25);
-  margin: 10px 10px 10px 0;
-  padding: 0 10px;
-  border-bottom-right-radius: 25px;
-  border-left: 2px solid #f7467b;
-  border-right: 2px solid #f7467b;
-  border-bottom: 2px solid #f7467b;
-}
-
-#backlight {
-  background-color: rgba(45, 49, 57, 0.5);
-  color: #ff8a30;
-  border-left: 2px solid #ff8a30;
-  border-bottom: 2px solid #ff8a30;
-  margin: 10px 0;
-  padding: 0 10px;
-  font-size: 27px;
 }
 
 #battery {
-  background-color: rgba(45, 49, 57, 1);
-  color: #00ffb1;
-  border-left: 2px solid #00ffb1;
-  border-bottom: 2px solid #00ffb1;
-  margin: 10px 0;
-  padding: 0 10px;
+  background-color: #00ffb1;
+  font-family: Phosphor, Dosis, sans-serif;
+  color: #2d3139;
+  margin: 0 10px;
+  padding: 13px 0;
   font-size: 27px;
   border-top-left-radius: 25px;
 }
-
-#custom-prev {
-  color: #b3b7bd;
-  font-family: feather, Lato, "Iosevka Nerd Font", sans-serif;
-  font-size: 22px;
-  background-color: #171c21;
-  margin: 0 10px;
-  padding: 15px 0;
-  border-top-left-radius: 25px;
-  /* border-bottom-right-radius: 25px; */
-  border-left: 2px solid #2bfcfc;
-  border-right: 2px solid #b467f9;
-}
-
-#mpris {
-  color: #b3b7bd;
-  font-family: feather, Lato, "Iosevka Nerd Font", sans-serif;
-  font-size: 25px;
-  background-color: #171c21;
-  margin: 0 10px;
-  padding: 8px 0;
-  /* border-top-left-radius: 25px; */
-  /* border-bottom-right-radius: 25px; */
-  border-left: 2px solid #2bfcfc;
-  border-right: 2px solid #b467f9;
-}
-
-#custom-next {
-  color: #b3b7bd;
-  font-family: feather, Lato, "Iosevka Nerd Font", sans-serif;
-  font-size: 22px;
-  background-color: #171c21;
-  margin: 0 10px;
-  padding: 15px 0;
-  /* border-top-left-radius: 25px; */
-  border-bottom-right-radius: 25px;
-  border-left: 2px solid #2bfcfc;
-  border-right: 2px solid #b467f9;
-}
-
-#pulseaudio {
-  background-color: rgba(45, 49, 57, 1);
-  color: #53befc;
-  border-left: 2px solid #53befc;
-  border-bottom: 2px solid #53befc;
-  margin: 0 10px;
-  padding: 14px 0;
-  font-size: 27px;
-  border-top-left-radius: 25px;
-}
-
-#bluetooth {
-  background-color: rgba(45, 49, 57, 0.75);
-  color: #2bfcfc;
-  border-left: 2px solid #2bfcfc;
-  border-bottom: 2px solid #2bfcfc;
-  margin: 0 10px;
-  padding: 14px 0;
-  font-size: 27px;
-}
-
-#network {
-  background-color: rgba(45, 49, 57, 0.5);
-  color: #b467f9;
-  border-bottom: 2px solid #b467f9;
-  border-left: 2px solid #b467f9;
-  margin: 0 10px;
-  padding: 14px 0;
-  font-size: 27px;
-}
-
-/* .modules-left>widget>* {
-  margin-left: 12px;
-}
-
-.modules-center>widget>* {
-  margin-left: 12px;
-  margin-right: 12px;
-}
-
-.modules-right>widget>* {
-  margin-right: 12px;
-} */
 
 @keyframes blink {
   to {
-    color: #b3b7bd;
+    background-color: #f7467b;
   }
+}
+
+#clock {
+  font-family: "Iosevka Nerd Font", sans-serif;
+  background-color: rgba(23, 28, 33, 0.5);
+  color: #b3b7bd;
+  margin: 0 10px;
+  padding: 15px 6px;
+  font-size: 25px;
+}
+
+#pulseaudio {
+  background-color: rgba(45, 49, 57, 0.6);
+  color: #53befc;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#pulseaudio.muted {
+  color: #f7467b;
+}
+
+#backlight {
+  font-family: Phosphor, Dosis, sans-serif;
+  background-color: rgba(45, 49, 57, 0.6);
+  color: #ff8a30;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
 }
 
 #battery.critical:not(.charging) {
@@ -257,23 +146,30 @@ window#waybar {
   animation-direction: alternate;
 }
 
-tooltip {
-  border-radius: 5px;
-  background: rgba(14, 17, 21, 0.75);
+#battery.charging {
+  background-color: #b467f9;
 }
 
-tooltip label {
-  color: #b3b7bd;
-}
-
-#clock {
-  font-family: "Iosevka Nerd Font", sans-serif;
-  background-color: #171c21;
-  color: #b3b7bd;
+#network {
+  background-color: rgba(45, 49, 57, 0.3);
+  color: #b467f9;
   margin: 0 10px;
-  padding: 10px 6px;
-  font-size: 25px;
-  border-bottom-right-radius: 25px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#bluetooth {
+  background-color: rgba(23, 28, 33, 0.4);
+  color: #2bfcfc;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#custom-seperator {
+  margin: 10px;
+  border-bottom: 2px solid #2d3139;
+  font-size: 0;
 }
 
 #custom-avatar {
@@ -281,26 +177,6 @@ tooltip label {
   background-size: 60px;
   background-position: center;
   padding: 20px 0;
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   border-radius: 99px;
-}
-
-#taskbar {
-  background-color: transparent;
-  padding-left: 4px;
-  padding-right: 4px;
-  border-radius: 6px;
-}
-
-#taskbar button.active {
-  border-bottom-color: #b3b7bd;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-}
-
-#taskbar button:hover {
-  background-color: rgba(45, 49, 57, 0.75);
-  border-bottom-color: transparent;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
 }
