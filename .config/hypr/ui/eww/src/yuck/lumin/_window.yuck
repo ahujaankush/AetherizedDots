@@ -1,5 +1,5 @@
 (defwindow lumin
-  :monitor 0
+  :monitor 1
   :stacking "bg"
   :focusable true
   :geometry (geometry :x 100 :width "30%" :height "25%" :anchor "left center")

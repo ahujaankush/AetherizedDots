@@ -1,5 +1,5 @@
 (defwindow census
-  :monitor 0
+  :monitor 1
   :geometry
   (geometry
     :anchor "bottom left"

@@ -1,5 +1,5 @@
 (defwindow notifications
-  :monitor 0
+  :monitor 1
   :stacking "fg"
   :geometry (geometry :height "100%" :anchor "right center")
   (notifications_layout)

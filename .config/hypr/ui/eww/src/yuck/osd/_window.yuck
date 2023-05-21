@@ -1,5 +1,5 @@
 (defwindow volume-indicator
-  :monitor 0
+  :monitor 1
   :geometry (geometry :width "500px" :anchor "center top")
   :exclusive false
   :stacking "fg"
@@ -7,7 +7,7 @@
 )
 
 (defwindow brightness-indicator
-  :monitor 0
+  :monitor 1
   :geometry (geometry :width "500px" :anchor "center top")
   :stacking "fg"
   (brightness-indicator)

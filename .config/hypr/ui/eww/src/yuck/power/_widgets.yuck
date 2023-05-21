@@ -10,7 +10,7 @@
     :transition "slidedown"
     :reveal "${powerreveal}"
     :duration "600ms"
-    (box :orientation "h" :class "lockscreen" :space-evenly false :vexpand true :hexpand true :height 1080
+    (box :orientation "h" :class "lockscreen" :space-evenly false :vexpand true :hexpand true :height 1440
       (box :orientation "v" :class "locktext"  :space-evenly false :valign "center" :hexpand true :halign "center"
         (box :class "locktime" "${hour}:${minute}")
         (box :class "lockstr" :halign "start" :space-evenly false 
