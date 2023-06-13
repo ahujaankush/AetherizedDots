@@ -1,96 +1,33 @@
 local M = {}
+
+M.options = {
+  nvchad_branch = "v2.0",
+}
+
 M.ui = {
   ------------------------------- base46 -------------------------------------
-  hl_add = {
-    -- LSPSAGA
-    -- general
-    SagaBorder = {
-      fg = "purple",
-    },
-    SagaBeacon = {
-      bg = "grey",
-    },
-    -- code action
-    ActionPreviewBorder = {
-      link = "vibrant_green",
-    },
-    CodeActionBorder = {
-      link = "SagaBorder",
-    },
-    --finder spinner
-    FinderBorder = {
-      link = "SagaBorder",
-    },
-    FinderPreviewBorder = {
-      link = "SagaBorder",
-    },
-    -- definition
-    DefinitionBorder = {
-      fg = "cyan",
-    },
-    -- hover
-    HoverBorder = {
-      fg = "green",
-    },
-    -- rename
-    RenameBorder = {
-      fg = "orange",
-    },
-    -- diagnostic
-    DiagnosticBorder = {
-      fg = "red",
-    },
-    -- Call Hierachry
-    CallHierarchyBorder = {
-      link = "SagaBorder",
-    },
-    OutlineIndent = { link = "DefinitionBorder" },
-    OutlinePreviewBorder = { fg = "red" },
-    OutlinePreviewNormal = { fg = "white" },
-  },
-  hl_override = {
-    TelescopePromptPrefix = {
-      fg = "purple",
-    },
-    TelescopePromptTitle = {
-      bg = "purple",
-    },
-    CursorLine = {
-      bg = "black2",
-    },
-    Comment = {
-      italic = true,
-    },
-
-    NvDashAscii = {
-      fg = "red",
-      bg = "bg",
-    },
-    St_pos_sep = {
-      fg = "purple",
-    },
-
-    St_pos_icon = {
-      bg = "purple",
-    },
-
-    St_pos_text = {
-      fg = "purple",
-    },
-  },
+  -- hl = highlights
+  hl_add = {},
+  hl_override = {},
   changed_themes = {},
-  theme_toggle = { "aether", "one_light" },
-  theme = "aether", -- default theme
+  theme_toggle = { "onedark", "one_light" },
+  theme = "onedark", -- default theme
   transparency = false,
+  lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
+
+  -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
+  extended_integrations = {}, -- these aren't compiled by default, ex: "alpha", "notify"
 
   -- cmp themeing
   cmp = {
     icons = true,
     lspkind_text = true,
-    style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
+    style = "default", -- default/flat_light/flat_dark/atom/atom_colored
     border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables
     selected_item_bg = "colored", -- colored / simple
   },
+
+  telescope = { style = "borderless" }, -- borderless / bordered
 
   ------------------------------- nvchad_ui modules -----------------------------
   statusline = {
@@ -103,6 +40,8 @@ M.ui = {
 
   -- lazyload it when there are 1+ buffers
   tabufline = {
+    show_numbers = true,
+    enabled = true,
     lazyload = true,
     overriden_modules = nil,
   },
@@ -112,40 +51,42 @@ M.ui = {
     load_on_startup = true,
 
     header = {
-      "   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ",
-      "    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ",
-      "          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ",
-      "           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ",
-      "          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ",
-      "   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ",
-      "  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ",
-      " ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ",
-      " ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ",
-      "      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ",
-      "       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ",
+      "           ▄ ▄                   ",
+      "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
+      "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
+      "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
+      "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
+      "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
+      "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
+      "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
+      "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
     },
 
     buttons = {
-      { "󰘔  Projects", "Spc f p", "Telescope projects" },
       { "  Find File", "Spc f f", "Telescope find_files" },
-      { "  Recent Files", "Spc f o", "Telescope oldfiles" },
-      { "  Find Word", "Spc f w", "Telescope live_grep" },
-      { "  Bookmarks", "Spc b m", "Telescope marks" },
-      { "  Themes", "Spc t f", "Telescope themes" },
-      { "  Github", "", "term xdg-open \"https://github.com/ahujaankush/AetherizedDots\"" },
+      { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
+      { "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
+      { "  Bookmarks", "Spc m a", "Telescope marks" },
+      { "  Themes", "Spc t h", "Telescope themes" },
+      { "  Mappings", "Spc c h", "NvCheatsheet" },
     },
   },
 
-  cheatsheet = {
-    theme = "grid", -- simple/grid
+  cheatsheet = { theme = "grid" }, -- simple/grid
+
+  lsp = {
+    -- show function signatures i.e args as you type
+    signature = {
+      disabled = false,
+      silent = true, -- silences 'no signature help available' message from appearing
+    },
   },
 }
 
-M.plugins = "" -- path i.e "custom.plugins" -> custom/plugins.lua only and not custom/plugins/init.lua!!!!
+M.plugins = "" -- path i.e "custom.plugins", so make custom/plugins.lua file
 
-M.lazy_nvim = {} -- config for lazy.nvim startup options
+M.lazy_nvim = require "plugins.configs.lazy_nvim" -- config for lazy.nvim startup options
 
--- these are default mappings, check core.mappings for table structure
-M.mappings = require "core.mappings"
+M.mappings = {}
 
 return M

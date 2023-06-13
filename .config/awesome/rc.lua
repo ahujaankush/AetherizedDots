@@ -9,8 +9,8 @@ screen_height = awful.screen.focused().geometry.height
 
 user = {
 	-- default applications
-	terminal = "kitty",
-	floating_terminal = "kitty",
+	terminal = "alacritty",
+	floating_terminal = "alacritty",
 	browser = "brave",
 	file_manager = "dolphin",
 	image_viewer = "lximage-qt",

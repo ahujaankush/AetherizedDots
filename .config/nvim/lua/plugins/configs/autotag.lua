@@ -1,5 +1,0 @@
-return {
-  autotag = {
-    enable = true,
-  },
-}

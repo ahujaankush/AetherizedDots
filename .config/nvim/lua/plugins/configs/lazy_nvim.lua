@@ -5,7 +5,7 @@ return {
   ui = {
     icons = {
       ft = "",
-      lazy = "鈴 ",
+      lazy = "󰂠 ",
       loaded = "",
       not_loaded = "",
     },
@@ -14,6 +14,9 @@ return {
   performance = {
     rtp = {
       disabled_plugins = {
+        "2html_plugin",
+        "tohtml",
+        "getscript",
         "getscriptPlugin",
         "gzip",
         "logipat",
@@ -30,11 +33,15 @@ return {
         "vimballPlugin",
         "zip",
         "zipPlugin",
+        "tutor",
+        "rplugin",
         "syntax",
         "synmenu",
         "optwin",
         "compiler",
         "bugreport",
+        "ftplugin",
+        "editorconfig",
       },
     },
   },
