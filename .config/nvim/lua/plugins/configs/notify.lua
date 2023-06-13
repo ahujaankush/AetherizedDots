@@ -3,7 +3,7 @@ return {
   on_open = nil,
   on_close = nil,
   render = "default",
-  timeout = 3500,
+  timeout = 1500,
   max_width = 150,
   max_height = 25,
   background_colour = "TabLine",

@@ -96,6 +96,13 @@ local default_plugins = {
       require "nvchad_ui"
     end,
   },
+  -- ui library
+  {
+    "MunifTanjim/nui.nvim",
+    config = function()
+      dofile(vim.g.base46_cache .. "nui")
+    end,
+  },
 
   {
     "winston0410/range-highlight.nvim",
@@ -277,32 +284,59 @@ local default_plugins = {
 
   -- lsp stuff
   {
-    "williamboman/mason.nvim",
-    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
-    opts = function()
-      return require "plugins.configs.mason"
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "mason")
-      require("mason").setup(opts)
-
-      -- custom nvchad cmd to install all mason binaries listed
-      vim.api.nvim_create_user_command("MasonInstallAll", function()
-        vim.cmd("MasonInstall " .. table.concat(opts.ensure_installed, " "))
-      end, {})
-    end,
-  },
-
-  {
     "neovim/nvim-lspconfig",
     init = require("core.utils").lazy_load "nvim-lspconfig",
     dependencies = {
+      {
+        "williamboman/mason.nvim",
+        cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+        opts = function()
+          return require "plugins.configs.mason"
+        end,
+        config = function(_, opts)
+          dofile(vim.g.base46_cache .. "mason")
+          require("mason").setup(opts)
+        end,
+      },
+
+      {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+          require("mason-lspconfig").setup {
+            ensure_installed = lsp_servers,
+          }
+        end,
+      },
       -- format & linting
       {
-        "jose-elias-alvarez/null-ls.nvim",
-        init = require("core.utils").load_mappings "null_ls",
+        "jay-babu/mason-null-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = {
+          "williamboman/mason.nvim",
+          {
+            "jose-elias-alvarez/null-ls.nvim",
+            init = require("core.utils").load_mappings "null_ls",
+          },
+        },
         config = function()
           require "plugins.configs.null-ls"
+        end,
+      },
+      -- code navigation
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "neovim/nvim-lspconfig",
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+          "numToStr/Comment.nvim", -- Optional
+          "nvim-telescope/telescope.nvim", -- Optional
+        },
+        opts = function()
+          require "plugins.configs.navbuddy"
+        end,
+        config = function(opts)
+          require("nvim-navbuddy").setup(opts)
         end,
       },
     },
@@ -674,7 +708,7 @@ local default_plugins = {
 
   {
     "ahmedkhalf/project.nvim",
-    lazy = true,
+    lazy = false,
     config = function()
       require("project_nvim").setup()
     end,
@@ -685,6 +719,9 @@ local default_plugins = {
     "petertriho/nvim-scrollbar",
     init = function()
       require("core.utils").lazy_load "nvim-scrollbar"
+    end,
+    opts = function()
+      require "plugins.configs.scrollbar"
     end,
     config = function()
       require("scrollbar").setup()

@@ -3,26 +3,8 @@ require "nvchad_ui.lsp"
 
 local M = {}
 local utils = require "core.utils"
-local servers = {
-  "html",
-  "cssls",
-  -- "tsserver", -- replaced with typescript.nvim
-  "denols",
-  -- "clangd", -- replaced with clangd_extensions
-  "pyright",
-  "asm_lsp",
-  "gopls",
-  "omnisharp",
-  "jsonls",
-  "yamlls",
-  "volar",
-  "r_language_server",
-  "arduino_language_server", -- further cfg significant , see lspconfig server configs doc
-  "angularls",
-  "lua_ls",
-  "cmake",
-}
 local lspconfig = require "lspconfig"
+local navbuddy = require "nvim-navbuddy"
 -- export on_attach & capabilities for custom lspconfigs
 
 M.on_attach = function(client, bufnr)
@@ -30,7 +12,7 @@ M.on_attach = function(client, bufnr)
   client.server_capabilities.documentRangeFormattingProvider = false
 
   utils.load_mappings("lspconfig", { buffer = bufnr })
-
+  navbuddy.attach(client, bufnr)
   if client.server_capabilities.signatureHelpProvider then
     require("nvchad_ui.signature").setup(client)
   end
@@ -65,7 +47,7 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
-for _, lsp in ipairs(servers) do
+for _, lsp in ipairs(lsp_servers) do
   lspconfig[lsp].setup {
     on_attach = M.on_attach,
     capabilities = M.capabilities,
@@ -94,6 +76,29 @@ lspconfig.lua_ls.setup {
     },
   },
 }
+
+lspconfig.emmet_ls.setup {
+  -- on_attach = on_attach,
+  filetypes = {
+    "eruby",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "svelte",
+    "pug",
+    "typescriptreact",
+    "vue",
+  },
+  init_options = {
+    html = {
+      options = {
+        -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+        ["bem.enabled"] = true,
+      },
+    },
+  },
+}
+
 lspconfig.omnisharp.setup {
   cmd = { "dotnet", "/usr/lib/omnisharp/OmniSharp.dll" },
   enable_editorconfig_support = true,
@@ -116,6 +121,7 @@ lspconfig.jsonls.setup {
     },
   },
 }
+
 lspconfig.yamlls.setup {
   settings = {
     yaml = {
@@ -129,14 +135,17 @@ vim.fn.sign_define(
   "LspDiagnosticsSignError",
   { texthl = "LspDiagnosticsSignError", text = vim.g.lsp_signs.error, numhl = "LspDiagnosticsSignError" }
 )
+
 vim.fn.sign_define(
   "LspDiagnosticsSignWarning",
   { texthl = "LspDiagnosticsSignWarning", text = vim.g.lsp_signs.warning, numhl = "LspDiagnosticsSignWarning" }
 )
+
 vim.fn.sign_define(
   "LspDiagnosticsSignHint",
   { texthl = "LspDiagnosticsSignHint", text = vim.g.lsp_signs.hint, numhl = "LspDiagnosticsSignHint" }
 )
+
 vim.fn.sign_define("LspDiagnosticsSignInformation", {
   texthl = "LspDiagnosticsSignInformation",
   text = vim.g.lsp_signs.information,

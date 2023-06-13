@@ -1,13 +1,19 @@
-@import "./src/scss/vars";
-@import "./src/scss/main";
-@import "./src/scss/modules";
+@import "./themes/aether.scss";
+@import "./src/scss/_base.scss";
 
-@import "./src/scss/census/index";
-@import "./src/scss/calbox/index";
-@import "./src/scss/lumin/index";
-@import "./src/scss/melody/index";
-@import "./src/scss/notifications/index";
-@import "./src/scss/osd/index";
-@import "./src/scss/power/index";
-@import "./src/scss/sidebar/index";
-@import "./src/scss/symphony/index";
+@import "./src/scss/avatar/_init.scss";
+@import "./src/scss/disclose/_init.scss";
+@import "./src/scss/vertigo/_init.scss";
+@import "./src/scss/ocular/_init.scss";
+@import "./src/scss/lumin/_init.scss";
+@import "./src/scss/melody/_init.scss";
+@import "./src/scss/origin/_init.scss";
+@import "./src/scss/horizon/_init.scss";
+@import "./src/scss/clime/_init.scss";
+@import "./src/scss/power/_init.scss";
+@import "./src/scss/chrono/_init.scss";
+@import "./src/scss/bolt/_init.scss";
+
+@import "./src/scss/_override.scss"
+
+// vim:ft=scss

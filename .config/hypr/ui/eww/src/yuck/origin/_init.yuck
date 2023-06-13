@@ -1,0 +1,7 @@
+(include "./src/yuck/origin/_layout.yuck")
+
+(defwindow origin :stacking "bg" :exclusive false :monitor 0
+  :geometry (geometry :x 60 :y 60 :width "13%" :height "5%" :anchor "top left")
+  (origin_layout))
+
+;; vim:ft=yuck

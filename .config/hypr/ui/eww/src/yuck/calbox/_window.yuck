@@ -1,9 +1,0 @@
-(defwindow calbox
-  :monitor 0
-  :geometry
-  (geometry
-    :anchor "bottom left"
-  )
-  :stacking "fg"
-  (calbox)
-)

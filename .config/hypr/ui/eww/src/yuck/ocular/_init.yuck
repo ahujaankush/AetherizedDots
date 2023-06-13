@@ -1,0 +1,8 @@
+(include "./src/yuck/ocular/_modules.yuck")
+(include "./src/yuck/ocular/_layout.yuck")
+
+(defwindow ocular :stacking "bg" :exclusive false :monitor 0
+  :geometry (geometry :y -10 :width "20%" :height "25%" :anchor "center")
+  (ocular_layout))
+
+;; vim:ft=yuck

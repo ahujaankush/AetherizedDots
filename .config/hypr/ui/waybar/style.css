@@ -5,16 +5,26 @@
 }
 
 window#waybar {
-  background-color: rgba(14, 17, 21, 0.5);
+  background-color: #101317;
+  border-radius: 10px;
   color: #b3b7bd;
 }
 
 tooltip {
   font-family: Phosphor, Dosis;
-  background-color: #B467F9;
-  color: #171C21;
+  background-color: #b467f9;
+  color: #171c21;
   font-size: 14px;
   border-radius: 10px;
+}
+
+#custom-avatar {
+  background-image: url("./avatar.png");
+  background-size: 38px;
+  background-position: center;
+  padding: 0 17px;
+  margin: 6px 6px 6px 12px;
+  border-radius: 99px;
 }
 
 #custom-launcher {
@@ -32,11 +42,11 @@ tooltip {
     #53befc 90%,
     #b467f9 100%
   );
-  color: #0e1115;
-  margin: 10px;
-  padding: 14px 0;
-  font-size: 27px;
-  border-top-left-radius: 25px;
+  color: #101317;
+  font-size: 22px;
+  margin: 6px 0;
+  padding: 0 8px;
+  border-radius: 10px;
   background-size: 400% 400%;
   animation: gradient 20s ease-in-out infinite;
 }
@@ -54,25 +64,23 @@ tooltip {
 }
 
 #workspaces {
-  background-color: rgba(23, 28, 33, 0.5);
-  margin: 0 10px;
-  border-bottom-right-radius: 25px;
+  background-color: #1f2429;
+  border-radius: 10px;
+  margin: 6px 0;
 }
 
 #workspaces button {
   font-family: Phosphor, Dosis, sans-serif;
   color: #ffc457;
-  font-size: 25px;
+  font-size: 16px;
   transition: 0.3s;
 }
 
 #workspaces button.focused {
-  background-color: rgba(23, 28, 33, 0.5);
   border-bottom: none;
 }
 
 #workspaces button.active {
-  border-right: 2px solid #00ffb1;
   color: #00ffb1;
   border-bottom: none;
 }
@@ -81,48 +89,73 @@ tooltip {
   background-color: transparent;
 }
 
-#workspaces button:last-child {
-  border-bottom-right-radius: 25px;
-}
-
 #workspaces button.urgent {
   color: #f7467b;
 }
 
-#tray {
+#taskbar {
+  background-color: transparent;
+  padding: 0 3px;
+  border-radius: 10px;
 }
 
-#battery {
-  background-color: #00ffb1;
-  font-family: Phosphor, Dosis, sans-serif;
-  color: #2d3139;
-  margin: 0 10px;
-  padding: 13px 0;
-  font-size: 27px;
-  border-top-left-radius: 25px;
+#taskbar button {
+  background-color: #1f2429;
+  border-radius: 10px;
+  margin: 6px 3px;
+}
+
+#taskbar button:hover {
+  background-color: #3d464e;
+}
+
+#taskbar button.active {
+  background-color: rgba(83, 190, 252, 0.5);
+}
+
+#taskbar button.active:hover {
+  background-color: rgba(83, 190, 252, 0.6);
+}
+
+#tray {
+  background-color: #1f2429;
+  border-radius: 10px;
+  margin: 6px;
+  padding: 0 8px;
 }
 
 @keyframes blink {
   to {
-    background-color: #f7467b;
+    color: #f7467b;
   }
 }
 
 #clock {
-  font-family: "Iosevka Nerd Font", sans-serif;
-  background-color: rgba(23, 28, 33, 0.5);
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  background-color: #1f2429;
+  font-size: 18px;
   color: #b3b7bd;
-  margin: 0 10px;
-  padding: 15px 6px;
-  font-size: 25px;
+  margin: 6px 12px 6px 0;
+  padding: 0 6px;
+  border-radius: 10px;
+}
+
+#battery {
+  color: #00ffb1;
+  background-color: #1f2429;
+  font-family: Phosphor, Dosis, sans-serif;
+  font-size: 18px;
+  margin: 6px 0;
+  padding: 0 4px 0 8px;
+  border-radius: 10px 0 0 10px;
 }
 
 #pulseaudio {
-  background-color: rgba(45, 49, 57, 0.6);
   color: #53befc;
-  margin: 0 10px;
-  padding: 14px 0;
-  font-size: 27px;
+  background-color: #1f2429;
+  font-size: 18px;
+  margin: 6px 0;
+  padding: 0 4px 0 4px;
 }
 
 #pulseaudio.muted {
@@ -131,14 +164,18 @@ tooltip {
 
 #backlight {
   font-family: Phosphor, Dosis, sans-serif;
-  background-color: rgba(45, 49, 57, 0.6);
   color: #ff8a30;
-  margin: 0 10px;
-  padding: 14px 0;
-  font-size: 27px;
+  background-color: #1f2429;
+  font-size: 18px;
+  margin: 6px 0;
+  padding: 0 4px 0 4px;
 }
 
-#battery.critical:not(.charging) {
+#battery.warning {
+  color: #FFC457;
+}
+
+#battery.critical {
   animation-name: blink;
   animation-duration: 1s;
   animation-timing-function: linear;
@@ -146,37 +183,19 @@ tooltip {
   animation-direction: alternate;
 }
 
-#battery.charging {
-  background-color: #b467f9;
-}
-
 #network {
-  background-color: rgba(45, 49, 57, 0.3);
   color: #b467f9;
-  margin: 0 10px;
-  padding: 14px 0;
-  font-size: 27px;
+  background-color: #1f2429;
+  font-size: 18px;
+  margin: 6px 0;
+  padding: 0 4px 0 4px;
 }
 
 #bluetooth {
-  background-color: rgba(23, 28, 33, 0.4);
   color: #2bfcfc;
-  margin: 0 10px;
-  padding: 14px 0;
-  font-size: 27px;
-}
-
-#custom-seperator {
-  margin: 10px;
-  border-bottom: 2px solid #2d3139;
-  font-size: 0;
-}
-
-#custom-avatar {
-  background-image: url("./avatar.png");
-  background-size: 60px;
-  background-position: center;
-  padding: 20px 0;
-  margin: 0 10px 10px 10px;
-  border-radius: 99px;
+  background-color: #1f2429;
+  font-size: 18px;
+  margin: 6px 6px 6px 0;
+  padding: 0 8px 0 4px;
+  border-radius: 0 10px 10px 0;
 }

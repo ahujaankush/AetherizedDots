@@ -9,7 +9,7 @@ fi
 bat=$(cat /sys/class/power_supply/BAT*/capacity)
 plugged=$(cat /sys/class/power_supply/ADP1/online)
 low=20
-medium=70
+medium=50
 
 low_icon=$HYPR/ui/dunst/icons/notifications/battery/battery_low.png
 medium_icon=$HYPR/ui/dunst/icons/notifications/battery/battery_medium.png

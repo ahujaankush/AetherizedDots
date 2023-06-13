@@ -1,0 +1,8 @@
+(include "./src/yuck/bolt/_modules.yuck")
+(include "./src/yuck/bolt/_layout.yuck")
+
+(defwindow bolt :exclusive false :monitor 0
+  :geometry (geometry :y 60 :width "23%" :anchor "center bottom") 
+  (bolt_layout))
+
+;; vim:ft=yuck

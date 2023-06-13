@@ -10,18 +10,17 @@ local sources = {
 
   -- webdev stuff
   require "typescript.extensions.null-ls.code-actions",
-  b.formatting.prettier, -- so prettier works only on these filetypes
-  b.formatting.djlint,
+  b.formatting.prettier,
+  b.diagnostics.tidy,
+
   -- Lua
   b.formatting.stylua,
-  b.diagnostics.selene,
+  b.diagnostics.luacheck,
 
   -- c-family
-  -- b.formatting.clang_format.with { filetypes = { "c", "cpp", "cs" } },
-  b.diagnostics.clang_check,
-  b.diagnostics.clazy,
-  b.diagnostics.cppcheck,
-  b.formatting.astyle.with { filetype = { "arduino" } },
+  b.formatting.clang_format.with { filetypes = { "c", "cpp", "cs" } },
+  b.diagnostics.cppcheck, -- only works for c(pp)
+  b.formatting.astyle.with { filetype = { "arduino" } }, -- only for arduino
   -- golang
   b.formatting.gofmt,
   b.code_actions.gomodifytags,
@@ -30,19 +29,18 @@ local sources = {
   -- Shows the first available definition for the current word under the cursor.
   b.hover.dictionary,
   -- Shows the value for the current environment variable under the cursor.
-  b.hover.printenv,
+  b.hover.printenv.with { filetypes = { "sh", "bash", "dosbatch", "ps1" } },
 
   -- formatting and linting xml
   b.formatting.xmllint,
 
   -- python
   b.formatting.black,
-  b.formatting.isort,
-  b.diagnostics.pylint,
+  b.formatting.isort, -- organize imports
+  b.diagnostics.mypy,
 
   -- bash, csh, ksh, sh and zsh
   b.formatting.beautysh,
-  b.code_actions.shellcheck,
 
   -- SQL
   b.diagnostics.sqlfluff,

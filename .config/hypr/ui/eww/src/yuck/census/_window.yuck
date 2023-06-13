@@ -1,9 +1,0 @@
-(defwindow census
-  :monitor 0
-  :geometry
-  (geometry
-    :anchor "bottom left"
-  )
-  :stacking "fg"
-  (census)
-)

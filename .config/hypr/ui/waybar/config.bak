@@ -1,0 +1,154 @@
+{
+  "layer": "top",
+  "position": "left",
+  "exclusive": true,
+  "fixed-center": false,
+  "width": 80,
+  "modules-left": [
+    "custom/launcher",
+    "wlr/workspaces"
+  ],
+  "modules-center": [
+    "tray"
+  ],
+  "modules-right": [
+    "battery",
+    "clock",
+    "pulseaudio",
+    "backlight",
+    "network",
+    "bluetooth",
+    "custom/seperator",
+    "custom/avatar"
+  ],
+  "custom/launcher": {
+    "on-click": "$SCRIPTS/apps/eww.sh windows | grep '*sidebar' && ($SCRIPTS/apps/eww.sh update sidebarreveal=false && sleep 0.5s && $SCRIPTS/apps/eww.sh close sidebar) || ($SCRIPTS/apps/eww.sh open sidebar && $SCRIPTS/apps/eww.sh update sidebarreveal=true)",
+  "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep '*symphony' && ($SCRIPTS/apps/eww.sh update symphonyreveal=false && sleep 0.4s && $SCRIPTS/apps/eww.sh close symphony) || ($SCRIPTS/apps/eww.sh open symphony && $SCRIPTS/apps/eww.sh update symphonyreveal=true)",
+    "format": "\uf849",
+    "tooltip": false
+  },
+  "wlr/workspaces": {
+    "sort-by-number": true,
+    "disable-scroll": false,
+    "all-outputs": false,
+    "on-click": "activate",
+    "active-only": false,
+    "persistent_workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": []
+    },
+    "format-icons": {
+      "urgent": "\ufa44",
+      "active": "\uf963",
+      "default": "\uf75a"
+    },
+    "format": "{icon}"
+  },
+  "tray": {
+    "icon-size": 30,
+    "spacing": 10
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}",
+    "format-charging": "",
+    "format-plugged": "",
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "on-click": "hyprctl dispatch exec [float] foot battop",
+    "on-click-right": "$HOME/.config/rofi/applets/bin/battery.sh",
+    "on-update": "$SCRIPTS/utils/battery.sh"
+  },
+  "clock": {
+    "format": "<span foreground='#9554ff'><b>{:%I</b></span>\n<span foreground='#00ffb1'>%M}</span>",
+    "format-alt": "<span foreground='#00ffb1'>{:%d</span>\n<span foreground='#9554ff'><b>%m</b>}</span>",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep '*calbox' && ($SCRIPTS/apps/eww.sh update calboxreveal=false && sleep 0.4s && $SCRIPTS/apps/eww.sh close calbox) || ($SCRIPTS/apps/eww.sh open calbox && $SCRIPTS/apps/eww.sh update calboxreveal=true)",
+    "interval": 1
+  },
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon}",
+    "format-bluetooth-muted": "󰝟",
+    "format-muted": "󰝟",
+    "format-source": "",
+    "format-source-muted": "",
+    "tooltip-format": "{desc}; {volume}%",
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "蓼",
+      "headset": "蓼",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ]
+    },
+    "on-click": "killall pavucontrol-qt || pavucontrol-qt",
+    "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep '*census' && ($SCRIPTS/apps/eww.sh update censusreveal=false && sleep 0.4s && $SCRIPTS/apps/eww.sh close census) || ($SCRIPTS/apps/eww.sh open census && $SCRIPTS/apps/eww.sh update censusreveal=true)",
+    "on-click-middle": "$HOME/.config/rofi/applets/bin/volume.sh"
+  },
+  "backlight": {
+    "format": "{icon}",
+    "tooltip-format": "{percent}%",
+    "format-icons": [
+      "󰃞",
+      "󰃝",
+      "󰃟",
+      "󰃠"
+    ],
+    "on-click": "killall gammastep || gammastep -O 3500K",
+    "on-click-middle": "$HOME/.config/rofi/applets/bin/brightness.sh",
+    "on-scroll-up": "light -U 5",
+    "on-scroll-down": "light -A 5"
+  },
+  "network": {
+    "format": "󰖩",
+    "format-wifi": "󰖩",
+    "format-ethernet": "󰱔",
+    "format-disconnected": "󰱟",
+    "tooltip-format": "嬨 {ifname} via {gwaddr}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "tooltip-format-ethernet": "{ifname}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50,
+    "on-click": "hyprctl dispatch exec [float] foot nmtui"
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{num_connections} connected\t{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "killall blueman-manager || hyprctl dispatch exec [float] blueman-manager"
+  },
+  "custom/seperator": {
+    "tooltip": false,
+    "format": " "
+  },
+  "custom/avatar": {
+    "on-click": "cliphist list | rofi -dmenu -config $HOME/.config/rofi/launchers/type-1/style-4.rasi | cliphist decode | wl-copy",
+    "format": " "
+  }
+}

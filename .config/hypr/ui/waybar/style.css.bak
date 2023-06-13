@@ -1,0 +1,182 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-weight: 400;
+}
+
+window#waybar {
+  background-color: rgba(14, 17, 21, 0.5);
+  color: #b3b7bd;
+}
+
+tooltip {
+  font-family: Phosphor, Dosis;
+  background-color: #B467F9;
+  color: #171C21;
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+#custom-launcher {
+  font-family: Phosphor, Dosis, sans-serif;
+  background: radial-gradient(
+    circle,
+    #f7467b 10%,
+    #ffc457 20%,
+    #00ffb1 30%,
+    #2798e4 40%,
+    #9554ff 50%,
+    #ff62a4 60%,
+    #ff8a30 70%,
+    #1addb0 80%,
+    #53befc 90%,
+    #b467f9 100%
+  );
+  color: #0e1115;
+  margin: 10px;
+  padding: 14px 0;
+  font-size: 27px;
+  border-top-left-radius: 25px;
+  background-size: 400% 400%;
+  animation: gradient 20s ease-in-out infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 200%;
+  }
+  50% {
+    background-position: 200% 0%;
+  }
+  100% {
+    background-position: 400% 200%;
+  }
+}
+
+#workspaces {
+  background-color: rgba(23, 28, 33, 0.5);
+  margin: 0 10px;
+  border-bottom-right-radius: 25px;
+}
+
+#workspaces button {
+  font-family: Phosphor, Dosis, sans-serif;
+  color: #ffc457;
+  font-size: 25px;
+  transition: 0.3s;
+}
+
+#workspaces button.focused {
+  background-color: rgba(23, 28, 33, 0.5);
+  border-bottom: none;
+}
+
+#workspaces button.active {
+  border-right: 2px solid #00ffb1;
+  color: #00ffb1;
+  border-bottom: none;
+}
+
+#workspaces button:hover {
+  background-color: transparent;
+}
+
+#workspaces button:last-child {
+  border-bottom-right-radius: 25px;
+}
+
+#workspaces button.urgent {
+  color: #f7467b;
+}
+
+#tray {
+}
+
+#battery {
+  background-color: #00ffb1;
+  font-family: Phosphor, Dosis, sans-serif;
+  color: #2d3139;
+  margin: 0 10px;
+  padding: 13px 0;
+  font-size: 27px;
+  border-top-left-radius: 25px;
+}
+
+@keyframes blink {
+  to {
+    background-color: #f7467b;
+  }
+}
+
+#clock {
+  font-family: "Iosevka Nerd Font", sans-serif;
+  background-color: rgba(23, 28, 33, 0.5);
+  color: #b3b7bd;
+  margin: 0 10px;
+  padding: 15px 6px;
+  font-size: 25px;
+}
+
+#pulseaudio {
+  background-color: rgba(45, 49, 57, 0.6);
+  color: #53befc;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#pulseaudio.muted {
+  color: #f7467b;
+}
+
+#backlight {
+  font-family: Phosphor, Dosis, sans-serif;
+  background-color: rgba(45, 49, 57, 0.6);
+  color: #ff8a30;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#battery.critical:not(.charging) {
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.charging {
+  background-color: #b467f9;
+}
+
+#network {
+  background-color: rgba(45, 49, 57, 0.3);
+  color: #b467f9;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#bluetooth {
+  background-color: rgba(23, 28, 33, 0.4);
+  color: #2bfcfc;
+  margin: 0 10px;
+  padding: 14px 0;
+  font-size: 27px;
+}
+
+#custom-seperator {
+  margin: 10px;
+  border-bottom: 2px solid #2d3139;
+  font-size: 0;
+}
+
+#custom-avatar {
+  background-image: url("./avatar.png");
+  background-size: 60px;
+  background-position: center;
+  padding: 20px 0;
+  margin: 0 10px 10px 10px;
+  border-radius: 99px;
+}

@@ -1,29 +1,30 @@
 {
   "layer": "top",
-  "position": "left",
-  "exclusive": true,
-  "fixed-center": false,
-  "width": 80,
+  "position": "bottom",
+  "exclusive": false,
+  "height": 50,
+  "margin-bottom": 10,
+  "margin-left": 160,
+  "margin-right": 160,
   "modules-left": [
-    "custom/launcher",
+    "custom/avatar",
     "wlr/workspaces"
   ],
   "modules-center": [
-    "tray"
+    "custom/launcher",
+    "wlr/taskbar"
   ],
   "modules-right": [
+    "tray",
     "battery",
-    "clock",
     "pulseaudio",
     "backlight",
     "network",
     "bluetooth",
-    "custom/seperator",
-    "custom/avatar"
+    "clock"
   ],
   "custom/launcher": {
-    "on-click": "$SCRIPTS/apps/eww.sh windows | grep '*sidebar' && ($SCRIPTS/apps/eww.sh update sidebarreveal=false && sleep 0.5s && $SCRIPTS/apps/eww.sh close sidebar) || ($SCRIPTS/apps/eww.sh open sidebar && $SCRIPTS/apps/eww.sh update sidebarreveal=true)",
-  "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep '*symphony' && ($SCRIPTS/apps/eww.sh update symphonyreveal=false && sleep 0.4s && $SCRIPTS/apps/eww.sh close symphony) || ($SCRIPTS/apps/eww.sh open symphony && $SCRIPTS/apps/eww.sh update symphonyreveal=true)",
+    "on-click": "$SCRIPTS/apps/eww.sh windows | grep *bolt && ($SCRIPTS/apps/eww.sh update boltreveal=false && sleep 0.55s && $SCRIPTS/apps/eww.sh close bolt) || ($SCRIPTS/apps/eww.sh open bolt && $SCRIPTS/apps/eww.sh update boltreveal=true)",
     "format": "\uf849",
     "tooltip": false
   },
@@ -48,16 +49,27 @@
     },
     "format": "{icon}"
   },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 22,
+    "icon-theme": "oomox-aesthetic-dark",
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
+  },
   "tray": {
-    "icon-size": 30,
-    "spacing": 10
+    "icon-size": 20,
+    "spacing": 4
+  },
+  "hyprland/language": {
+    "keyboard-name": "at-translated-set-2-keyboard"
   },
   "battery": {
     "states": {
-      "warning": 30,
-      "critical": 15
+      "warning": 50,
+      "critical": 20
     },
-    "format": "{capacity}",
+    "format": "{icon}",
     "format-charging": "",
     "format-plugged": "",
     "format-icons": [
@@ -77,10 +89,9 @@
     "on-update": "$SCRIPTS/utils/battery.sh"
   },
   "clock": {
-    "format": "<span foreground='#9554ff'><b>{:%I</b></span>\n<span foreground='#00ffb1'>%M}</span>",
-    "format-alt": "<span foreground='#00ffb1'>{:%d</span>\n<span foreground='#9554ff'><b>%m</b>}</span>",
-    "tooltip-format": "<tt>{calendar}</tt>",
-    "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep '*calbox' && ($SCRIPTS/apps/eww.sh update calboxreveal=false && sleep 0.4s && $SCRIPTS/apps/eww.sh close calbox) || ($SCRIPTS/apps/eww.sh open calbox && $SCRIPTS/apps/eww.sh update calboxreveal=true)",
+    "format": "<span foreground='#f7467b'>{:%H</span>:<span foreground='#00ffb1'>%M</span>}",
+    "format-alt": "<span foreground='#00ffb1'>{:%d</span>:<span foreground='#9554ff'>%m}</span>",
+    "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep *disclose && ($SCRIPTS/apps/eww.sh update disclosereveal=false && sleep 0.55s && $SCRIPTS/apps/eww.sh close disclose) || ($SCRIPTS/apps/eww.sh open disclose && $SCRIPTS/apps/eww.sh update disclosereveal=true)",
     "interval": 1
   },
   "pulseaudio": {
@@ -105,7 +116,7 @@
       ]
     },
     "on-click": "killall pavucontrol-qt || pavucontrol-qt",
-    "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep '*census' && ($SCRIPTS/apps/eww.sh update censusreveal=false && sleep 0.4s && $SCRIPTS/apps/eww.sh close census) || ($SCRIPTS/apps/eww.sh open census && $SCRIPTS/apps/eww.sh update censusreveal=true)",
+    "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep '*avatar' && ($SCRIPTS/apps/eww.sh update avatarreveal=false && sleep 0.4s && $SCRIPTS/apps/eww.sh close avatar) || ($SCRIPTS/apps/eww.sh open avatar && $SCRIPTS/apps/eww.sh update avatarreveal=true)",
     "on-click-middle": "$HOME/.config/rofi/applets/bin/volume.sh"
   },
   "backlight": {
@@ -148,7 +159,8 @@
     "format": " "
   },
   "custom/avatar": {
-    "on-click": "cliphist list | rofi -dmenu -config $HOME/.config/rofi/launchers/type-1/style-4.rasi | cliphist decode | wl-copy",
+    "on-click": "$SCRIPTS/apps/eww.sh windows | grep *chrono && ($SCRIPTS/apps/eww.sh update chronoreveal=false && sleep 0.55s && $SCRIPTS/apps/eww.sh close chrono) || ($SCRIPTS/apps/eww.sh open chrono && $SCRIPTS/apps/eww.sh update chronoreveal=true)",
+    "tooltip": false,
     "format": " "
   }
 }

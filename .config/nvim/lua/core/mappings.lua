@@ -20,6 +20,13 @@ M.general = {
   },
 
   n = {
+  ["<A-c>"] = {
+      function()
+        require("core.utils").close_nvim()
+      end,
+      "close nvim",
+    },
+
     ["<ESC>"] = { "<cmd> noh <CR>", "no highlight" },
 
     -- switch between windows

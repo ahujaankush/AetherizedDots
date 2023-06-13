@@ -34,6 +34,21 @@ M.capabilities.textDocument.completion.completionItem = {
 
 return {
   server = {
+    cmd = {
+      "clangd",
+      "--background-index",
+      "--pch-storage=memory",
+      "--clang-tidy",
+      "--suggest-missing-includes",
+      "--cross-file-rename",
+      "--completion-style=detailed",
+    },
+    init_options = {
+      clangdFileStatus = true,
+      usePlaceholders = true,
+      completeUnimported = true,
+      semanticHighlighting = true,
+    },
     on_attach = M.on_attach,
     capabilities = M.capabilities,
   },
@@ -43,6 +58,9 @@ return {
     autoSetHints = true,
     -- These apply to the default ClangdSetInlayHints command
     inlay_hints = {
+      inline = vim.fn.has "nvim-0.10" == 1,
+      -- Options other than `highlight' and `priority' only work
+      -- if `inline' is disabled
       -- Only show inlay hints for the current line
       only_current_line = false,
       -- Event which triggers a refersh of the inlay hints.
@@ -89,7 +107,7 @@ return {
         TemplateTemplateParm = "🅃",
         TemplateParamObject = "🅃",
       },]]
-      -- These require codicons (https://github.com/microsoft/vscode-codicons)
+      --[[ These require codicons (https://github.com/microsoft/vscode-codicons) ]]
       role_icons = {
         type = "",
         declaration = "",
@@ -108,7 +126,6 @@ return {
         TemplateTemplateParm = "",
         TemplateParamObject = "",
       },
-
       highlights = {
         detail = "Comment",
       },

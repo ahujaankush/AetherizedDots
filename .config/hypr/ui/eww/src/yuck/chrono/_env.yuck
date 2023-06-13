@@ -1,0 +1,3 @@
+(defpoll air :interval "12h" "./src/shell/pollution.py 2> /dev/null")
+
+; vim:filetype=yuck

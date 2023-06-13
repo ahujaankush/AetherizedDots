@@ -375,6 +375,7 @@ alias nhist="dbus-monitor \"interface='org.freedesktop.Notifications'\" | grep -
 alias strel="xrdb -I$HOME/.config/Xresources $HOME/.config/Xresources/config.x && kill -USR1 $(pidof st)"
 
 alias packettracer="QT_QPA_PLATFORM=xcb packettracer"
+alias wxmaxima="GTK_THEME=Breeze wxmaxima"
 alias resrc="source $ZDOTDIR/.zshrc"
 alias rofi-shot='rofi -show drun -normal-window & disown'
 

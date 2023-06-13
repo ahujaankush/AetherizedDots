@@ -76,16 +76,19 @@ msg_urgency = critical
 fullscreen = pushback
 
 [battery_low]
-appname = "battery_low"
+appname = "Battery low"
 foreground = "#f7467b"
+set_stack_tag = "Battery low"
 
 [battery_medium]
-appname = "battery_medium"
+appname = "Battery medium"
 foreground = "#FFC457"
+set_stack_tag = "Battery medium"
 
-[battery_medium]
-appname = "charger_plugged"
-foreground = "#9554ff"
+[battery_charging]
+appname = "Charger plugged"
+foreground = "#00ffb1""
+set_stack_tag = "Charger plugged"
 
 [volume]
 appname = "volume"

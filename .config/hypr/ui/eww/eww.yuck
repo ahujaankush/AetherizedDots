@@ -1,29 +1,16 @@
-(include "./src/yuck/_vars.yuck")
-(include "./src/yuck/_modules.yuck")
+(include "./src/yuck/_env.yuck")
+(include "./src/yuck/_lib.yuck")
 
-(include "./src/yuck/census/_widgets.yuck")
-(include "./src/yuck/census/_window.yuck")
+;; (include "./src/yuck/vertigo/_init.yuck")
+(include "./src/yuck/disclose/_init.yuck")
+(include "./src/yuck/avatar/_init.yuck")
+(include "./src/yuck/melody/_init.yuck")
+(include "./src/yuck/lumin/_init.yuck")
+(include "./src/yuck/origin/_init.yuck")
+;; (include "./src/yuck/ocular/_init.yuck")
+;; (include "./src/yuck/clime/_init.yuck")
+(include "./src/yuck/power/_init.yuck")
+(include "./src/yuck/chrono/_init.yuck")
+(include "./src/yuck/bolt/_init.yuck")
 
-(include "./src/yuck/calbox/_widgets.yuck")
-(include "./src/yuck/calbox/_window.yuck")
-
-(include "./src/yuck/lumin/_widgets.yuck")
-(include "./src/yuck/lumin/_window.yuck")
-
-(include "./src/yuck/melody/_widgets.yuck")
-(include "./src/yuck/melody/_window.yuck")
-
-(include "./src/yuck/notifications/_window.yuck")
-(include "./src/yuck/notifications/_widgets.yuck")
-
-(include "./src/yuck/osd/_window.yuck")
-(include "./src/yuck/osd/_widgets.yuck")
-
-(include "./src/yuck/power/_widgets.yuck")
-(include "./src/yuck/power/_window.yuck")
-
-(include "./src/yuck/sidebar/_widgets.yuck")
-(include "./src/yuck/sidebar/_window.yuck")
-
-(include "./src/yuck/symphony/_widgets.yuck")
-(include "./src/yuck/symphony/_window.yuck")
+; vim:filetype=yuck
