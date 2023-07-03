@@ -14,6 +14,7 @@ opt.showmode = false
 
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
+opt.relativenumber = true
 
 -- Indenting
 opt.expandtab = true
@@ -26,6 +27,7 @@ opt.fillchars = { eob = " " }
 opt.ignorecase = true
 opt.smartcase = true
 opt.mouse = "a"
+opt.mousemoveevent = true
 
 -- Numbers
 opt.number = true
@@ -51,10 +53,48 @@ opt.whichwrap:append "<>[]hl"
 
 g.mapleader = " "
 
--- disable some default providers
-for _, provider in ipairs { "node", "perl", "python3", "ruby" } do
-  vim.g["loaded_" .. provider .. "_provider"] = 0
-end
+-- Neovide
+
+vim.api.nvim_command "set guifont=JetBrainsMono\\ Nerd\\ Font,Cooper\\ Hewitt:h13"
+
+g.neovide_refresh_rate = 60
+g.neovide_transparency = 1
+g.neovide_scale_factor = 0.7
+
+g.neovide_no_idle = true
+g.neovide_profiler = false
+g.neovide_touch_deadzone = 1.0
+g.neovide_input_use_logo = true
+g.neovide_remember_window_size = true
+g.neovide_touch_drag_timeout = 0.17
+
+g.neovide_cursor_animation_length = 0.1
+g.neovide_cursor_trail_length = 1
+g.neovide_cursor_antialiasing = true
+g.neovide_cursor_unfocused_outline_width = 0.125
+
+g.neovide_cursor_vfx_mode = "railgun"
+g.neovide_cursor_vfx_opacity = 85.0
+g.neovide_cursor_vfx_particle_lifetime = 1
+g.neovide_cursor_vfx_particle_density = 50.0
+g.neovide_cursor_vfx_particle_speed = 5.0
+g.neovide_cursor_vfx_particle_phase = 1.5
+g.neovide_cursor_vfx_particle_curl = 1.0
+
+g.neovide_padding_top = 20
+g.neovide_padding_left = 20
+g.neovide_padding_right = 20
+g.neovide_padding_bottom = 20
+
+-- lazygit
+g.lazygit_floating_window_winblend = 0 -- transparency of floating window
+g.lazygit_floating_window_scaling_factor = 0.9 -- scaling factor for floating window
+g.lazygit_floating_window_border_chars = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } -- customize lazygit popup window border characters
+g.lazygit_floating_window_use_plenary = 0 -- use plenary.nvim to manage floating window if available
+g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not installed
+
+-- g.lazygit_use_custom_config_file_path = 0 -- config file path is evaluated if this value is 1
+-- g.lazygit_config_file_path = "" -- custom config file path
 
 -- add binaries installed by mason.nvim to path
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"

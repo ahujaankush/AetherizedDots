@@ -1,0 +1,29 @@
+return {
+  darker_white = "#b3b7bd",
+	white = "#ffffff",
+	darker_black = "#0a0d11",
+	black = "#0E1115", --  nvim bg
+	black2 = "#171C21",
+	one_bg = "#212428", -- real bg of onedark
+	one_bg2 = "#2d3139",
+	one_bg3 = "#33363a",
+	grey = "#3e4145",
+	grey_fg = "#45484c",
+	grey_fg2 = "#4a4d51",
+	light_grey = "#525559",
+	red = "#f7467b",
+	baby_pink = "#ff62a4",
+	pink = "#ff75a0",
+	line = "#31353d", -- for lines like vertsplit
+	green = "#00ffb1",
+	vibrant_green = "#1addb0",
+	nord_blue = "#53befc",
+	blue = "#2798e4",
+	yellow = "#FFC457",
+	sun = "#FFA246",
+	purple = "#B467F9",
+	dark_purple = "#9554ff",
+	teal = "#2BCAFC",
+	orange = "#ff8a30",
+	cyan = "#2bfcfc",
+}

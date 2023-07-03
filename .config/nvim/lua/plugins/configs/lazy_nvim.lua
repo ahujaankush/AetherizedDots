@@ -10,7 +10,6 @@ return {
       not_loaded = "",
     },
   },
-
   performance = {
     rtp = {
       disabled_plugins = {
@@ -34,13 +33,10 @@ return {
         "zip",
         "zipPlugin",
         "tutor",
-        "rplugin",
         "syntax",
         "synmenu",
         "optwin",
-        "compiler",
         "bugreport",
-        "ftplugin",
         "editorconfig",
       },
     },

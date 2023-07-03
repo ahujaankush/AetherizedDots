@@ -1,5 +1,5 @@
 dofile(vim.g.base46_cache .. "telescope")
-local telescope = require("telescope")
+local telescope = require "telescope"
 local options = {
   defaults = {
     vimgrep_arguments = {
@@ -21,15 +21,15 @@ local options = {
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = {
-        prompt_position = "top",
-        preview_width = 0.55,
-        results_width = 0.8,
+        prompt_position = "bottom",
+        preview_width = 0.6,
+        results_width = 0.7,
       },
       vertical = {
         mirror = false,
       },
-      width = 0.87,
-      height = 0.80,
+      width = 0.9,
+      height = 0.9,
       preview_cutoff = 120,
     },
     file_sorter = require("telescope.sorters").get_fuzzy_file,
@@ -50,8 +50,47 @@ local options = {
       n = { ["q"] = require("telescope.actions").close },
     },
   },
-
-  extensions_list = { "themes", "terms" },
+  extensions = {
+    media = {
+      backend = "jp2a",
+      backend_options = {
+        jp2a = {
+          move = true,
+        },
+      },
+    },
+    undo = {
+      use_delta = true,
+      use_custom_command = nil,
+      side_by_side = true,
+      diff_context_lines = vim.o.scrolloff,
+      entry_format = "state #$ID, $STAT, $TIME",
+      time_format = "",
+      mappings = {
+        i = {
+          -- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
+          -- you want to replicate these defaults and use the following actions. This means
+          -- installing as a dependency of telescope in it's `requirements` and loading this
+          -- extension from there instead of having the separate plugin definition as outlined
+          -- above.
+          ["<C-CR>"] = require("telescope-undo.actions").yank_additions,
+          ["<S-CR>"] = require("telescope-undo.actions").yank_deletions,
+          ["<CR>"] = require("telescope-undo.actions").restore,
+        },
+      },
+    },
+  },
+  extensions_list = {
+    "themes",
+    "terms",
+    "media",
+    "projects",
+    "ui-select",
+    "refactoring",
+    "undo",
+    "textcase",
+    "lazygit",
+  },
 }
 
 telescope.setup(options)
@@ -59,4 +98,3 @@ telescope.setup(options)
 for _, ext in ipairs(options.extensions_list) do
   telescope.load_extension(ext)
 end
-

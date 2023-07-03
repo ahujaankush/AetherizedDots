@@ -1,7 +1,6 @@
 -- n, v, i, t = mode names
 
 local M = {}
-
 M.general = {
   i = {
     -- go to  beginning and end
@@ -23,6 +22,13 @@ M.general = {
     ["<C-j>"] = { "<C-w>j", "Window down" },
     ["<C-k>"] = { "<C-w>k", "Window up" },
 
+    -- resize vertical splits
+    ["v["] = { "<cmd> vertical resize +10 <CR>", "increase vertical split" },
+    ["v]"] = { "<cmd> vertical resize -10 <CR>", "decrease vertical split" },
+    -- resize horizontal splits
+    ["w["] = { "<cmd> resize +10 <CR>", "increase horizontal split" },
+    ["w]"] = { "<cmd> resize -10 <CR>", "decrease horizontal split" },
+
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "Save file" },
 
@@ -43,8 +49,15 @@ M.general = {
     ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
 
     -- new buffer
-    ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
+    ["<leader>bn"] = { "<cmd> enew <CR>", "New buffer" },
     ["<leader>ch"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
+    -- tabs
+    ["<leader>tn"] = { "<cmd> tab new <CR>", "new tab" },
+    ["<leader>tq"] = { "<cmd> tab close <CR>", "close tab" },
+    ["<C-t>"] = { "<cmd> tabnext <CR>", "tab next" },
+    ["<S-t>"] = { "<cmd> tabprevious <CR>", "tab prev" },
+    ["<leader>t."] = { "<cmd> tabmove +1 <CR>", "tab move +1" },
+    ["<leader>t,"] = { "<cmd> tabmove -1 <CR>", "tab move -1" },
   },
 
   t = {
@@ -107,6 +120,31 @@ M.tabufline = {
   },
 }
 
+M.bufferline = {
+  plugin = true,
+
+  n = {
+    -- cycle through buffers
+    ["<tab>"] = {
+      "<cmd> BufferLineCycleNext <CR>",
+      "Goto next buffer",
+    },
+
+    ["<S-tab>"] = {
+      "<cmd> BufferLineCyclePrev <CR>",
+      "Goto prev buffer",
+    },
+
+    -- close buffer + hide terminal buffer
+    ["<leader>xx"] = {
+      function()
+        require("bufdelete").bufdelete(0, true)
+      end,
+      "Close buffer",
+    },
+  },
+}
+
 M.comment = {
   plugin = true,
 
@@ -128,39 +166,62 @@ M.comment = {
   },
 }
 
+M.neogen = {
+  plugin = true,
+  n = {
+    ["<leader>,"] = {
+      function()
+        require("neogen").generate()
+      end,
+      "Neogen generate annotation",
+    },
+  },
+}
+
+M.trouble = {
+  plugin = true,
+
+  n = {
+    ["<leader>tt"] = {
+      "<cmd>TroubleToggle<CR>",
+      "toggle trouble",
+    },
+  },
+}
+
 M.lspconfig = {
   plugin = true,
 
   -- See `<cmd> :help vim.lsp.*` for documentation on any of the below functions
 
   n = {
-    ["gD"] = {
-      function()
-        vim.lsp.buf.declaration()
-      end,
-      "LSP declaration",
-    },
+    -- ["gD"] = {
+    --   function()
+    --     vim.lsp.buf.declaration()
+    --   end,
+    --   "LSP declaration",
+    -- },
+    --
+    -- ["gd"] = {
+    --   function()
+    --     vim.lsp.buf.definition()
+    --   end,
+    --   "LSP definition",
+    -- },
 
-    ["gd"] = {
-      function()
-        vim.lsp.buf.definition()
-      end,
-      "LSP definition",
-    },
+    -- ["K"] = {
+    --   function()
+    --     vim.lsp.buf.hover()
+    --   end,
+    --   "LSP hover",
+    -- },
 
-    ["K"] = {
-      function()
-        vim.lsp.buf.hover()
-      end,
-      "LSP hover",
-    },
-
-    ["gi"] = {
-      function()
-        vim.lsp.buf.implementation()
-      end,
-      "LSP implementation",
-    },
+    -- ["gi"] = {
+    --   function()
+    --     vim.lsp.buf.implementation()
+    --   end,
+    --   "LSP implementation",
+    -- },
 
     ["<leader>ls"] = {
       function()
@@ -169,63 +230,56 @@ M.lspconfig = {
       "LSP signature help",
     },
 
-    ["<leader>D"] = {
-      function()
-        vim.lsp.buf.type_definition()
-      end,
-      "LSP definition type",
-    },
+    -- ["<leader>D"] = {
+    --   function()
+    --     vim.lsp.buf.type_definition()
+    --   end,
+    --   "LSP definition type",
+    -- },
 
-    ["<leader>ra"] = {
-      function()
-        require("nvchad_ui.renamer").open()
-      end,
-      "LSP rename",
-    },
+    -- ["<leader>ra"] = {
+    --   function()
+    --     require("nvchad_ui.renamer").open()
+    --   end,
+    --   "LSP rename",
+    -- },
 
-    ["<leader>ca"] = {
-      function()
-        vim.lsp.buf.code_action()
-      end,
-      "LSP code action",
-    },
+    -- ["gr"] = {
+    --   function()
+    --     vim.lsp.buf.references()
+    --   end,
+    --   "LSP references",
+    -- },
 
-    ["gr"] = {
-      function()
-        vim.lsp.buf.references()
-      end,
-      "LSP references",
-    },
-
-    ["<leader>f"] = {
-      function()
-        vim.diagnostic.open_float { border = "rounded" }
-      end,
-      "Floating diagnostic",
-    },
+    -- ["<leader>f"] = {
+    --   function()
+    --     vim.diagnostic.open_float { border = "rounded" }
+    --   end,
+    --   "Floating diagnostic",
+    -- },
 
     ["[d"] = {
       function()
-        vim.diagnostic.goto_prev({ float = { border = "rounded" }})
+        vim.diagnostic.goto_prev { float = { border = "rounded" } }
       end,
       "Goto prev",
     },
 
     ["]d"] = {
       function()
-        vim.diagnostic.goto_next({ float = { border = "rounded" }})
+        vim.diagnostic.goto_next { float = { border = "rounded" } }
       end,
       "Goto next",
     },
 
-    ["<leader>q"] = {
-      function()
-        vim.diagnostic.setloclist()
-      end,
-      "Diagnostic setloclist",
-    },
+    -- ["<leader>q"] = {
+    --   function()
+    --     vim.diagnostic.setloclist()
+    --   end,
+    --   "Diagnostic setloclist",
+    -- },
 
-    ["<leader>fm"] = {
+    ["<leader>lf"] = {
       function()
         vim.lsp.buf.format { async = true }
       end,
@@ -255,15 +309,70 @@ M.lspconfig = {
   },
 }
 
+M.dial = {
+  plugin = true,
+
+  n = {
+    -- inc
+    ["<leader>di"] = {
+      "<cmd> DialIncrement <CR>",
+      "Increment (dial) in normal",
+    },
+    -- dec
+    ["<leader>du"] = {
+      "<cmd> DialDecrement <CR>",
+      "Decrement (dial) in normal",
+    },
+  },
+  v = {
+    -- inc
+    ["<leader>di"] = {
+      "<cmd>'<,'> DialIncrement <CR>",
+      "Increment (dial) in visual",
+    },
+    -- dec
+    ["<leader>du"] = {
+      "<cmd>'<,'> DialDecrement <CR>",
+      "Decrement (dial) in visual",
+    },
+  },
+}
+
+M.navbuddy = {
+  plugin = true,
+
+  n = {
+    -- toggle
+    ["<leader>."] = { "<cmd> Navbuddy <CR>", "Focus navbuddy" },
+  },
+}
+
 M.nvimtree = {
   plugin = true,
 
   n = {
     -- toggle
-    ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
+    ["<leader>;"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
+  },
+}
 
-    -- focus
-    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
+M.saga = {
+  plugin = true,
+
+  n = {
+    -- toggle
+    ["<leader>ca"] = { "<cmd> Lspsaga code_action <CR>", "code action" },
+    ["<leader>q"] = { "<cmd> Lspsaga outline <CR>", "code navigation" },
+    ["<leader>ra"] = { "<cmd> Lspsaga rename <CR>", "rename" },
+    ["<leader>gd"] = { "<cmd> Lspsaga goto_definition <CR>", "goto definition" },
+    ["<leader>gD"] = { "<cmd> Lspsaga goto_type_definition <CR>", "goto type definition" },
+    ["<leader>pd"] = { "<cmd> Lspsaga peek_definition <CR>", "peek definition" },
+    ["<leader>pD"] = { "<cmd> Lspsaga peek_type_definition <CR>", "peek type definition" },
+    ["<leader>hd"] = { "<cmd> Lspsaga hover_doc <CR>", "hover doc" },
+    ["<leader>lp"] = { "<cmd> Lspsaga lsp_finder <CR>", "lsp finder" },
+    ["<leader>ld"] = { "<cmd> Lspsaga show_line_diagnostics  <CR>", "line diagnostics" },
+    ["<leader>bd"] = { "<cmd> Lspsaga show_buf_diagnostics <CR>", "buffer diagnostics" },
+    ["<leader>cd"] = { "<cmd> Lspsaga show_cursor_diagnostics <CR>", "cursor diagnostics" },
   },
 }
 
@@ -271,6 +380,11 @@ M.telescope = {
   plugin = true,
 
   n = {
+    ["<leader>fu"] = { "<CMD> Telescope undo <CR>", "undo tree" },
+    -- tabs
+    ["<leader>ft"] = { "<CMD> Telescope telescope-tabs list_tabs <CR>", "list tabs" },
+    -- projects
+    ["<leader>fp"] = { "<CMD> Telescope projects <CR>", "open projects" },
     -- find
     ["<leader>ff"] = { "<cmd> Telescope find_files <CR>", "Find files" },
     ["<leader>fa"] = { "<cmd> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
@@ -291,6 +405,37 @@ M.telescope = {
     ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
 
     ["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
+  },
+}
+
+M.textcase = {
+  plugin = true,
+  n = {
+    ["<leader>fe"] = { "<CMD> TextCaseOpenTelescope <CR>", "Textcase telescope" },
+  },
+  v = {
+    ["<leader>fe"] = { "<CMD> TextCaseOpenTelescope <CR>", "Textcase telescope" },
+  },
+}
+
+M.refactoring = {
+  plugin = true,
+  n = {
+    ["<leader>fr"] = {
+      function()
+        require("telescope").extensions.refactoring.refactors()
+      end,
+      "refactoring",
+    },
+  },
+  v = {
+    -- refactoring
+    ["<leader>fr"] = {
+      function()
+        require("telescope").extensions.refactoring.refactors()
+      end,
+      "refactoring",
+    },
   },
 }
 
@@ -345,18 +490,29 @@ M.nvterm = {
     },
 
     -- new
-    ["<leader>h"] = {
+    ["<leader>ht"] = {
       function()
         require("nvterm.terminal").new "horizontal"
       end,
       "New horizontal term",
     },
 
-    ["<leader>v"] = {
+    ["<leader>vt"] = {
       function()
         require("nvterm.terminal").new "vertical"
       end,
       "New vertical term",
+    },
+  },
+}
+
+M.scrollbar = {
+  plugin = true,
+
+  n = {
+    ["<leader>st"] = {
+      "<cmd> ScrollbarToggle <CR>",
+      "Toggle scrollbar",
     },
   },
 }
@@ -381,6 +537,19 @@ M.whichkey = {
   },
 }
 
+M.legendary = {
+  plugin = true,
+
+  n = {
+    ["<C-S-P>"] = {
+      function()
+        vim.cmd "Legendary"
+      end,
+      "Legendary search",
+    },
+  },
+}
+
 M.blankline = {
   plugin = true,
 
@@ -397,7 +566,6 @@ M.blankline = {
           vim.cmd [[normal! _]]
         end
       end,
-
       "Jump to current context",
     },
   },

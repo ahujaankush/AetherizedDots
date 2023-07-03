@@ -7,8 +7,151 @@ M.options = {
 M.ui = {
   ------------------------------- base46 -------------------------------------
   -- hl = highlights
-  hl_add = {},
-  hl_override = {},
+  hl_add = {
+    -- NUI
+    NUIHeading = { bg = "darker_black", fg = "blue" },
+    NUIText = { bg = "darker_black", fg = "white" },
+    NUILine = { bg = "darker_black", fg = "light_grey" },
+    NUINormal = { bg = "darker_black", fg = "white" },
+    NUIPrompt = { bg = "darker_black", fg = "blue" },
+    NUIYes = { fg = "green" },
+    NUINo = { fg = "red" },
+    NUICancel = { fg = "purple" },
+
+    -- LSPSAGA
+    -- general
+    TitleString = { link = "Title" },
+    TitleIcon = { link = "Repeat" },
+    SagaBorder = { link = "FloatBorder" },
+    SagaNormal = { bg = "bg" },
+    SagaExpand = { fg = "light_grey" },
+    SagaCollapse = { fg = "light_grey" },
+    SagaCount = { link = "Comment" },
+    SagaBeacon = { bg = "red" },
+    -- code action
+    ActionFix = { link = "Keyword" },
+    ActionPreviewNormal = { link = "SagaNormal" },
+    ActionPreviewBorder = { fg = "red" },
+    ActionPreviewTitle = { fg = "red" },
+    CodeActionNormal = { link = "SagaNormal" },
+    CodeActionBorder = { fg = "red" },
+    CodeActionText = { link = "@variable" },
+    CodeActionNumber = { link = "DiffAdd" },
+    -- finder
+    FinderSelection = { link = "String" },
+    FinderFName = {},
+    FinderCode = { link = "Comment" },
+    FinderCount = { link = "Constant" },
+    FinderIcon = { link = "Type" },
+    FinderType = { link = "@property" },
+    FinderStart = { link = "Function" },
+    --finder spinner
+    FinderSpinnerTitle = { fg = "purple" },
+    FinderSpinner = { link = "Statement" },
+    FinderPreview = { link = "Search" },
+    FinderLines = { link = "Operator" },
+    FinderNormal = { link = "SagaNormal" },
+    FinderBorder = { fg = "purple" },
+    FinderPreviewBorder = { link = "SagaBorder" },
+    -- definition
+    DefinitionBorder = { fg = "vibrant_green" },
+    DefinitionNormal = { link = "SagaNormal" },
+    DefinitionSearch = { link = "Search" },
+    -- hover
+    HoverNormal = { link = "SagaNormal" },
+    HoverBorder = { link = "SagaBorder" },
+    -- rename
+    RenameBorder = { fg = "dark_purple" },
+    RenameNormal = { link = "Statement" },
+    RenameMatch = { link = "Search" },
+    -- diagnostic
+    DiagnosticBorder = { fg = "orange" },
+    DiagnosticSource = { link = "Comment" },
+    DiagnosticNormal = { link = "SagaNormal" },
+    DiagnosticText = {},
+    DiagnosticBufnr = { link = "@variable" },
+    DiagnosticFname = { link = "KeyWord" },
+    DiagnosticShowNormal = { link = "SagaNormal" },
+    DiagnosticShowBorder = { link = "@property" },
+    -- Call Hierachry
+    CallHierarchyNormal = { link = "SagaNormal" },
+    CallHierarchyBorder = { fg = "yellow" },
+    CallHierarchyIcon = { link = "TitleIcon" },
+    CallHierarchyTitle = { fg = "yellow" },
+    -- lightbulb
+    SagaLightBulb = { link = "DiagnosticSignHint" },
+    -- shadow
+    SagaShadow = { link = "FloatShadow" },
+    -- Outline
+    OutlineIndent = { fg = "fg" },
+    OutlinePreviewBorder = { link = "SagaNormal" },
+    OutlinePreviewNormal = { link = "SagaBorder" },
+    OutlineWinSeparator = { link = "WinSeparator" },
+    -- Float term
+    TerminalBorder = { fg = "cyan" },
+    TerminalNormal = { link = "SagaNormal" },
+    -- Wilder (cmd line)
+    WilderPrompt = { bg = "bg" },
+    WilderPromptCursor = { bg = "one_bg2" },
+    WilderBorder = { fg = "green" },
+    -- cursorword
+    MiniCursorword = { link = "CursorLine" },
+    TSRainbowRed = { fg = "red" },
+    TSRainbowYellow = { fg = "yellow" },
+    TSRainbowBlue = { fg = "blue" },
+    TSRainbowOrange = { fg = "orange" },
+    TSRainbowGreen = { fg = "green" },
+    TSRainbowViolet = { fg = "purple" },
+    TSRainbowCyan = { fg = "cyan" },
+    TreesitterContext = { bg = "black" },
+    Directory = { fg = "blue", bg = "darker_black" },
+    -- paint.nvim
+    DocKeyword = {
+      fg = "nord_blue",
+    },
+  },
+  hl_override = {
+    -- statusline
+    St_NormalMode = {
+      fg = "black",
+      bg = "blue",
+    },
+    St_NormalModeSep = {
+      fg = "blue",
+      bg = "grey",
+    },
+    St_SelectMode = {
+      fg = "black",
+      bg = "red",
+    },
+    St_SelectModeSep = {
+      fg = "red",
+      bg = "grey",
+    },
+
+    TelescopePromptPrefix = {
+      fg = "cyan",
+    },
+    TelescopePromptTitle = {
+      bg = "cyan",
+    },
+    CursorLine = {
+      bg = "black2",
+    },
+    Comment = {
+      italic = true,
+    },
+    -- Dashboard
+    NvDashAscii = {
+      fg = "light_grey",
+      bg = "black",
+    },
+
+    NvDashButtons = {
+      fg = "light_grey",
+      bg = "black",
+    },
+  },
   changed_themes = {},
   theme_toggle = { "onedark", "one_light" },
   theme = "onedark", -- default theme
@@ -16,13 +159,13 @@ M.ui = {
   lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 
   -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
-  extended_integrations = {}, -- these aren't compiled by default, ex: "alpha", "notify"
+  extended_integrations = { "notify" }, -- these aren't compiled by default, ex: "alpha", "notify"
 
   -- cmp themeing
   cmp = {
     icons = true,
     lspkind_text = true,
-    style = "default", -- default/flat_light/flat_dark/atom/atom_colored
+    style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
     border_color = "grey_fg", -- only applicable for "default" style, use color names from base30 variables
     selected_item_bg = "colored", -- colored / simple
   },
@@ -40,9 +183,9 @@ M.ui = {
 
   -- lazyload it when there are 1+ buffers
   tabufline = {
-    show_numbers = true,
-    enabled = true,
-    lazyload = true,
+    show_numbers = false,
+    enabled = false,
+    lazyload = false,
     overriden_modules = nil,
   },
 
@@ -51,18 +194,21 @@ M.ui = {
     load_on_startup = true,
 
     header = {
-      "           ▄ ▄                   ",
-      "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-      "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-      "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-      "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-      "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-      "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-      "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-      "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+      "   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆          ",
+      "    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ",
+      "          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄     ",
+      "           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ",
+      "          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ",
+      "   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ",
+      "  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ",
+      " ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ",
+      " ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄ ",
+      "      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ",
+      "       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ",
     },
 
     buttons = {
+      { "󰘔  Projects", "Spc f p", "Telescope projects" },
       { "  Find File", "Spc f f", "Telescope find_files" },
       { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
       { "󰈭  Find Word", "Spc f w", "Telescope live_grep" },

@@ -4,7 +4,6 @@ dofile(vim.g.base46_cache .. "cmp")
 
 local cmp_ui = require("core.utils").load_config().ui.cmp
 local cmp_style = cmp_ui.style
-
 local field_arrangement = {
   atom = { "kind", "abbr", "menu" },
   atom_colored = { "kind", "abbr", "menu" },
@@ -105,11 +104,15 @@ local options = {
     }),
   },
   sources = {
-    { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "buffer" },
     { name = "nvim_lua" },
+    { name = "nvim_lsp" },
+    { name = "buffer" },
     { name = "path" },
+    { name = "calc" },
+    { name = "emoji", option = {
+      insert = false,
+    } },
   },
 }
 

@@ -1,51 +1,43 @@
-local null = require("null-ls")
+local null = require "null-ls"
 
 local b = null.builtins
 
 local sources = {
-
   -- webdev stuff
-  -- require "typescript.extensions.null-ls.code-actions",
-  b.formatting.prettier, -- so prettier works only on these filetypes
+  require "typescript.extensions.null-ls.code-actions",
+  b.code_actions.eslint_d,
+  b.formatting.prettier.with {
+    disabled_filetypes = { "markdown", "markdown.mdx" },
+  },
+  b.formatting.tidy,
+  b.diagnostics.djlint,
   b.formatting.djlint,
-  -- Lua
-  b.formatting.stylua,
-  b.diagnostics.selene,
-
-  -- c-family
-  -- b.formatting.clang_format.with { filetypes = { "c", "cpp", "cs" } },
-  b.diagnostics.clang_check,
-  b.diagnostics.clazy,
-  b.diagnostics.cppcheck,
-  b.formatting.astyle.with { filetype = { "arduino" } },
-  -- golang
-  b.formatting.gofmt,
-  b.code_actions.gomodifytags,
-  b.diagnostics.staticcheck,
-
-  -- Shows the first available definition for the current word under the cursor.
-  b.hover.dictionary,
-  -- Shows the value for the current environment variable under the cursor.
-  b.hover.printenv,
-
-  -- formatting and linting xml
-  b.formatting.xmllint,
-
+  -- css/sass
+  b.formatting.stylelint,
+  -- json
+  b.diagnostics.cfn_lint, -- AWS CloudFormation Resource Specification
+  b.formatting.fixjson,
   -- python
-  b.formatting.black,
-  b.formatting.isort,
-  b.diagnostics.pylint,
-
-  -- bash, csh, ksh, sh and zsh
-  b.formatting.beautysh,
-  b.code_actions.shellcheck,
-
-  -- SQL
-  b.diagnostics.sqlfluff,
-
+  b.diagnostics.ruff,
+  -- c/cpp
+  b.formatting.astyle.with { filetypes = { "arduino", "c", "cpp", "cs" } }, -- formatting cs
+  b.diagnostics.cpplint,
+  -- cs
+  -- java
+  -- formatting cs
+  -- rust
+  -- asm
+  b.formatting.asmfmt,
+  -- r
+  b.formatting.format_r,
+  -- lua
+  b.diagnostics.selene,
+  b.formatting.stylua,
+  -- vimscript
+  b.diagnostics.vulture,
   -- markdown
-  b.formatting.markdown_toc.with { filetype = { "markdown", "md" } },
-  b.diagnostics.write_good.with { filetype = { "markdown", "md", "txt" }},
+  b.formatting.markdownlint,
+  b.formatting.markdown_toc,
 }
 
 null.setup {

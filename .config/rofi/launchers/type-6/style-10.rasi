@@ -10,11 +10,12 @@
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun,run,filebrowser,window";
-    show-icons:                 true;
-    display-drun:               "APPS";
-    display-run:                "RUN";
-    display-filebrowser:        "FILES";
-    display-window:             "WINDOW";
+  icon-theme: "oomox-aesthetic-dark";
+  show-icons:                 true;
+  display-drun:               "APPS";
+  display-run:                "RUN";
+  display-filebrowser:        "FILES";
+  display-window:             "WINDOW";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
 }
@@ -22,12 +23,14 @@ configuration {
 /*****----- Global Properties -----*****/
 * {
     font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #11092D;
-    background-alt:              #281657;
-    foreground:                  #FFFFFF;
-    selected:                    #DF5296;
-    active:                      #6E77FF;
-    urgent:                      #8E3596;
+    background:     #0e111580;
+    background-alt: #171c2188;
+    background-light: #2d313988;
+    foreground:     #FFFFFFFF;
+    foreground-alt:     #0e1115;
+    selected:       #53befc;
+    active:         #00ffb1;
+    urgent:         #f7467b;
 }
 
 /*****----- Main Window -----*****/
@@ -38,6 +41,7 @@ window {
     anchor:                      center;
     fullscreen:                  false;
     width:                       1000px;
+    height:                      600px;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -60,7 +64,7 @@ mainbox {
 imagebox {
     padding:                     20px;
     background-color:            transparent;
-    background-image:            url("~/.config/rofi/images/j.jpg", height);
+    background-image:            url("~/.config/rofi/images/image.png", height);
     orientation:                 vertical;
     children:                    [ "inputbar", "dummy", "mode-switcher" ];
 }
@@ -91,12 +95,12 @@ textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
     str:                         "";
-    background-color:            inherit;
+    background-color:            transparent;
     text-color:                  inherit;
 }
 entry {
     enabled:                     true;
-    background-color:            inherit;
+    background-color:            transparent;
     text-color:                  inherit;
     cursor:                      text;
     placeholder:                 "Search";
@@ -118,15 +122,15 @@ button {
     cursor:                      pointer;
 }
 button selected {
-    background-color:            @selected;
-    text-color:                  @foreground;
+    background-color:            @active;
+    text-color:                  @foreground-alt;
 }
 
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
     columns:                     1;
-    lines:                       8;
+    lines:                       9;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
@@ -178,7 +182,7 @@ element selected.active {
 element-icon {
     background-color:            transparent;
     text-color:                  inherit;
-    size:                        32px;
+    size:                        37px;
     cursor:                      inherit;
 }
 element-text {

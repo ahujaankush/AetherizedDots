@@ -72,4 +72,13 @@ lspconfig.lua_ls.setup {
   },
 }
 
+lspconfig.jsonls.setup {
+  settings = {
+    json = {
+      schemas = require "plugins.configs.lsp.lang.schemastore",
+      validate = { enable = true },
+    },
+  },
+}
+
 return M

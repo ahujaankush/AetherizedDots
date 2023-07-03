@@ -12,7 +12,7 @@ window#waybar {
 
 tooltip {
   font-family: Phosphor, Dosis;
-  background-color: #b467f9;
+  background-color: #53befc;
   color: #171c21;
   font-size: 14px;
   border-radius: 10px;
@@ -144,9 +144,9 @@ tooltip {
   color: #00ffb1;
   background-color: #1f2429;
   font-family: Phosphor, Dosis, sans-serif;
-  font-size: 18px;
+  font-size: 17px;
   margin: 6px 0;
-  padding: 0 4px 0 8px;
+  padding: 0 2px 0 8px;
   border-radius: 10px 0 0 10px;
 }
 
@@ -155,7 +155,7 @@ tooltip {
   background-color: #1f2429;
   font-size: 18px;
   margin: 6px 0;
-  padding: 0 4px 0 4px;
+  padding: 0 6px 0 6px;
 }
 
 #pulseaudio.muted {
@@ -163,16 +163,15 @@ tooltip {
 }
 
 #backlight {
-  font-family: Phosphor, Dosis, sans-serif;
   color: #ff8a30;
   background-color: #1f2429;
   font-size: 18px;
   margin: 6px 0;
-  padding: 0 4px 0 4px;
+  padding: 0 6px 0 6px;
 }
 
 #battery.warning {
-  color: #FFC457;
+  color: #ffc457;
 }
 
 #battery.critical {
@@ -188,7 +187,7 @@ tooltip {
   background-color: #1f2429;
   font-size: 18px;
   margin: 6px 0;
-  padding: 0 4px 0 4px;
+  padding: 0 6px;
 }
 
 #bluetooth {
@@ -196,6 +195,6 @@ tooltip {
   background-color: #1f2429;
   font-size: 18px;
   margin: 6px 6px 6px 0;
-  padding: 0 8px 0 4px;
+  padding: 0 12px 0 6px;
   border-radius: 0 10px 10px 0;
 }
