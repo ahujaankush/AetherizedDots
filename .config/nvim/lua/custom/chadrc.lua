@@ -1,4 +1,5 @@
----@type ChadrcConfig 
- local M = {}
- M.ui = {theme = 'aether2'}
- return M
+local M = {
+  ui = { theme = "aether2" },
+  theme_toggle = { "aether2", "aether2_light" },
+}
+return M

@@ -1,16 +1,3 @@
-if [ ! $(echo $MANPAGER | awk '{print $1}') = nvim ]; then
-    export MANPAGER="less -s +M +Gg"
-    export LESS="--RAW-CONTROL-CHARS"
-
-    export LESS_TERMCAP_mb=$'\e[1;32m'
-    export LESS_TERMCAP_md=$'\e[1;32m'
-    export LESS_TERMCAP_me=$'\e[0m'
-    export LESS_TERMCAP_se=$'\e[0m'
-    export LESS_TERMCAP_so=$'\e[01;33m'
-    export LESS_TERMCAP_ue=$'\e[0m'
-    export LESS_TERMCAP_us=$'\e[1;4;31m'
-fi
-
 # FZF bases
 export FZF_DEFAULT_OPTS="
 --color fg:$base07
@@ -22,16 +9,22 @@ export FZF_DEFAULT_OPTS="
 --color info:$base02
 --color prompt:$base01
 --color spinner:$base12
---color pointer:$base07
+--color pointer:$base02
 --color marker:$base03
---color border:$background
+--color border:$base08
 --color gutter:$base00
 --color info:$base05
 --color header:$base08
---prompt '  '
---pointer ' '
+--color scrollbar:$base08
+--color marker:$base07
+
+--scrollbar='▓'
+--marker=' '
+--prompt=' '
+--pointer=' '
 --layout=reverse
---border horizontal
+--border='horizontal'
+--cycle
 --height 40"
 # PATH
 export PATH="$HOME/.bin:$HOME/.npm-global/bin:$PATH:$HOME/.local/bin"

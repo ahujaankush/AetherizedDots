@@ -5,6 +5,7 @@ local lsp = {
   "cssls",
   -- "tsserver", -- replaced with typescript.nvim
   -- "clangd", -- replaced with clangd_extensions
+  "eslint",
   "pyright",
   "asm_lsp",
   "gopls",
@@ -17,13 +18,16 @@ local lsp = {
   "angularls",
   "lua_ls",
   "cmake",
-  "taplo"
+  "taplo",
+  "marksman"
 }
 
 -- null ls (for manual installation -> provide function)
 local null = {}
 
 local ts = {
+  "comment",
+  "regex",
   "toml",
   "bash",
   "vim",

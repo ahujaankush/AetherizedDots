@@ -1,4 +1,4 @@
--- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
+-- All plugins have lazy=true by default,to load a plugin on startup just lazy=falseplugins/init
 -- List of all default plugins & their definitions
 local default_plugins = {
   "nvim-lua/plenary.nvim",
@@ -44,7 +44,6 @@ local default_plugins = {
       require("base46").load_all_highlights()
     end,
   },
-  -- nvchad bufferline is disabled
   {
     "NvChad/ui",
     branch = "v2.0",
@@ -95,9 +94,9 @@ local default_plugins = {
     init = function()
       require("core.utils").load_mappings "nvterm"
     end,
-    config = function(_, opts)
-      require "base46.term"
-      require("nvterm").setup(opts)
+    config = function()
+      require "custom.utils.term_override"
+      require "plugins.configs.code.nvterm"
     end,
   },
 
@@ -110,39 +109,23 @@ local default_plugins = {
     end,
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
-      --Please make sure you install markdown and markdown_inline parser
+      --lease make surr you install markdown and markdown_inline parser
       { "nvim-treesitter/nvim-treesitter" },
     },
   },
-
+  -- lsp progress
   {
-    "gelguy/wilder.nvim",
-    event = "CmdlineEnter",
-    build = ":UpdateRemotePlugins",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      {
-        "romgrk/fzy-lua-native",
-        build = "make",
-      },
-    },
+    "j-hui/fidget.nvim",
+    event = "LspAttach",
     config = function()
-      require "plugins.configs.interface.wilder"
+      require "plugins.configs.interface.fidget"
     end,
   },
-  {
-    "rcarriga/nvim-notify",
-    event = "UIenter",
-    config = function()
-      require "plugins.configs.interface.notify"
-    end,
-  },
-
   {
     "petertriho/nvim-scrollbar",
     event = "BufRead",
     config = function()
-      require("scrollbar").setup()
+      require "plugins.configs.interface.scrollbar"
     end,
   },
   {
@@ -160,6 +143,34 @@ local default_plugins = {
     },
     config = function()
       require "plugins.configs.code.ccc"
+    end,
+  },
+  -- nvim ui
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    enabled = true,
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require "plugins.configs.interface.noice"
+    end,
+  },
+  -- highlight visual selections
+  {
+    "Pocco81/HighStr.nvim",
+    cmd = { "HSHighlight" },
+    init = function()
+      require("core.utils").load_mappings "highstr"
+    end,
+    config = function()
+      require "plugins.configs.code.highstr"
     end,
   },
   {
@@ -204,6 +215,12 @@ local default_plugins = {
           require "plugins.configs.code.surround"
         end,
       },
+      {
+        "windwp/nvim-ts-autotag",
+        cofnig = function()
+          require "plugins.configs.treesitter.autotag"
+        end,
+      },
     },
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
@@ -215,7 +232,7 @@ local default_plugins = {
     "theHamsta/nvim-dap-virtual-text",
     event = "LspAttach",
     config = function()
-      require "plugins.configs.treesitter.dapvirtua"
+      require "plugins.configs.treesitter.dapvirtual"
     end,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
@@ -256,7 +273,7 @@ local default_plugins = {
   -- lsp stuff
   {
     "williamboman/mason.nvim",
-    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+    cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     config = function()
       require "plugins.configs.lsp.mason"
     end,
@@ -304,6 +321,7 @@ local default_plugins = {
   {
     "jose-elias-alvarez/typescript.nvim",
     ft = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
+    build = ":MasonInstall typescript-language-server",
     config = function()
       require "plugins.configs.lsp.lang.typescript"
     end,
@@ -346,7 +364,7 @@ local default_plugins = {
   {
     "p00f/clangd_extensions.nvim",
     ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-    build = "npm -g i @vscode/codicons",
+    build = { ":MasonInstall clangd", "npm -g i @vscode/codicons" },
     config = function()
       require "plugins.configs.lsp.lang.clangd"
     end,
@@ -411,11 +429,32 @@ local default_plugins = {
   },
   -- Markdown
   {
+    "lukas-reineke/headlines.nvim",
+    ft = { "markdown" },
+    enabled = false,
+    config = function()
+      require "plugins.configs.code.headlines"
+    end, -- or `opts = {}`
+  },
+  {
+
+    "jghauser/follow-md-links.nvim",
+    ft = { "markdown" },
+  },
+  {
     "toppair/peek.nvim", -- markdown preview
-    ft = { "md" },
+    ft = { "markdown" },
     build = "deno task --quiet build:fast",
     config = function()
       require "plugins.configs.lsp.lang.peek"
+    end,
+  },
+  -- preview when entering line numbers
+  {
+    "nacro90/numb.nvim",
+    event = "BufRead",
+    config = function()
+      require "plugins.configs.interface.numb"
     end,
   },
   -- inc/dec plugin
@@ -454,15 +493,7 @@ local default_plugins = {
     version = false,
     config = function()
       require "plugins.configs.code.cursorword"
-      require "plugins.configs.interface.animate"
-    end,
-  },
-  -- lsp progress
-  {
-    "j-hui/fidget.nvim",
-    event = "LspAttach",
-    config = function()
-      require "plugins.configs.interface.fidget"
+      -- require "plugins.configs.interface.animate"
     end,
   },
   {
@@ -508,6 +539,7 @@ local default_plugins = {
       -- cmp sources plugins
       {
         "saadparwaiz1/cmp_luasnip",
+        "David-Kunz/cmp-npm",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
@@ -535,15 +567,6 @@ local default_plugins = {
     end,
     config = function()
       require "plugins.configs.code.comment"
-    end,
-  },
-  -- Todo comments with highlights
-  {
-    "folke/todo-comments.nvim",
-    event = "BufRead",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require "plugins.configs.code.todo_comments"
     end,
   },
   -- Annotations highlights
@@ -645,7 +668,7 @@ local default_plugins = {
   -- Only load whichkey after all the gui
   {
     "folke/which-key.nvim",
-    keys = { "<leader>", '"', "'", "`", "c", "v", "g" },
+    keys = { "<leader>" },
     init = function()
       require("core.utils").load_mappings "whichkey"
     end,
@@ -653,16 +676,6 @@ local default_plugins = {
       dofile(vim.g.base46_cache .. "whichkey")
       -- require("which-key").register(require("core.utils").load_config().mappings)
       require("which-key").setup()
-    end,
-  },
-  {
-    "mrjones2014/legendary.nvim",
-    cmd = { "Legendary" },
-    init = function()
-      require("core.utils").load_mappings "legendary"
-    end,
-    config = function()
-      require "plugins.configs.interface.legendary"
     end,
   },
 }

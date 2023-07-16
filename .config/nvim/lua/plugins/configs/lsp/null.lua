@@ -5,11 +5,10 @@ local b = null.builtins
 local sources = {
   -- webdev stuff
   require "typescript.extensions.null-ls.code-actions",
-  b.code_actions.eslint_d,
-  b.formatting.prettier.with {
-    disabled_filetypes = { "markdown", "markdown.mdx" },
+  b.formatting.prettier,
+  b.formatting.tidy.with {
+    disabled_filetypes = { "html" },
   },
-  b.formatting.tidy,
   b.diagnostics.djlint,
   b.formatting.djlint,
   -- css/sass
@@ -18,7 +17,7 @@ local sources = {
   b.diagnostics.cfn_lint, -- AWS CloudFormation Resource Specification
   b.formatting.fixjson,
   -- python
-  b.diagnostics.ruff,
+  b.diagnostics.flake8,
   -- c/cpp
   b.formatting.astyle.with { filetypes = { "arduino", "c", "cpp", "cs" } }, -- formatting cs
   b.diagnostics.cpplint,
@@ -36,7 +35,6 @@ local sources = {
   -- vimscript
   b.diagnostics.vulture,
   -- markdown
-  b.formatting.markdownlint,
   b.formatting.markdown_toc,
 }
 

@@ -34,7 +34,7 @@ local options = {
     },
   },
   lightbulb = {
-    enable = true,
+    enable = false,
     enable_in_insert = true,
     sign = true,
     sign_priority = 40,
@@ -83,7 +83,7 @@ local options = {
     },
   },
   callhierarchy = {
-    show_detail = false,
+    show_detail = true,
     keys = {
       edit = "e",
       vsplit = "s",

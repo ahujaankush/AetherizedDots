@@ -1,13 +1,33 @@
 local M = {}
 
-M.options = {
-  nvchad_branch = "v2.0",
-}
-
 M.ui = {
   ------------------------------- base46 -------------------------------------
   -- hl = highlights
   hl_add = {
+    -- Scrollbar
+
+    ScrollbarHandle = { bg = "one_bg2" },
+    ScrollbarCursorHandle = { bg = "one_bg2", fg = "white" },
+    ScrollbarCursor = {fg = "white"},
+    ScrollbarSearchHandle = { bg = "one_bg2", fg = "green" },
+    ScrollbarSearch = {fg = "green"},
+    ScrollbarErrorHandle = { bg = "one_bg2", fg = "red" },
+    ScrollbarError = { fg = "red"},
+    ScrollbarWarnHandle = { bg = "one_bg2", fg = "orange" },
+    ScrollbarWarn = {fg = "orange"},
+    ScrollbarInfoHandle = { bg = "one_bg2", fg = "purple" },
+    ScrollbarInfo = { fg = "purple" },
+    ScrollbarHintHandle = { bg = "one_bg2", fg = "purple" },
+    ScrollbarHint = { fg = "purple"},
+    ScrollbarMiscHandle = { bg = "one_bg2", fg = "blue" },
+    ScrollbarMisc = { fg = "blue" },
+    ScrollbarGitAdd = { fg = "cyan" },
+    ScrollbarGitAddHandle = { bg = "one_bg2", fg = "cyan" },
+    ScrollbarGitChange = { fg = "cyan"},
+    ScrollbarGitChangeHandle = { bg = "one_bg2", fg = "cyan" },
+    ScrollbarGitDelete = { fg = "cyan" },
+    ScrollbarGitDeleteHandle = { bg = "one_bg2", fg = "cyan" },
+
     -- NUI
     NUIHeading = { bg = "darker_black", fg = "blue" },
     NUIText = { bg = "darker_black", fg = "white" },
@@ -60,6 +80,7 @@ M.ui = {
     -- hover
     HoverNormal = { link = "SagaNormal" },
     HoverBorder = { link = "SagaBorder" },
+
     -- rename
     RenameBorder = { fg = "dark_purple" },
     RenameNormal = { link = "Statement" },
@@ -111,6 +132,9 @@ M.ui = {
     },
   },
   hl_override = {
+    FloatBorder = {
+      fg = "green",
+    },
     -- statusline
     St_NormalMode = {
       fg = "black",
@@ -129,11 +153,41 @@ M.ui = {
       bg = "grey",
     },
 
-    TelescopePromptPrefix = {
+    St_lsp_bg = {
+      fg = "black",
+      bg = "cyan",
+    },
+
+    St_lsp_txt = {
       fg = "cyan",
+      bg = "one_bg",
+    },
+
+    St_lsp_sep = {
+      fg = "cyan",
+      bg = "black",
+    },
+
+    St_cwd_bg = {
+      fg = "black",
+      bg = "green",
+    },
+
+    St_cwd_txt = {
+      fg = "green",
+      bg = "one_bg",
+    },
+
+    St_cwd_sep = {
+      fg = "green",
+      bg = "black",
+    },
+
+    TelescopePromptPrefix = {
+      fg = "red",
     },
     TelescopePromptTitle = {
-      bg = "cyan",
+      bg = "red",
     },
     CursorLine = {
       bg = "black2",
@@ -143,7 +197,7 @@ M.ui = {
     },
     -- Dashboard
     NvDashAscii = {
-      fg = "light_grey",
+      fg = "red",
       bg = "black",
     },
 
@@ -174,18 +228,18 @@ M.ui = {
 
   ------------------------------- nvchad_ui modules -----------------------------
   statusline = {
-    theme = "default", -- default/vscode/vscode_colored/minimal
+    theme = "minimal", -- default/vscode/vscode_colored/minimal
     -- default/round/block/arrow separators work only for default statusline theme
     -- round and block will work for minimal theme only
-    separator_style = "default",
+    separator_style = "block",
     overriden_modules = nil,
   },
 
   -- lazyload it when there are 1+ buffers
   tabufline = {
-    show_numbers = false,
+    show_numbers = true,
     enabled = false,
-    lazyload = false,
+    lazyload = true,
     overriden_modules = nil,
   },
 
@@ -223,8 +277,8 @@ M.ui = {
   lsp = {
     -- show function signatures i.e args as you type
     signature = {
-      disabled = false,
-      silent = true, -- silences 'no signature help available' message from appearing
+      disabled = true,
+      silent = false, -- silences 'no signature help available' message from appearing
     },
   },
 }

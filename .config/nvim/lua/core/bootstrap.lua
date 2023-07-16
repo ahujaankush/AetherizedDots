@@ -5,12 +5,13 @@ M.echo = function(str)
   vim.api.nvim_echo({ { str, "Bold" } }, true, {})
 end
 
+--- TODO: https://github.com/NvChad/base46
+
 M.lazy = function(install_path)
   ------------- base46 ---------------
   local lazy_path = vim.fn.stdpath "data" .. "/lazy/base46"
 
   M.echo "  Compiling base46 theme to bytecode ..."
-
   local base46_repo = "https://github.com/NvChad/base46"
   vim.fn.system { "git", "clone", "--depth", "1", "-b", "v2.0", base46_repo, lazy_path }
   vim.opt.rtp:prepend(lazy_path)
@@ -25,9 +26,6 @@ M.lazy = function(install_path)
 
   -- install plugins
   require "plugins"
-
-  -- mason packages & show post_boostrap screen
-  require "nvchad.post_bootstrap"()
 end
 
 M.gen_chadrc_template = function()

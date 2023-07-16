@@ -7,10 +7,6 @@ M.on_attach = function(client, bufnr)
   client.server_capabilities.documentRangeFormattingProvider = false
 
   utils.load_mappings("lspconfig", { buffer = bufnr })
-
-  if client.server_capabilities.signatureHelpProvider then
-    require("nvchad_ui.signature").setup(client)
-  end
 end
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()

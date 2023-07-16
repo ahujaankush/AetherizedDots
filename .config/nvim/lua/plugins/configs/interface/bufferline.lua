@@ -76,41 +76,41 @@ local options = {
     diagnostic_selected = {
       fg = colors.light_grey,
       bg = colors.black,
-      bold = false,
+      bold = true,
       italic = false,
     },
-    -- hint = {
-    --   fg = "<colour-value-here>",
-    --   sp = "<colour-value-here>",
-    --   bg = "<colour-value-here>",
-    -- },
-    -- hint_visible = {
-    --   fg = "<colour-value-here>",
-    --   bg = "<colour-value-here>",
-    -- },
-    -- hint_selected = {
-    --   fg = "<colour-value-here>",
-    --   bg = "<colour-value-here>",
-    --   sp = "<colour-value-here>",
-    --   bold = true,
-    --   italic = true,
-    -- },
-    -- hint_diagnostic = {
-    --   fg = "<colour-value-here>",
-    --   sp = "<colour-value-here>",
-    --   bg = "<colour-value-here>",
-    -- },
-    -- hint_diagnostic_visible = {
-    --   fg = "<colour-value-here>",
-    --   bg = "<colour-value-here>",
-    -- },
-    -- hint_diagnostic_selected = {
-    --   fg = "<colour-value-here>",
-    --   bg = "<colour-value-here>",
-    --   sp = "<colour-value-here>",
-    --   bold = true,
-    --   italic = true,
-    -- },
+    hint = {
+      fg = colors.grey_fg,
+      sp = colors.black2,
+      bg = colors.black2,
+    },
+    hint_visible = {
+      fg = colors.grey_fg,
+      bg = colors.black2,
+    },
+    hint_selected = {
+      fg = colors.purple,
+      bg = colors.black,
+      sp = colors.black,
+      bold = true,
+      italic = false,
+    },
+    hint_diagnostic = {
+      fg = colors.grey_fg,
+      sp = colors.black2,
+      bg = colors.black2,
+    },
+    hint_diagnostic_visible = {
+      fg = colors.grey_fg,
+      bg = colors.black2,
+    },
+    hint_diagnostic_selected = {
+      fg = colors.purple,
+      bg = colors.black,
+      sp = colors.black,
+      bold = true,
+      italic = false,
+    },
     info = {
       fg = colors.grey_fg,
       sp = colors.black2,

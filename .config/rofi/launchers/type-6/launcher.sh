@@ -16,4 +16,5 @@ theme='style-10'
 ## Run
 rofi \
     -show drun \
+    -sorting-method fzf \
     -theme ${dir}/${theme}.rasi

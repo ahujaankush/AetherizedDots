@@ -5,7 +5,7 @@
 }
 
 window#waybar {
-  background-color: #101317;
+  background-color: rgba(16, 19, 23, 0.5);
   border-radius: 10px;
   color: #b3b7bd;
 }
@@ -18,62 +18,26 @@ tooltip {
   border-radius: 10px;
 }
 
-#custom-avatar {
-  background-image: url("./avatar.png");
-  background-size: 38px;
-  background-position: center;
-  padding: 0 17px;
-  margin: 6px 6px 6px 12px;
-  border-radius: 99px;
-}
-
 #custom-launcher {
-  font-family: Phosphor, Dosis, sans-serif;
-  background: radial-gradient(
-    circle,
-    #f7467b 10%,
-    #ffc457 20%,
-    #00ffb1 30%,
-    #2798e4 40%,
-    #9554ff 50%,
-    #ff62a4 60%,
-    #ff8a30 70%,
-    #1addb0 80%,
-    #53befc 90%,
-    #b467f9 100%
-  );
-  color: #101317;
-  font-size: 22px;
-  margin: 6px 0;
-  padding: 0 8px;
-  border-radius: 10px;
-  background-size: 400% 400%;
+  background-color: #1f2429;
+  color: #1addb0;
+  font-size: 28px;
+  /* margin-right: 6px; */
+  padding: 0 10px 0 16px;
   animation: gradient 20s ease-in-out infinite;
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 200%;
-  }
-  50% {
-    background-position: 200% 0%;
-  }
-  100% {
-    background-position: 400% 200%;
-  }
 }
 
 #workspaces {
   background-color: #1f2429;
-  border-radius: 10px;
-  margin: 6px 0;
+  border-top-right-radius: 24px;
 }
 
 #workspaces button {
   font-family: Phosphor, Dosis, sans-serif;
-  color: #ffc457;
+  color: #53befc;
   font-size: 16px;
   transition: 0.3s;
+  padding: 0 10px;
 }
 
 #workspaces button.focused {
@@ -81,12 +45,13 @@ tooltip {
 }
 
 #workspaces button.active {
-  color: #00ffb1;
+  color: #b467f9;
   border-bottom: none;
 }
 
-#workspaces button:hover {
-  background-color: transparent;
+#workspaces button:last-child {
+  border-top-right-radius: 24px;
+  padding-right: 16px;
 }
 
 #workspaces button.urgent {
@@ -95,31 +60,23 @@ tooltip {
 
 #taskbar {
   background-color: transparent;
-  padding: 0 3px;
-  border-radius: 10px;
 }
 
 #taskbar button {
-  background-color: #1f2429;
-  border-radius: 10px;
-  margin: 6px 3px;
+  border-bottom: 1.5px solid transparent;
+  border-top: 1.5px solid transparent;
 }
 
 #taskbar button:hover {
-  background-color: #3d464e;
 }
 
 #taskbar button.active {
-  background-color: rgba(83, 190, 252, 0.5);
-}
-
-#taskbar button.active:hover {
-  background-color: rgba(83, 190, 252, 0.6);
+  border-bottom-color: #1addb0;
 }
 
 #tray {
   background-color: #1f2429;
-  border-radius: 10px;
+  border-radius: 18px;
   margin: 6px;
   padding: 0 8px;
 }
@@ -135,27 +92,25 @@ tooltip {
   background-color: #1f2429;
   font-size: 18px;
   color: #b3b7bd;
-  margin: 6px 12px 6px 0;
-  padding: 0 6px;
-  border-radius: 10px;
+  /* margin: 6px 12px 6px 0; */
+  padding: 0 16px 0 10px;
+  /* border-radius: 18px; */
 }
 
 #battery {
   color: #00ffb1;
   background-color: #1f2429;
   font-family: Phosphor, Dosis, sans-serif;
-  font-size: 17px;
-  margin: 6px 0;
-  padding: 0 2px 0 8px;
-  border-radius: 10px 0 0 10px;
+  font-size: 20px;
+  padding: 0 5px 0 16px;
+  border-bottom-left-radius: 24px;
 }
 
 #pulseaudio {
   color: #53befc;
   background-color: #1f2429;
-  font-size: 18px;
-  margin: 6px 0;
-  padding: 0 6px 0 6px;
+  font-size: 24px;
+  padding: 0 10px;
 }
 
 #pulseaudio.muted {
@@ -165,9 +120,8 @@ tooltip {
 #backlight {
   color: #ff8a30;
   background-color: #1f2429;
-  font-size: 18px;
-  margin: 6px 0;
-  padding: 0 6px 0 6px;
+  font-size: 22px;
+  padding: 0 10px;
 }
 
 #battery.warning {
@@ -185,16 +139,19 @@ tooltip {
 #network {
   color: #b467f9;
   background-color: #1f2429;
-  font-size: 18px;
-  margin: 6px 0;
-  padding: 0 6px;
+  font-size: 22px;
+  padding: 0 10px;
 }
 
 #bluetooth {
   color: #2bfcfc;
   background-color: #1f2429;
-  font-size: 18px;
-  margin: 6px 6px 6px 0;
-  padding: 0 12px 0 6px;
-  border-radius: 0 10px 10px 0;
+  font-size: 22px;
+  padding: 0 10px;
+}
+
+#custom-seperator {
+  background-color: #1f2429;
+  color: white;
+  font-size: 12px;
 }

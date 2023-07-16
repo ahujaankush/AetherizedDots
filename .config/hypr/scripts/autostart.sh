@@ -9,7 +9,7 @@ function launch() {
 }
 
 # Wallpaper
-launch swww init && $SCRIPTS/utils/wallpaper.sh $HYPR/Wallpaper.png &
+launch "swww init && $SCRIPTS/utils/wallpaper.sh $HYPR/Wallpaper.png &"
 # Polkit
 launch /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # Waybar

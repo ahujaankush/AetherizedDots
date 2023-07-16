@@ -145,6 +145,23 @@ M.bufferline = {
   },
 }
 
+M.highstr = {
+  plugin = true,
+  v = {
+    ["<leader>hs1"] = { "<ESC><CMD>HSHighlight 1<CR>", "highlight with color 1" },
+    ["<leader>hs2"] = { "<ESC><CMD>HSHighlight 2<CR>", "highlight with color 2" },
+    ["<leader>hs3"] = { "<ESC><CMD>HSHighlight 3<CR>", "highlight with color 3" },
+    ["<leader>hs4"] = { "<ESC><CMD>HSHighlight 4<CR>", "highlight with color 4" },
+    ["<leader>hs5"] = { "<ESC><CMD>HSHighlight 5<CR>", "highlight with color 5" },
+    ["<leader>hs6"] = { "<ESC><CMD>HSHighlight 6<CR>", "highlight with color 6" },
+    ["<leader>hs7"] = { "<ESC><CMD>HSHighlight 7<CR>", "highlight with color 7" },
+    ["<leader>hs8"] = { "<ESC><CMD>HSHighlight 8<CR>", "highlight with color 8" },
+    ["<leader>hs9"] = { "<ESC><CMD>HSHighlight 9<CR>", "highlight with color 9" },
+    ["<leader>hs0"] = { "<ESC><CMD>HSHighlight 0<CR>", "highlight with color 0" },
+    ["<leader>hsr"] = { "<ESC><CMD>HSRmHighlight<CR>", "remove highlight" },
+  },
+}
+
 M.comment = {
   plugin = true,
 
@@ -208,13 +225,12 @@ M.lspconfig = {
     --   end,
     --   "LSP definition",
     -- },
-
-    -- ["K"] = {
-    --   function()
-    --     vim.lsp.buf.hover()
-    --   end,
-    --   "LSP hover",
-    -- },
+    ["<leader>hd"] = {
+      function()
+        vim.lsp.buf.hover()
+      end,
+      "hover doc",
+    },
 
     -- ["gi"] = {
     --   function()
@@ -353,6 +369,8 @@ M.nvimtree = {
   n = {
     -- toggle
     ["<leader>;"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
+    -- focuse
+    ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
   },
 }
 
@@ -368,7 +386,7 @@ M.saga = {
     ["<leader>gD"] = { "<cmd> Lspsaga goto_type_definition <CR>", "goto type definition" },
     ["<leader>pd"] = { "<cmd> Lspsaga peek_definition <CR>", "peek definition" },
     ["<leader>pD"] = { "<cmd> Lspsaga peek_type_definition <CR>", "peek type definition" },
-    ["<leader>hd"] = { "<cmd> Lspsaga hover_doc <CR>", "hover doc" },
+    -- ["<leader>hd"] = { "<cmd> Lspsaga hover_doc <CR>", "hover doc" },
     ["<leader>lp"] = { "<cmd> Lspsaga lsp_finder <CR>", "lsp finder" },
     ["<leader>ld"] = { "<cmd> Lspsaga show_line_diagnostics  <CR>", "line diagnostics" },
     ["<leader>bd"] = { "<cmd> Lspsaga show_buf_diagnostics <CR>", "buffer diagnostics" },
@@ -402,7 +420,12 @@ M.telescope = {
     ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
 
     -- theme switcher
-    ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
+    ["<leader>th"] = {
+      function()
+        vim.cmd "Telescope themes"
+      end,
+      "Nvchad themes",
+    },
 
     ["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
   },
@@ -533,19 +556,6 @@ M.whichkey = {
         vim.cmd("WhichKey " .. input)
       end,
       "Which-key query lookup",
-    },
-  },
-}
-
-M.legendary = {
-  plugin = true,
-
-  n = {
-    ["<C-S-P>"] = {
-      function()
-        vim.cmd "Legendary"
-      end,
-      "Legendary search",
     },
   },
 }

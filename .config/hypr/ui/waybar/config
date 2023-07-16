@@ -3,15 +3,15 @@
   "position": "bottom",
   "exclusive": false,
   "height": 50,
-  "margin-bottom": 10,
-  "margin-left": 160,
-  "margin-right": 160,
+  "margin-bottom": 0,
+  "margin-left": 0,
+  "margin-right": 0,
   "modules-left": [
-    "custom/avatar",
+    "custom/launcher",
+    "custom/seperator",
     "wlr/workspaces"
   ],
   "modules-center": [
-    "custom/launcher",
     "wlr/taskbar"
   ],
   "modules-right": [
@@ -21,11 +21,12 @@
     "backlight",
     "network",
     "bluetooth",
+    "custom/seperator",
     "clock"
   ],
   "custom/launcher": {
     "on-click": "$SCRIPTS/apps/eww.sh windows | grep *bolt && ($SCRIPTS/apps/eww.sh update boltreveal=false && sleep 0.55s && $SCRIPTS/apps/eww.sh close bolt) || ($SCRIPTS/apps/eww.sh open bolt && $SCRIPTS/apps/eww.sh update boltreveal=true)",
-    "format": "\uf849",
+    "format": "󰈸",
     "tooltip": false
   },
   "wlr/workspaces": {
@@ -51,7 +52,7 @@
   },
   "wlr/taskbar": {
     "format": "{icon}",
-    "icon-size": 22,
+    "icon-size": 28,
     "icon-theme": "oomox-aesthetic-dark",
     "tooltip-format": "{title}",
     "on-click": "activate",
@@ -92,7 +93,8 @@
     "format": "<span foreground='#f7467b'>{:%H</span>:<span foreground='#00ffb1'>%M</span>}",
     "format-alt": "<span foreground='#00ffb1'>{:%d</span>:<span foreground='#9554ff'>%m}</span>",
     "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep *disclose && ($SCRIPTS/apps/eww.sh update disclosereveal=false && sleep 0.55s && $SCRIPTS/apps/eww.sh close disclose) || ($SCRIPTS/apps/eww.sh open disclose && $SCRIPTS/apps/eww.sh update disclosereveal=true)",
-    "interval": 1
+    "tooltip": "true",
+    "tooltip-format": "<big>Calendar</big>\n<tt><small>{calendar}</small></tt>"
   },
   "pulseaudio": {
     "format": "{icon}",
@@ -156,11 +158,6 @@
   },
   "custom/seperator": {
     "tooltip": false,
-    "format": " "
-  },
-  "custom/avatar": {
-    "on-click": "$SCRIPTS/apps/eww.sh windows | grep *chrono && ($SCRIPTS/apps/eww.sh update chronoreveal=false && sleep 0.55s && $SCRIPTS/apps/eww.sh close chrono) || ($SCRIPTS/apps/eww.sh open chrono && $SCRIPTS/apps/eww.sh update chronoreveal=true)",
-    "tooltip": false,
-    "format": " "
+    "format": "|"
   }
-}
+} // vim: ft=jsonc

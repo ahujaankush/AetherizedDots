@@ -8,7 +8,7 @@ export foreground='#e4e4e5'
 export background='#0E1115'
 
 export base00='#171C21'
-export base08='#949494'
+export base08='#2d3139'
 
 # red
 export base01='#f7467b'
@@ -35,7 +35,7 @@ export base06='#2BCAFC'
 export base14='#2bfcfc'
 
 # white
-export base07='#d4d4d5'
+export base07='#8e8e8e'
 export base15='#ffffff'
 
 # vim:filetype=zsh

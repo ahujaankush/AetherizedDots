@@ -1,5 +1,5 @@
 dofile(vim.g.base46_cache .. "lsp")
-require "nvchad_ui.lsp"
+-- require "nvchad_ui.lsp"
 
 local M = {}
 local lspconfig = require "lspconfig"
@@ -13,9 +13,9 @@ M.on_attach = function(client, bufnr)
 
   utils.load_mappings("lspconfig", { buffer = bufnr })
 
-  if client.server_capabilities.signatureHelpProvider then
-    require("nvchad_ui.signature").setup(client)
-  end
+  -- if client.server_capabilities.signatureHelpProvider and not utils.load_config().ui.lsp.signature.disabled then
+  --   require("nvchad_ui.signature").setup(client)
+  -- end
 
   if not utils.load_config().ui.lsp_semantic_tokens and client.supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
@@ -56,7 +56,7 @@ lspconfig.lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = {
-        globals = { "vim" },
+        globals = { "vim", "awesome" },
       },
       workspace = {
         library = {
@@ -71,6 +71,16 @@ lspconfig.lua_ls.setup {
     },
   },
 }
+
+-- lspconfig.eslint.setup {
+--   --- ...
+--   on_attach = function(client, bufnr)
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--       buffer = bufnr,
+--       command = "EslintFixAll",
+--     })
+--   end,
+-- }
 
 lspconfig.jsonls.setup {
   settings = {

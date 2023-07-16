@@ -189,7 +189,7 @@ M.attach = function()
         format = {
           enabled = true,
           settings = {
-            url = vim.fn.stdpath "config" .. "/ftplugin/formatting/intellij-java-google-style.xml",
+            url = vim.fn.stdpath "config" .. "/configs/formatting/intellij-java-google-style.xml",
             profile = "GoogleStyle",
           },
         },
