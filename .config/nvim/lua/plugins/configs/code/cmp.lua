@@ -52,7 +52,7 @@ local options = {
     completion = {
       side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
       winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
-      scrollbar = false,
+      scrollbar = true,
     },
     documentation = {
       border = border "CmpDocBorder",
@@ -104,8 +104,8 @@ local options = {
     }),
   },
   sources = {
-    { name = "luasnip" },
     { name = "neorg" },
+    { name = "luasnip" },
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "path" },
