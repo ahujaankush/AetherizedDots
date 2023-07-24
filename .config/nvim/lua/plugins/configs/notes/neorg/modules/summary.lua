@@ -1,5 +1,0 @@
-return {
-  config = {
-    strategy = "default",
-  },
-}
