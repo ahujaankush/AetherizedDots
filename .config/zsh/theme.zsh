@@ -4,11 +4,11 @@
 
 # Colors
 # black
-export foreground='#e4e4e5'
-export background='#0E1115'
+export foreground='#dddddd'
+export background='#0e1319'
 
-export base00='#171C21'
-export base08='#2d3139'
+export base00='#2d373e'
+export base08='#3c404c'
 
 # red
 export base01='#f7467b'
@@ -20,7 +20,7 @@ export base10='#00ffb1'
 
 # yellow
 export base03='#ff8a30'
-export base11='#FFC457'
+export base11='#ffc857'
  
 # blue
 export base04='#2798e4'

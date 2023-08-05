@@ -3,10 +3,13 @@ zmodload zsh/zle
 zmodload zsh/zpty
 zmodload zsh/complist
 
+autoload vi_search_fix
 autoload -Uz colors
 autoload -U compinit
 colors
 
+zle -N vi_search_fix
+zle -N sudo_command_line
 zle -N toggle_right_prompt
 zle -N toggle_left_prompt
 

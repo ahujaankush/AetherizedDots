@@ -2,8 +2,8 @@ alias xclip='xclip -selection clipboard'
 
 if [ $(command -v exa) ]; then
     alias l="exa --long --all --group --icons"
-    alias ls="exa --icons"
-    alias la="exa --long --all --group --icons"
+    alias ls="exa"
+    alias la="exa --long --all --group"
 fi
 
 if [ $(command -v logo-ls) ]; then

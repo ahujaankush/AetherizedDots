@@ -8,7 +8,7 @@ alias
 utils
 opts
 plugs
-keys
+keys_vi
 prompt
 EOF
 
@@ -18,5 +18,5 @@ done
 
 # cfetch
 default_greeter
-
+source $HOME/.profile
 # vim:ft=zsh:nowrap

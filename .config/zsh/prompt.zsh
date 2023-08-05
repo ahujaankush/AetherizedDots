@@ -8,8 +8,20 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
 [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
+function prompt_csep(){
+  p10k segment +e  -t " "
+}
+
+function prompt_dir_icon(){
+  p10k segment +e  -t "󰉋"
+}
+
+function prompt_user_icon(){
+  p10k segment +e  -t ""
+}
+
 () {
-  emulate -L zsh -o extended_glob
+emulate -L zsh -o extended_glob
 
   # Unset all configuration options. This allows you to apply configuration changes without
   unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
@@ -19,42 +31,44 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    os_icon                 # os identifier
-    dir                     # current directory
-  )
-
-  # The list of segments shown on the right. Fill it with less important segments.
-  # Right prompt on the last prompt line (where you are typing your commands) gets
-  # automatically hidden when the input line reaches it. Right prompt above the
-  # last prompt line gets hidden if it would overlap with left prompt.
-  typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    status                  # exit code of the last command
-    command_execution_time  # duration of the last command
-    background_jobs         # presence of background jobs
-    direnv                  # direnv status (https://direnv.net/)
-    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    goenv                   # go environment (https://github.com/syndbg/goenv)
-    nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
-    node_version            # node.js version
-    go_version              # go version (https://golang.org)
-    rust_version            # rustc version (https://www.rust-lang.org)
-    java_version            # java version (https://www.java.com/)
-    package                 # name@version from package.json (https://docs.npmjs.com/files/package.json)
-    fvm                     # flutter version management (https://github.com/leoafarias/fvm)
-    luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
-    jenv                    # java version from jenv (https://github.com/jenv/jenv)
-    haskell_stack           # haskell version from stack (https://haskellstack.org/)
-    context                 # user@hostname
-    ranger                  # ranger shell (https://github.com/ranger/ranger)
-    vim_shell               # vim shell indicator (:sh)
-    nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
-    vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
-    # example               # example user-defined segment (see prompt_example function below)
-    vcs                     # git status
-  )
+  vim_shell               # vim shell indicator (:sh)
+  os_icon                 # os identifier
+  vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
+  csep
+  dir_icon
+  dir                     # current directory
+)
+# The list of segments shown on the right. Fill it with less important segments.
+# Right prompt on the last prompt line (where you are typing your commands) gets
+# automatically hidden when the input line reaches it. Right prompt above the
+# last prompt line gets hidden if it would overlap with left prompt.
+typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+vcs                     # git status
+csep
+# background_jobs         # presence of background jobs
+direnv                  # direnv status (https://direnv.net/)
+# virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
+# pyenv                   # python environment (https://github.com/pyenv/pyenv)
+# goenv                   # go environment (https://github.com/syndbg/goenv)
+# nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
+# nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
+# node_version            # node.js version
+# go_version              # go version (https://golang.org)
+# rust_version            # rustc version (https://www.rust-lang.org)
+# java_version            # java version (https://www.java.com/)
+# package                 # name@version from package.json (https://docs.npmjs.com/files/package.json)
+# fvm                     # flutter version management (https://github.com/leoafarias/fvm)
+# luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
+# jenv                    # java version from jenv (https://github.com/jenv/jenv)
+# haskell_stack           # haskell version from stack (https://haskellstack.org/
+user_icon
+context                 # user@hostname
+ranger                  # ranger shell (https://github.com/ranger/ranger)
+nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
+csep
+status                  # exit code of the last command
+command_execution_time  # duration of the last command
+)
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
   typeset -g POWERLEVEL9K_MODE=nerdfont-complete
@@ -68,20 +82,20 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=
 
   # Add an empty line before each prompt.
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
   # Separator between same-color segments on the left.
-  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR='█'
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
   # Separator between same-color segments on the right.
-  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR='█'
+  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=''
   # Separator between different-color segments on the left.
   typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
   # Separator between different-color segments on the right.
   typeset -g POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
   # The right end of left prompt.
-  typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='▓▒░'
-  # The left end of right prompt.
-  typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='░▒▓'
+  typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=''
+  # # The left end of right prompt.
+  typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
   # The left end of left prompt.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
   # The right end of right prompt.
@@ -92,9 +106,9 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=0
-  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=5
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=4
   # Custom icon. הּ ﮼  
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION="󰘧"
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='󰊠'
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.
@@ -107,68 +121,69 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
-  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=11
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=7
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=6
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=1
   # Display anchor directory segments in bold.
   typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
+
   # Don't shorten directories that contain any of these files. They are anchors.
   local anchor_files=(
-    .bzr
-    .citc
-    .git
-    .hg
-    .node-version
-    .python-version
-    .go-version
-    .ruby-version
-    .lua-version
-    .java-version
-    .perl-version
-    .php-version
-    .tool-version
-    .shorten_folder_marker
-    .svn
-    .terraform
-    CVS
-    Cargo.toml
-    composer.json
-    go.mod
-    package.json
-    stack.yaml
-  )
-  typeset -g POWERLEVEL9K_SHORTEN_FOLDER_MARKER="(${(j:|:)anchor_files})"
-  # If set to "first" ("last"), remove everything before the first (last) subdirectory that contains
-  # files matching $POWERLEVEL9K_SHORTEN_FOLDER_MARKER. For example, when the current directory is
-  # /foo/bar/git_repo/nested_git_repo/baz, prompt will display git_repo/nested_git_repo/baz (first)
-  # or nested_git_repo/baz (last). This assumes that git_repo and nested_git_repo contain markers
-  # and other directories don't.
-  #
-  # Optionally, "first" and "last" can be followed by ":<offset>" where <offset> is an integer.
-  # This moves the truncation point to the right (positive offset) or to the left (negative offset)
-  # relative to the marker. Plain "first" and "last" are equivalent to "first:0" and "last:0"
-  # respectively.
-  typeset -g POWERLEVEL9K_DIR_TRUNCATE_BEFORE_MARKER=false
-  # Don't shorten this many last directory segments. They are anchors.
-  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-  # Shorten directory if it's longer than this even if there is space for it. The value can
-  # be either absolute (e.g., '80') or a percentage of terminal width (e.g, '50%'). If empty,
-  # directory will be shortened only when prompt doesn't fit or when other parameters demand it
-  # (see POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS and POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT below).
-  # If set to `0`, directory will always be shortened to its minimum length.
-  typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=80
-  # When `dir` segment is on the last prompt line, try to shorten it enough to leave at least this
-  # many columns for typing commands.
-  typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS=40
-  # When `dir` segment is on the last prompt line, try to shorten it enough to leave at least
-  # COLUMNS * POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT * 0.01 columns for typing commands.
-  typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT=50
-  # If set to true, embed a hyperlink into the directory. Useful for quickly
-  # opening a directory in the file manager simply by clicking the link.
-  # Can also be handy when the directory is shortened, as it allows you to see
-  # the full directory that was used in previous commands.
-  typeset -g POWERLEVEL9K_DIR_HYPERLINK=false
+  .bzr
+  .citc
+  .git
+  .hg
+  .node-version
+  .python-version
+  .go-version
+  .ruby-version
+  .lua-version
+  .java-version
+  .perl-version
+  .php-version
+  .tool-version
+  .shorten_folder_marker
+  .svn
+  .terraform
+  CVS
+  Cargo.toml
+  composer.json
+  go.mod
+  package.json
+  stack.yaml
+)
+typeset -g POWERLEVEL9K_SHORTEN_FOLDER_MARKER="(${(j:|:)anchor_files})"
+# If set to "first" ("last"), remove everything before the first (last) subdirectory that contains
+# files matching $POWERLEVEL9K_SHORTEN_FOLDER_MARKER. For example, when the current directory is
+# /foo/bar/git_repo/nested_git_repo/baz, prompt will display git_repo/nested_git_repo/baz (first)
+# or nested_git_repo/baz (last). This assumes that git_repo and nested_git_repo contain markers
+# and other directories don't.
+#
+# Optionally, "first" and "last" can be followed by ":<offset>" where <offset> is an integer.
+# This moves the truncation point to the right (positive offset) or to the left (negative offset)
+# relative to the marker. Plain "first" and "last" are equivalent to "first:0" and "last:0"
+# respectively.
+typeset -g POWERLEVEL9K_DIR_TRUNCATE_BEFORE_MARKER=true
+# Don't shorten this many last directory segments. They are anchors.
+typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+# Shorten directory if it's longer than this even if there is space for it. The value can
+# be either absolute (e.g., '80') or a percentage of terminal width (e.g, '50%'). If empty,
+# directory will be shortened only when prompt doesn't fit or when other parameters demand it
+# (see POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS and POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT below).
+# If set to `0`, directory will always be shortened to its minimum length.
+typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=80
+# When `dir` segment is on the last prompt line, try to shorten it enough to leave at least this
+# many columns for typing commands.
+typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS=40
+# When `dir` segment is on the last prompt line, try to shorten it enough to leave at least
+# COLUMNS * POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT * 0.01 columns for typing commands.
+typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT=50
+# If set to true, embed a hyperlink into the directory. Useful for quickly
+# opening a directory in the file manager simply by clicking the link.
+# Can also be handy when the directory is shortened, as it allows you to see
+# the full directory that was used in previous commands.
+typeset -g POWERLEVEL9K_DIR_HYPERLINK=false
 
   # Enable special styling for non-writable and non-existent directories. See POWERLEVEL9K_LOCK_ICON
   # and POWERLEVEL9K_DIR_CLASSES below.
@@ -176,7 +191,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
 
   # The default icon shown next to non-writable and non-existent directories when
   # POWERLEVEL9K_DIR_SHOW_WRITABLE is set to v3.
-  typeset -g POWERLEVEL9K_LOCK_ICON='ﯨ'
+  typeset -g POWERLEVEL9K_LOCK_ICON=' '
 
   # POWERLEVEL9K_DIR_CLASSES allows you to specify custom icons and colors for different
   # directories. It must be an array with 3 * N elements. Each triplet consists of:
@@ -193,18 +208,18 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   #
   # For example, given these settings:
   #
-    typeset -g POWERLEVEL9K_DIR_CLASSES=(
-      '~/work(|/*)'  WORK     ''
-      '~(|/*)'       HOME     ''
-      '*'            DEFAULT  '')
+  typeset -g POWERLEVEL9K_DIR_CLASSES=(
+  '~/work(|/*)'  WORK     ''
+  '~(|/*)'       HOME     ''
+  '*'            DEFAULT  '')
 
   #####################################[ vcs: git status ]######################################
   # Version control system colors.
-  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND=0
-  typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND=0
-  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND=0
-  typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND=0
-  typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND=0
+  typeset -g POWERLEVEL9K_VCS_CLEAN_BACKGROUND="{POWERLEVEL9K_BACKGROUND}"
+  typeset -g POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="{POWERLEVEL9K_BACKGROUND}"
+  typeset -g POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="{POWERLEVEL9K_BACKGROUND}"
+  typeset -g POWERLEVEL9K_VCS_CONFLICTED_BACKGROUND="{POWERLEVEL9K_BACKGROUND}"
+  typeset -g POWERLEVEL9K_VCS_LOADING_BACKGROUND="{POWERLEVEL9K_BACKGROUND}"
 
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=' '
@@ -233,9 +248,9 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
 
     # Styling for different parts of Git status.
     local       meta='%7F' # white foreground
-    local      clean='%2F' # black foreground
-    local   modified='%3F' # black foreground
-    local  untracked='%4F' # black foreground
+    local      clean='%2F' # green foreground
+    local   modified='%11F' # yellow foreground
+    local  untracked='%4F' # blue foreground
     local conflicted='%1F' # red foreground
 
     local res
@@ -250,10 +265,10 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
     fi
 
     if [[ -n $VCS_STATUS_TAG
-          # Show tag only if not on a branch.
-          # Tip: To always show tag, delete the next line.
-          && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
-        ]]; then
+      # Show tag only if not on a branch.
+      # Tip: To always show tag, delete the next line.
+      && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
+      ]]; then
       local tag=${(V)VCS_STATUS_TAG}
       # If tag name is at most 32 characters long, show it in full.
       # Otherwise show the first 12 … the last 12.
@@ -292,11 +307,11 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
     # 'merge' if the repo is in an unusual state.
     [[ -n $VCS_STATUS_ACTION     ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
     # ~42 if have merge conflicts.
-    (( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
+    (( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}${VCS_STATUS_NUM_CONFLICTED}"
     # +42 if have staged changes.
-    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}+${VCS_STATUS_NUM_STAGED}"
+    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}✓${VCS_STATUS_NUM_STAGED}"
     # !42 if have unstaged changes.
-    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
+    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}✗${VCS_STATUS_NUM_UNSTAGED}"
     # ?42 if have untracked files. It's really a question mark, your font isn't broken.
     # See POWERLEVEL9K_VCS_UNTRACKED_ICON above if you want to use a different icon.
     # Remove the next line if you don't want to see untracked files at all.
@@ -353,21 +368,21 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_STATUS_OK=true
   typeset -g POWERLEVEL9K_STATUS_OK_VISUAL_IDENTIFIER_EXPANSION=''
   typeset -g POWERLEVEL9K_STATUS_OK_FOREGROUND=0
-  typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=10
+  typeset -g POWERLEVEL9K_STATUS_OK_BACKGROUND=11
 
   # Status when some part of a pipe command fails but the overall exit status is zero. It may look
   # like this: 1|0.
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE=true
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE_VISUAL_IDENTIFIER_EXPANSION=''
   typeset -g POWERLEVEL9K_STATUS_OK_PIPE_FOREGROUND=0
-  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_BACKGROUND=2
+  typeset -g POWERLEVEL9K_STATUS_OK_PIPE_BACKGROUND=11
 
   # Status when it's just an error code (e.g., '1'). No need to show it if prompt_char is enabled as
   # it will signify error by turning red.
   typeset -g POWERLEVEL9K_STATUS_ERROR=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_VISUAL_IDENTIFIER_EXPANSION=''
   typeset -g POWERLEVEL9K_STATUS_ERROR_FOREGROUND=0
-  typeset -g POWERLEVEL9K_STATUS_ERROR_BACKGROUND=1
+  typeset -g POWERLEVEL9K_STATUS_ERROR_BACKGROUND=11
 
   # Status when the last command was terminated by a signal.
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL=true
@@ -375,35 +390,35 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_STATUS_VERBOSE_SIGNAME=false
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_VISUAL_IDENTIFIER_EXPANSION=''
   typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_FOREGROUND=0
-  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_BACKGROUND=1
+  typeset -g POWERLEVEL9K_STATUS_ERROR_SIGNAL_BACKGROUND=11
 
   # Status when some part of a pipe command fails and the overall exit status is also non-zero.
   # It may look like this: 1|0.
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE=true
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_VISUAL_IDENTIFIER_EXPANSION=''
   typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_FOREGROUND=0
-  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_BACKGROUND=1
+  typeset -g POWERLEVEL9K_STATUS_ERROR_PIPE_BACKGROUND=11
 
   ###################[ command_execution_time: duration of the last command ]###################
   # Execution time color.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=0
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=3
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=11
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=0
   # Show duration of the last command if takes at least this many seconds.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=
   # Show this many fractional digits. Zero means round to seconds.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_VISUAL_IDENTIFIER_EXPANSION=''
   # Custom prefix.
-  # typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX='took '
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PREFIX=''
 
   #######################[ background_jobs: presence of background jobs ]#######################
   # Background jobs color.
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=6
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=0
-  # Show the number of background jobs.
+  # Don't show the number of background jobs.
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -414,7 +429,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_DIRENV_BACKGROUND=0
   # Custom icon.
   # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   #################[ ranger: ranger shell (https://github.com/ranger/ranger) ]##################
   # Ranger shell color.
   typeset -g POWERLEVEL9K_RANGER_FOREGROUND=3
@@ -446,22 +461,21 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_NIX_SHELL_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ###########[ vi_mode: vi mode (you don't need this if you've enabled prompt_char) ]###########
   # Foreground color.
-  typeset -g POWERLEVEL9K_VI_MODE_FOREGROUND=0
+
+  typeset -g POWERLEVEL9K_VI_MODE_FOREGROUND=4
+  typeset -g POWERLEVEL9K_VI_MODE_BACKGROUND=0
+
   # Text and color for normal (a.k.a. command) vi mode.
-  typeset -g POWERLEVEL9K_VI_COMMAND_MODE_STRING="NRM"
-  typeset -g POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND=4
+  typeset -g POWERLEVEL9K_VI_COMMAND_MODE_STRING="%BNORMAL%b"
   # Text and color for visual vi mode.
-  typeset -g POWERLEVEL9K_VI_VISUAL_MODE_STRING="VIS"
-  typeset -g POWERLEVEL9K_VI_MODE_VISUAL_BACKGROUND=6
+  typeset -g POWERLEVEL9K_VI_VISUAL_MODE_STRING="%BVISUAL%b"
   # Text and color for overtype (a.k.a. overwrite and replace) vi mode.
-  typeset -g POWERLEVEL9K_VI_OVERWRITE_MODE_STRING="OVT"
-  typeset -g POWERLEVEL9K_VI_MODE_OVERWRITE_BACKGROUND=3
+  typeset -g POWERLEVEL9K_VI_OVERWRITE_MODE_STRING="%BOVERWR%b"
   # Text and color for insert vi mode.
-  typeset -g POWERLEVEL9K_VI_INSERT_MODE_STRING=""
-  typeset -g POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND=8
+  typeset -g POWERLEVEL9K_VI_INSERT_MODE_STRING="%BINSERT%b"
 
   ################[ todo: todo items (https://github.com/todotxt/todo.txt-cli) ]################
   # Todo color.
@@ -525,25 +539,25 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
 
   ##################################[ context: user@hostname ]##################################
   # Context color when running with privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=1
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_FOREGROUND=2
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_BACKGROUND=0
   # Context color in SSH without privileges.
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=3
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_FOREGROUND=2
   typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_BACKGROUND=0
   # Default context color (no privileges, no SSH).
-  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=3
+  typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=2
   typeset -g POWERLEVEL9K_CONTEXT_BACKGROUND=0
 
   # Context format when running with privileges: user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n@%m'
+  typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n' # @%m'
   # Context format when in SSH without privileges: user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n@%m'
+  typeset -g POWERLEVEL9K_CONTEXT_{REMOTE,REMOTE_SUDO}_TEMPLATE='%n' # @%m'
   # Default context format (no privileges, no SSH): user@hostname.
-  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n@%m'
+  typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE='%n' # @%m'
 
   # Don't show context unless running with privileges or in SSH.
   # Tip: Remove the next line to always show context.
-  typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
+  # typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_CONTEXT_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -622,7 +636,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
   # Nvm color.
   typeset -g POWERLEVEL9K_NVM_FOREGROUND=0
-  typeset -g POWERLEVEL9K_NVM_BACKGROUND=6
+  typeset -g POWERLEVEL9K_NVM_BACKGROUND=5
   # Custom icon.
   # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
@@ -663,7 +677,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ####################[ java_version: java version (https://www.java.com/) ]####################
   # Java version color.
   typeset -g POWERLEVEL9K_JAVA_VERSION_FOREGROUND=1
@@ -689,7 +703,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_PACKAGE_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ###########[ fvm: flutter version management (https://github.com/leoafarias/fvm) ]############
   # Fvm color.
   typeset -g POWERLEVEL9K_FVM_FOREGROUND=0
@@ -724,7 +738,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_JENV_SHOW_SYSTEM=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_JENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   ##########[ haskell_stack: haskell version from stack (https://haskellstack.org/) ]###########
   # Haskell color.
   typeset -g POWERLEVEL9K_HASKELL_STACK_FOREGROUND=0
@@ -740,7 +754,7 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   typeset -g POWERLEVEL9K_HASKELL_STACK_ALWAYS_SHOW=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_HASKELL_STACK_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  
+
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job
   # is to generate the prompt segment for display in instant prompt. See
   # https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
@@ -763,6 +777,13 @@ typeset -g PS3='%K{4} %K{0}%B select %b%k '
   # User-defined prompt segments can be customized the same way as built-in segments.
   typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=3
   typeset -g POWERLEVEL9K_EXAMPLE_BACKGROUND=1
+
+  typeset -g POWERLEVEL9K_CSEP_{LEFT,RIGHT}_{LEFT,RIGHT}_WHITESPACE=''
+  typeset -g POWERLEVEL9K_CSEP_BACKGROUND="{POWERLEVEL9K_BACKGROUND}"
+  typeset -g POWERLEVEL9K_DIR_ICON_BACKGROUND=1
+  typeset -g POWERLEVEL9K_DIR_ICON_FOREGROUND=0
+  typeset -g POWERLEVEL9K_USER_ICON_BACKGROUND=2
+  typeset -g POWERLEVEL9K_USER_ICON_FOREGROUND=0
   # typeset -g POWERLEVEL9K_EXAMPLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt

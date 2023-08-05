@@ -13,6 +13,9 @@ alias load='zinit load'
 # ice depth"1"
 # use zsh-users/zsh-completions
 
+ice depth=1
+use jeffreytse/zsh-vi-mode
+
 autoload compinit
 compinit
 
