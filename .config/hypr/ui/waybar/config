@@ -8,20 +8,17 @@
   "margin-right": 0,
   "modules-left": [
     "custom/launcher",
-    "custom/seperator",
-    "wlr/workspaces"
+    "hyprland/workspaces",
+    "tray"
   ],
   "modules-center": [
     "wlr/taskbar"
   ],
   "modules-right": [
-    "tray",
     "battery",
     "pulseaudio",
     "backlight",
     "network",
-    "bluetooth",
-    "custom/seperator",
     "clock"
   ],
   "custom/launcher": {
@@ -29,7 +26,7 @@
     "format": "󰈸",
     "tooltip": false
   },
-  "wlr/workspaces": {
+  "hyprland/workspaces": {
     "sort-by-number": true,
     "disable-scroll": false,
     "all-outputs": false,
@@ -44,9 +41,10 @@
       "6": []
     },
     "format-icons": {
-      "urgent": "\ufa44",
-      "active": "\uf963",
-      "default": "\uf75a"
+      "urgent": "󰮯",
+      "active": "󰮯",
+      "special": "󰮯",
+      "default": "󰊠"
     },
     "format": "{icon}"
   },
@@ -70,19 +68,16 @@
       "warning": 50,
       "critical": 20
     },
-    "format": "{icon}",
-    "format-charging": "",
-    "format-plugged": "",
+    "format": "{icon} {capacity}%",
+    "format-charging": "󱐋 {capacity}%",
+    "format-plugged": "󱐋 POW",
     "format-icons": [
       "󰂎",
-      "󰁺",
       "󰁻",
       "󰁼",
       "󰁽",
       "󰁿",
       "󰂀",
-      "󰂁",
-      "󰂂",
       "󰁹"
     ],
     "on-click": "hyprctl dispatch exec [float] foot battop",
@@ -90,17 +85,17 @@
     "on-update": "$SCRIPTS/utils/battery.sh"
   },
   "clock": {
-    "format": "<span foreground='#f7467b'>{:%H</span>:<span foreground='#00ffb1'>%M</span>}",
-    "format-alt": "<span foreground='#00ffb1'>{:%d</span>:<span foreground='#9554ff'>%m}</span>",
+    "format": "󰅐 {:%H:%M}",
+    "format-alt": "󰃮 {:%d.%m}",
     "on-click-right": "$SCRIPTS/apps/eww.sh windows | grep *disclose && ($SCRIPTS/apps/eww.sh update disclosereveal=false && sleep 0.55s && $SCRIPTS/apps/eww.sh close disclose) || ($SCRIPTS/apps/eww.sh open disclose && $SCRIPTS/apps/eww.sh update disclosereveal=true)",
     "tooltip": "true",
     "tooltip-format": "<big>Calendar</big>\n<tt><small>{calendar}</small></tt>"
   },
   "pulseaudio": {
-    "format": "{icon}",
-    "format-bluetooth": "{icon}",
-    "format-bluetooth-muted": "\ufed13",
-    "format-muted": "󰝟",
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-bluetooth-muted": "\ufed13 {volume}%",
+    "format-muted": "󰝟 {volume}%",
     "format-source": "󰍬",
     "format-source-muted": "󰍬",
     "tooltip-format": "{desc}; {volume}%",
@@ -122,7 +117,7 @@
     "on-click-middle": "$HOME/.config/rofi/applets/bin/volume.sh"
   },
   "backlight": {
-    "format": "{icon}",
+    "format": "{icon} {percent}%",
     "tooltip-format": "{percent}%",
     "format-icons": [
       "󰃞",
@@ -136,8 +131,8 @@
     "on-scroll-down": "light -A 5"
   },
   "network": {
-    "format": "󰤨",
-    "format-wifi": "󰤨",
+    "format": "󰖩 {essid}",
+    "format-wifi": "󰖩 {essid}",
     "format-ethernet": "󰛳",
     "format-disconnected": "󰲛",
     "tooltip-format": "󰤭 {ifname} via {gwaddr}",
@@ -146,18 +141,6 @@
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
     "on-click": "hyprctl dispatch exec [float] foot nmtui"
-  },
-  "bluetooth": {
-    "format": "󰂯",
-    "format-disabled": "󰂲",
-    "format-connected": "󰂱",
-    "tooltip-format": "{controller_alias}\t{controller_address}",
-    "tooltip-format-connected": "{num_connections} connected\t{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "on-click": "killall blueman-manager || hyprctl dispatch exec [float] blueman-manager"
-  },
-  "custom/seperator": {
-    "tooltip": false,
-    "format": "|"
   }
-} // vim: ft=jsonc
+}
+// vim: ft=jsonc

@@ -3,13 +3,15 @@
   background-repeat: no-repeat;
   background-size: contain;
   padding: 5em;
+  background-size: cover;
+  background-image: url("/home/aahuja/.config/hypr/ui/eww/assets/exit.jpg");
 }
 
 .power-label,
 .power-label-icon {
   font-family: Phosphor, Koulen;
   font-size: 25;
-  background-color: rgba(#000, 0.0);
+  background-color: rgba(#000, 0);
   color: rgba($base04, 0.8);
 }
 
@@ -37,8 +39,10 @@
 }
 
 .power-box button:hover {
-  border-radius: 0.1em; 
-  transition: 200ms linear background-color, border-radius;
+  border-radius: 0.1em;
+  transition:
+    200ms linear background-color,
+    border-radius;
   background-color: rgba($shade00, 0.6);
 }
 

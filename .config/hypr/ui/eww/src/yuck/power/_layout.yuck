@@ -7,7 +7,6 @@
          :space-evenly false
          :height 1080
          :orientation "vertical"
-         :style "background-image: url('/home/aahuja/Pictures/Wallpaper/Wallpaper.png')"
       (box :valign "start" :space-evenly false :spacing 25 
         (_sundialinfo :class "power" :halign "end" :hexpand true)
         (_infobatnolbl :battery {EWW_BATTERY.BAT0.capacity}

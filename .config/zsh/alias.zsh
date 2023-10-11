@@ -50,6 +50,8 @@ alias bedit="$EDITOR $HOME/.bashrc"
 alias fedit="$EDITOR $HOME/.config/fish/config.fish"
 alias kev="xev -event keyboard"
 
+alias krunker.io="chromium -args --disable-frame-rate-limit"
+
 alias cclock="watch -t -n1 'date +%T | figlet' | lolcat"
 alias tty-clock="tty-clock -S -c -C4 -D -s -n"
 alias ccbonsai="cbonsai -ilt 0.02 -c '  ,  ,  ,  ,  ' -L 5"
