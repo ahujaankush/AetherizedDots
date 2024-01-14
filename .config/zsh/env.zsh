@@ -19,12 +19,12 @@ export EDITOR=nvim
 
 # SUDO
 export SUDO_PROMPT=' Password: '
-export SUDO_ASKPASS='rofi -dmenu \
-            -password            \
-            -i                   \
-            -no-fixed-num-lines  \
-            -p "Password: "      \
-            -theme "$HOME/.config/rofi/launcher.rasi"'
+# export SUDO_ASKPASS='rofi -dmenu \
+            # -password            \
+            # -i                   \
+            # -no-fixed-num-lines  \
+            # -p "Password: "      \
+            # -theme "$HOME/.config/rofi/launcher.rasi"'
 export SUDO_EDITOR="$EDITOR"
 
 # MANPAGE

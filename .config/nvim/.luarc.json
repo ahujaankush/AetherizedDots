@@ -1,0 +1,6 @@
+{
+    "diagnostics.disable": [
+        "deprecated"
+    ],
+    "workspace.checkThirdParty": false
+}

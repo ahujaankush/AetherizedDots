@@ -1,8 +1,0 @@
-(include "./src/yuck/power/_modules.yuck")
-(include "./src/yuck/power/_layout.yuck")
-
-(defwindow power :exclusive false :monitor 0
-  :geometry (geometry :width "100%")
-  (power_layout))
-
-;; vim:ft=yuck

@@ -33,9 +33,8 @@ fi
 if [ $(command -v nvim) ]; then
     alias vi="nvim"
     alias vic="fm ~/.config/nvim/"
-    alias nvupd="nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"
     alias nvst="nvim --startuptime $HOME/Documents/nvim-startuptime-'$(date)' +quitall"
-    alias vide="neovide"
+    alias suvi="sudo -E -s nvim -u $HOME/.config/nvim/init.lua"
 fi
 
 if [ $(command -v ranger) ]; then

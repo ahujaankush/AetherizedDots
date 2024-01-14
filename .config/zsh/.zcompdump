@@ -1,4 +1,4 @@
-#files: 848	version: 5.9
+#files: 852	version: 5.9
 
 _comps=(
 '-' '_precommand'
@@ -179,6 +179,7 @@ _comps=(
 'cmp' '_cmp'
 'co' '_rcs'
 'code' '_code'
+'codium' '_codium'
 'column' '_column'
 'comb' '_sccs'
 'combine' '_imagemagick'
@@ -264,7 +265,6 @@ _comps=(
 'dmidecode' '_dmidecode'
 'doas' '_doas'
 'docker' '_docker'
-'dolphin' '_dolphin'
 'domainname' '_yp'
 'dos2unix' '_dos2unix'
 'downgrade' '_downgrade'
@@ -329,6 +329,7 @@ _comps=(
 'fc' '_fc'
 'fc-list' '_xft_fonts'
 'fc-match' '_xft_fonts'
+'fd' '_fd'
 'feh' '_feh'
 'fetchmail' '_fetchmail'
 'ffmpeg' '_ffmpeg'
@@ -369,8 +370,6 @@ _comps=(
 'fold' '_fold'
 'folder' '_mh'
 'folders' '_mh'
-'foot' '_foot'
-'footclient' '_footclient'
 'fortune' '_fortune'
 'forw' '_mh'
 'fprev' '_mh'
@@ -382,6 +381,7 @@ _comps=(
 'functions' '_typeset'
 'fuser' '_fuser'
 'fusermount' '_fusermount'
+'fuzzel' '_fuzzel'
 'fwhois' '_whois'
 'g++' '_gcc'
 'galeon' '_webbrowser'
@@ -602,6 +602,7 @@ _comps=(
 'iftop' '_iftop'
 'ifup' '_net_interfaces'
 'ijoin' '_ispell'
+'img2sixel' '_img2sixel'
 'import' '_imagemagick'
 'inc' '_mh'
 'includeres' '_psutils'
@@ -646,7 +647,7 @@ _comps=(
 'join' '_join'
 'journalctl' '_journalctl'
 'jq' '_jq'
-'kcmshell5' '_systemsettings'
+'just' '_just'
 'kdeconnect-cli' '_kdeconnect'
 'kernel-install' '_kernel-install'
 'keystone' '_openstack'
@@ -655,13 +656,12 @@ _comps=(
 'kill' '_kill'
 'killall' '_killall'
 'killall5' '_killall'
-'kinfocenter' '_systemsettings'
 'kioclient' '_kfmclient'
+'kitty' '_kitty'
 'knock' '_knock'
 'konqueror' '_webbrowser'
 'kpartx' '_kpartx'
 'kpdf' '_pdf'
-'kscreen-doctor' '_kscreen-doctor'
 'ksh' '_sh'
 'ksh88' '_sh'
 'ksh93' '_sh'
@@ -720,6 +720,7 @@ _comps=(
 'ltrace' '_ltrace'
 'lua' '_lua'
 'luarocks' '_luarocks'
+'luarocks-admin' '_luarocks-admin'
 'lynx' '_lynx'
 'lz4' '_lz4'
 'lz4c' '_lz4'
@@ -939,6 +940,7 @@ _comps=(
 'pdftops' '_pdf'
 'pdftotext' '_pdf'
 'pdksh' '_sh'
+'pencil2d' '_pencil2d'
 'perf' '_perf'
 'perl' '_perl'
 'perldoc' '_perldoc'
@@ -969,8 +971,6 @@ _comps=(
 'pkginfo' '_pkginfo'
 'pkgrm' '_pkgrm'
 'pkill' '_pgrep'
-'plasmashell' '_plasmashell'
-'plasmoidviewer' '_plasmoidviewer'
 'playerctl' '_playerctl'
 'pldd' '_pids'
 'pmake' '_make'
@@ -988,6 +988,7 @@ _comps=(
 'podgrep' '_perl_modules'
 'podpath' '_perl_modules'
 'podtoc' '_perl_modules'
+'poetry' '_poetry'
 'poff' '_pon'
 'policytool' '_java'
 'pon' '_pon'
@@ -1083,6 +1084,7 @@ _comps=(
 'resolvectl' '_resolvectl'
 'restart' '_initctl'
 'retawq' '_webbrowser'
+'rg' '_rg'
 'rgrep' '_grep'
 'rgview' '_vim'
 'rgvim' '_vim'
@@ -1231,10 +1233,10 @@ _comps=(
 'svnliteadmin' '_subversion'
 'swaks' '_swaks'
 'swanctl' '_swanctl'
+'swayidle' '_swayidle'
 'swaylock' '_swaylock'
 'swift' '_swift'
 'swiftc' '_swift'
-'swww' '_swww'
 'sync' '_nothing'
 'sysctl' '_sysctl'
 'systemctl' '_systemctl'
@@ -1254,8 +1256,6 @@ _comps=(
 'systemd-run' '_systemd-run'
 'systemd-tmpfiles' '_systemd-tmpfiles'
 'systemd-tty-ask-password-agent' '_systemd'
-'systemsettings' '_systemsettings'
-'systemsettings5' '_systemsettings'
 'tac' '_tac'
 'tacker' '_openstack'
 'tail' '_tail'
@@ -1468,6 +1468,7 @@ _comps=(
 'wl-paste' '_wl-paste'
 'wodim' '_cdrecord'
 'wpa_cli' '_wpa_cli'
+'wpctl' '_wpctl'
 'write' '_users_on'
 'www' '_webbrowser'
 'xargs' '_xargs'
@@ -1539,6 +1540,7 @@ _comps=(
 'ytalk' '_other_accounts'
 'yt-dlp' '_yt-dlp'
 'zargs' '_zargs'
+'zathura' '_zathura'
 'zcalc' '_zcalc'
 '-zcalc-line-' '_zcalc_line'
 'zcat' '_zcat'
@@ -1550,7 +1552,6 @@ _comps=(
 'zeal' '_zeal'
 'zed' '_zed'
 'zegrep' '_grep'
-'zellij' '_zellij'
 'zen' '_webbrowser'
 'zf_chgrp' '_chown'
 'zf_chmod' '_chmod'
@@ -1700,23 +1701,24 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
-autoload -Uz _fast-theme _zinit _bluetoothctl _bootctl _busctl \
-            _bwrap _cargo _checkupdates _code _coredumpctl \
-            _curl _deno _docker _dolphin _downgrade \
-            _eza _firewalld _flatpak _foot _footclient \
-            _hostnamectl _journalctl _kernel-install _kscreen-doctor _libinput \
-            _localectl _loginctl _machinectl _meson _mkinitcpio \
-            _mpv _netctl _networkctl _ninja _oomctl \
-            _paccache _pacdiff _pacignore _paclist _paclog-pkglist \
-            _pacman _pacscripts _pacsearch _pacsort _pactree \
-            _parallel _pkgfile _plasmashell _plasmoidviewer _playerctl \
-            _pulseaudio _qpdf _rankmirrors _resolvectl _rustup \
+autoload -Uz _fast-theme _zinit _swaylock _bluetoothctl _bootctl \
+            _busctl _bwrap _cargo _checkupdates _codium \
+            _coredumpctl _curl _deno _docker _downgrade \
+            _eza _fd _firewalld _flatpak _fuzzel \
+            _hostnamectl _img2sixel _journalctl _just _kernel-install \
+            _kitty _libinput _localectl _loginctl _luarocks \
+            _luarocks-admin _machinectl _meson _mkinitcpio _mpv \
+            _netctl _networkctl _ninja _oomctl _paccache \
+            _pacdiff _pacignore _paclist _paclog-pkglist _pacman \
+            _pacscripts _pacsearch _pacsort _pactree _parallel \
+            _pencil2d _pkgfile _playerctl _poetry _pulseaudio \
+            _qpdf _rankmirrors _resolvectl _rg _rustup \
             _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files _shtab \
-            _swaylock _swww _systemctl _systemd _systemd-analyze \
+            _swayidle _swaylock _systemctl _systemd _systemd-analyze \
             _systemd-delta _systemd-inhibit _systemd-nspawn _systemd-path _systemd-run \
-            _systemd-tmpfiles _systemsettings _timedatectl _tldr _udevadm \
-            _udisks2 _updpkgsums _wl-copy _wl-paste _yay \
-            _yt-dlp _zellij _cdr _all_labels _all_matches \
+            _systemd-tmpfiles _timedatectl _tldr _udevadm _udisks2 \
+            _updpkgsums _wl-copy _wl-paste _wpctl _yay \
+            _yt-dlp _zathura _cdr _all_labels _all_matches \
             _alternative _approximate _arg_compile _arguments _bash_completions \
             _cache_invalid _call_function _combination _complete _complete_debug \
             _complete_help _complete_help_generic _complete_tag _comp_locale _correct \
