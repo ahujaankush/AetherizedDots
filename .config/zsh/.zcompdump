@@ -1,4 +1,4 @@
-#files: 852	version: 5.9
+#files: 858	version: 5.9
 
 _comps=(
 '-' '_precommand'
@@ -265,6 +265,7 @@ _comps=(
 'dmidecode' '_dmidecode'
 'doas' '_doas'
 'docker' '_docker'
+'dolphin' '_dolphin'
 'domainname' '_yp'
 'dos2unix' '_dos2unix'
 'downgrade' '_downgrade'
@@ -648,6 +649,7 @@ _comps=(
 'journalctl' '_journalctl'
 'jq' '_jq'
 'just' '_just'
+'kcmshell5' '_systemsettings'
 'kdeconnect-cli' '_kdeconnect'
 'kernel-install' '_kernel-install'
 'keystone' '_openstack'
@@ -656,12 +658,14 @@ _comps=(
 'kill' '_kill'
 'killall' '_killall'
 'killall5' '_killall'
+'kinfocenter' '_systemsettings'
 'kioclient' '_kfmclient'
 'kitty' '_kitty'
 'knock' '_knock'
 'konqueror' '_webbrowser'
 'kpartx' '_kpartx'
 'kpdf' '_pdf'
+'kscreen-doctor' '_kscreen-doctor'
 'ksh' '_sh'
 'ksh88' '_sh'
 'ksh93' '_sh'
@@ -971,6 +975,8 @@ _comps=(
 'pkginfo' '_pkginfo'
 'pkgrm' '_pkgrm'
 'pkill' '_pgrep'
+'plasmashell' '_plasmashell'
+'plasmoidviewer' '_plasmoidviewer'
 'playerctl' '_playerctl'
 'pldd' '_pids'
 'pmake' '_make'
@@ -1256,6 +1262,8 @@ _comps=(
 'systemd-run' '_systemd-run'
 'systemd-tmpfiles' '_systemd-tmpfiles'
 'systemd-tty-ask-password-agent' '_systemd'
+'systemsettings' '_systemsettings'
+'systemsettings5' '_systemsettings'
 'tac' '_tac'
 'tacker' '_openstack'
 'tail' '_tail'
@@ -1703,20 +1711,21 @@ bindkey '^[~' _bash_complete-word
 
 autoload -Uz _fast-theme _zinit _swaylock _bluetoothctl _bootctl \
             _busctl _bwrap _cargo _checkupdates _codium \
-            _coredumpctl _curl _deno _docker _downgrade \
-            _eza _fd _firewalld _flatpak _fuzzel \
-            _hostnamectl _img2sixel _journalctl _just _kernel-install \
-            _kitty _libinput _localectl _loginctl _luarocks \
-            _luarocks-admin _machinectl _meson _mkinitcpio _mpv \
-            _netctl _networkctl _ninja _oomctl _paccache \
-            _pacdiff _pacignore _paclist _paclog-pkglist _pacman \
-            _pacscripts _pacsearch _pacsort _pactree _parallel \
-            _pencil2d _pkgfile _playerctl _poetry _pulseaudio \
-            _qpdf _rankmirrors _resolvectl _rg _rustup \
-            _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files _shtab \
-            _swayidle _swaylock _systemctl _systemd _systemd-analyze \
-            _systemd-delta _systemd-inhibit _systemd-nspawn _systemd-path _systemd-run \
-            _systemd-tmpfiles _timedatectl _tldr _udevadm _udisks2 \
+            _coredumpctl _curl _deno _docker _dolphin \
+            _downgrade _eza _fd _firewalld _flatpak \
+            _fuzzel _hostnamectl _img2sixel _journalctl _just \
+            _kernel-install _kitty _kscreen-doctor _libinput _localectl \
+            _loginctl _luarocks _luarocks-admin _machinectl _meson \
+            _mkinitcpio _mpv _netctl _networkctl _ninja \
+            _oomctl _paccache _pacdiff _pacignore _paclist \
+            _paclog-pkglist _pacman _pacscripts _pacsearch _pacsort \
+            _pactree _parallel _pencil2d _pkgfile _plasmashell \
+            _plasmoidviewer _playerctl _poetry _pulseaudio _qpdf \
+            _rankmirrors _resolvectl _rg _rustup _sd_hosts_or_user_at_host \
+            _sd_machines _sd_outputmodes _sd_unit_files _shtab _swayidle \
+            _swaylock _systemctl _systemd _systemd-analyze _systemd-delta \
+            _systemd-inhibit _systemd-nspawn _systemd-path _systemd-run _systemd-tmpfiles \
+            _systemsettings _timedatectl _tldr _udevadm _udisks2 \
             _updpkgsums _wl-copy _wl-paste _wpctl _yay \
             _yt-dlp _zathura _cdr _all_labels _all_matches \
             _alternative _approximate _arg_compile _arguments _bash_completions \
