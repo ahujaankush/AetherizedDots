@@ -26,6 +26,18 @@ return {
       require "plugins.configs.lsp.lspconfig"
     end,
   },
+  -- Formatter
+  {
+    "stevearc/conform.nvim",
+    event = "BufRead",
+    init = function()
+      require("core.utils").load_mappings "conform"
+    end,
+
+    config = function()
+      require "plugins.configs.lsp.conform"
+    end,
+  },
   -- language specific plugins
   -- typescript (lsp)
   {

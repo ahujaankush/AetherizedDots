@@ -23,10 +23,8 @@ local lsp = {
   "yamlls",
   "taplo",
   "marksman",
+  -- "typos_lsp"
 }
-
--- null ls (for manual installation -> provide function)
-local null = {}
 
 local ts = {
   "comment",
@@ -63,7 +61,6 @@ local mason = {}
 
 return {
   ["lsp"] = lsp,
-  ["null"] = null,
   ["ts"] = ts,
   ["mason"] = mason,
 }

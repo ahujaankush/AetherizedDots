@@ -205,6 +205,7 @@ M.lspconfig = {
     ["<leader>lf"] = {
       function()
         vim.lsp.buf.format { async = true }
+        require("conform").format({ async = true })
       end,
       "LSP formatting",
     },
@@ -230,6 +231,18 @@ M.lspconfig = {
       "List workspace folders",
     },
   },
+}
+
+M.conform = {
+  plugin = true,
+  n = {
+    ["<leader>lf"] = {
+      function()
+        require("conform").format()
+      end,
+      "Format"
+    }
+  }
 }
 
 M.dial = {
@@ -293,7 +306,7 @@ M.saga = {
     ["<leader>gD"] = { "<cmd> Lspsaga goto_type_definition <CR>", "goto type definition" },
     ["<leader>pd"] = { "<cmd> Lspsaga peek_definition <CR>", "peek definition" },
     ["<leader>pD"] = { "<cmd> Lspsaga peek_type_definition <CR>", "peek type definition" },
-    -- ["<leader>hd"] = { "<cmd> Lspsaga hover_doc <CR>", "hover doc" },
+    ["<leader>hd"] = { "<cmd> Lspsaga hover_doc <CR>", "hover doc" },
     ["<leader>lp"] = { "<cmd> Lspsaga lsp_finder <CR>", "lsp finder" },
     ["<leader>ld"] = { "<cmd> Lspsaga show_line_diagnostics  <CR>", "line diagnostics" },
     ["<leader>bd"] = { "<cmd> Lspsaga show_buf_diagnostics <CR>", "buffer diagnostics" },

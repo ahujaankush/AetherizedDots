@@ -121,6 +121,10 @@ local options = {
     outgoing = " ",
     hover = " ",
     kind = {},
+    colors = {
+      normal_bg = "NONE",
+      title_bg = "NONE"
+    }
   },
 }
 

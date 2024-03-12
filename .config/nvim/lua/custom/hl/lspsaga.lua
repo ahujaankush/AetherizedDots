@@ -1,4 +1,6 @@
 return {
+  WinBar = { bg = "dark" },
+  WinBarNC = { bg = "dark" },
   -- LSPSAGA
   -- general
   TitleString = { link = "Title" },
@@ -9,6 +11,11 @@ return {
   SagaCollapse = { fg = "light_grey" },
   SagaCount = { link = "Comment" },
   SagaBeacon = { bg = "red" },
+  -- winbar
+  SagaWinbarSep = { link = 'Operator' },
+  SagaWinbarFileName = { link = 'SagaFileName' },
+  SagaWinbarFolderName = { link = 'SagaFolderName' },
+  SagaWinbarFolder = { link = 'SagaFolder' },
   -- code action
   ActionFix = { link = "Keyword" },
   ActionPreviewNormal = { link = "SagaNormal" },

@@ -65,9 +65,9 @@ g.maplocalelader = "\\"
 
 vim.api.nvim_command "set guifont=JetBrainsMono\\ Nerd\\ Font,Cooper\\ Hewitt:h13"
 
-g.neovide_refresh_rate = 60
-g.neovide_transparency = 1
-g.neovide_scale_factor = 0.7
+g.neovide_refresh_rate = 144
+g.neovide_transparency = 0.8
+g.neovide_scale_factor = 1
 
 g.neovide_no_idle = true
 g.neovide_profiler = false

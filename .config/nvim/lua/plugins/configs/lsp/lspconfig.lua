@@ -10,10 +10,6 @@ local servers = require("core.servers").lsp
 M.on_attach = function(client, bufnr)
   utils.load_mappings("lspconfig", { buffer = bufnr })
 
-  -- if client.server_capabilities.signatureHelpProvider and not utils.load_config().ui.lsp.signature.disabled then
-  --   require("nvchad_ui.signature").setup(client)
-  -- end
-
   if not utils.load_config().ui.lsp_semantic_tokens and client.supports_method "textDocument/semanticTokens" then
     client.server_capabilities.semanticTokensProvider = nil
   end
@@ -46,6 +42,20 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+lspconfig.clangd.setup {
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--pch-storage=memory",
+    "--clang-tidy",
+    "--suggest-missing-includes",
+    "--cross-file-rename",
+    "--completion-style=detailed",
+    "--header-insertion=never",
+    -- "--header-insertion=iwyu",
+  },
+}
+
 lspconfig.lua_ls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
@@ -74,15 +84,14 @@ lspconfig.denols.setup {
   root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", ".use-denols"),
 }
 
--- lspconfig.eslint.setup {
---   --- ...
---   on_attach = function(client, bufnr)
---     vim.api.nvim_create_autocmd("BufWritePre", {
---       buffer = bufnr,
---       command = "EslintFixAll",
---     })
---   end,
--- }
+lspconfig.eslint.setup {
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+}
 
 lspconfig.jsonls.setup {
   settings = {

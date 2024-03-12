@@ -10,13 +10,16 @@ local plugins = {
     "tpope/vim-repeat",
     event = "BufRead",
   },
+  {
+    "andweeb/presence.nvim",
+    event = "BufRead"
+  }
 }
 
 local spec_tab = {
   "plugins.definition.interface",
   "plugins.definition.lsp",
   "plugins.definition.code",
-  "plugins.definition.notes",
   "plugins.definition.telescope",
   "plugins.definition.treesitter",
 }

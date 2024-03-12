@@ -1,7 +1,6 @@
 configuration {
     font:           				"Roboto Medium 10";
     show-icons:                     true;
-	icon-theme: 					"WhiteSur-dark";
     display-drun: 					"";
     drun-display-format:            "{icon} {name}";
     disable-history:                false;
@@ -11,17 +10,17 @@ configuration {
 }
 
 * {
-    BG:                             #10121399;
-    BGA:                            #101213;
-    FG:                             #edeff0ff;
-    UGT:                            #df5b61ff;
+    BG:                             #0b0d1288;
+    BGA:                            #0b0d12;
+    FG:                             #ddddddff;
+    UGT:                            #f7467bff;
 }
 
 window {
     transparency:                   "real";
     background-color:               @BG;
     text-color:                     @FG;
-    border-radius:                  8px;
+    border-radius:                  12px;
     width:                          700px;
     x-offset:                       0;
     y-offset:                       -4.3%;
