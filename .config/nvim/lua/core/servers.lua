@@ -28,6 +28,8 @@ local lsp = {
 
 local ts = {
   "comment",
+  "luadoc",
+  "printf",
   "regex",
   "toml",
   "bash",
@@ -47,7 +49,6 @@ local ts = {
   "go",
   "markdown",
   "markdown_inline",
-  "norg",
   "vue",
   "julia",
   "arduino",

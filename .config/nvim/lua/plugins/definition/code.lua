@@ -68,14 +68,6 @@ return {
   },
   -- json schemas
   "b0o/schemastore.nvim",
-  -- Rest client
-  {
-    "rest-nvim/rest.nvim",
-    ft = "http",
-    config = function()
-      require "plugins.configs.code.rest"
-    end,
-  },
   -- inc/dec plugin
   {
     "monaqa/dial.nvim",
@@ -148,9 +140,9 @@ return {
     event = "InsertEnter",
     keys = {
       { "gcc", mode = "n" },
-      { "gc", mode = "v" },
+      { "gc",  mode = "v" },
       { "gbc", mode = "n" },
-      { "gb", mode = "v" },
+      { "gb",  mode = "v" },
     },
     init = function()
       require("core.utils").load_mappings "comment"

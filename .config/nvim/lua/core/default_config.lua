@@ -8,7 +8,6 @@ M.ui = {
     require "custom.hl.alpha",
     require "custom.hl.devicons",
     require "custom.hl.lspsaga",
-    require "custom.hl.neorg",
     require "custom.hl.neotest",
     require "custom.hl.neotree",
     require "custom.hl.nui",

@@ -71,11 +71,4 @@ widget:buttons(gears.table.join(awful.button({}, 1, nil, function()
 	toggle_action()
 end)))
 
---- Create a notification sound
-naughty.connect_signal("request::display", function(n)
-	if not dnd_state then
-		awful.spawn("canberra-gtk-play -i bell", false)
-	end
-end)
-
 return widget

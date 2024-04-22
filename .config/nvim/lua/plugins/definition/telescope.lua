@@ -12,7 +12,6 @@ return {
       "debugloop/telescope-undo.nvim",
       "nvim-telescope/telescope-file-browser.nvim",
       "nvim-telescope/telescope-dap.nvim",
-      "nvim-neorg/neorg",
     },
     init = function()
       require("core.utils").load_mappings "telescope"

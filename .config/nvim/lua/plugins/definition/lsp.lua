@@ -80,6 +80,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
+      "nvim-neotest/nvim-nio",
       -- language specific
       "haydenmeade/neotest-jest",
     },
@@ -108,6 +109,9 @@ return {
         config = function()
           require("dapui").setup()
         end,
+        dependencies = {
+          "nvim-neotest/nvim-nio"
+        }
       },
       -- mason.nvim integration
       {
