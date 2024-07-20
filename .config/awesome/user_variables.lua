@@ -6,10 +6,5 @@ return {
       --- Coordinates
       city = "2761369"
     },
-
-    --- Github activity
-    github = {
-      username = "ahujaankush",
-    },
   },
 }

@@ -10,10 +10,7 @@ local plugins = {
     "tpope/vim-repeat",
     event = "BufRead",
   },
-  {
-    "andweeb/presence.nvim",
-    event = "BufRead"
-  }
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" }
 }
 
 local spec_tab = {

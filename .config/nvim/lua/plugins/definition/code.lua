@@ -10,6 +10,13 @@ return {
       require "plugins.configs.code.nvterm"
     end,
   },
+  -- competitive programming
+  {
+    "ahujaankush/competitest.nvim",
+    cmd = "CompetiTest",
+    dependencies = 'MunifTanjim/nui.nvim',
+    config = function() require('competitest').setup() end,
+  },
   {
     "NvChad/nvim-colorizer.lua",
     event = "BufRead",

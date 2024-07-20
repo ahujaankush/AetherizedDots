@@ -12,7 +12,6 @@ M.ui = {
     require "custom.hl.neotree",
     require "custom.hl.nui",
     require "custom.hl.scrollbar",
-    require "custom.hl.tsrainbow",
     {
       Directory = {
         fg = "nord_blue",
@@ -64,7 +63,7 @@ M.ui = {
   lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 
   -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
-  extended_integrations = { "notify", "alpha", "trouble", "dap" }, -- these aren't compiled by default, ex: "alpha", "notify"
+  extended_integrations = { "notify", "alpha", "trouble", "dap", "rainbow_delimiters" }, -- these aren't compiled by default, ex: "alpha", "notify"
 
   -- cmp themeing
   cmp = {

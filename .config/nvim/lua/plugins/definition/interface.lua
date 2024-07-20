@@ -39,7 +39,6 @@ return {
   -- lsp progress
   {
     "j-hui/fidget.nvim",
-    tag = "legacy",
     event = "LspAttach",
     config = function()
       require "plugins.configs.interface.fidget"
@@ -61,11 +60,8 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    version = "2.20.7",
+    main = "ibl",
     event = "BufRead",
-    init = function()
-      require("core.utils").load_mappings "blankline"
-    end,
     config = function()
       require "plugins.configs.interface.blankline"
     end,
@@ -89,7 +85,7 @@ return {
       "neovim/nvim-lspconfig",
       "SmiteshP/nvim-navic",
       "MunifTanjim/nui.nvim",
-      "numToStr/Comment.nvim", -- Optional
+      "numToStr/Comment.nvim",         -- Optional
       "nvim-telescope/telescope.nvim", -- Optional
     },
     config = function()

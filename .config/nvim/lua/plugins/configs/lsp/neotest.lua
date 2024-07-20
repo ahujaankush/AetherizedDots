@@ -16,6 +16,10 @@ local options = {
         return vim.fn.getcwd()
       end,
     },
+    require("neotest-python"),
+    require("neotest-plenary"),
+    require("neotest-go"),
+    require("neotest-gtest").setup({})
   },
 }
 

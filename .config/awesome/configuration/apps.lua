@@ -16,7 +16,7 @@ return {
 		--- Default web browser
 		web_browser = "firefox",
 		--- Default file manager
-		file_manager = "nautilus",
+		file_manager = "dolphin",
 		--- Default network manager
 		network_manager = "kitty -e nmtui",
 		--- Default bluetooth manager

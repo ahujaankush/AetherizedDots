@@ -14,7 +14,7 @@ return wibox.widget({
 	{
 		{
 			widget = wibox.widget.textbox,
-			markup = helpers.ui.colorize_text("", beautiful.accent),
+			markup = helpers.ui.colorize_text("", beautiful.white),
 			font = beautiful.icon_font .. "Round 84",
 			valign = "center",
 			align = "center",

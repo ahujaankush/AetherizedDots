@@ -1,307 +1,489 @@
-local awful = require("awful")
-local gears = require("gears")
-local wibox = require("wibox")
-local beautiful = require("beautiful")
+local awful      = require("awful")
+local gears      = require("gears")
+local wibox      = require("wibox")
+local beautiful  = require("beautiful")
 local xresources = require("beautiful.xresources")
-local dpi = xresources.apply_dpi
-local helpers = require("helpers")
-local widgets = require("ui.widgets")
-local wbutton = require("ui.widgets.button")
-local animation = require("modules.animation")
+local dpi        = xresources.apply_dpi
+local helpers    = require("helpers")
+local widgets    = require("ui.widgets")
+local wbutton    = require("ui.widgets.button")
+local animation  = require("modules.animation")
+local apps       = require("configuration.apps")
+local gcolor     = require("gears.color")
+local watch      = awful.widget.watch
 
 --- Modern Top Panel
 --- ~~~~~~~~~~~~~~~~~~~
 
 return function(s)
-	--- Widgets
-	--- ~~~~~~~~~~
-	s.clock = require("ui.panels.top-panel.clock")(s)
-	s.battery = require("ui.panels.top-panel.battery")()
-	s.network = require("ui.panels.top-panel.network")()
+  --- Menu Button
+  --- ~~~~~~~~~~~~~~~~~
 
-	--- Animated tag list
-	--- ~~~~~~~~~~~~~~~~~
+  local launcher = function()
+    local icon = wibox.widget({
+      widget = wibox.widget.imagebox,
+      image = gcolor.recolor_image(beautiful.distro, beautiful.accent),
+      resize = true,
+    })
 
-	--- Taglist buttons
-	local modkey = "Mod4"
-	local taglist_buttons = gears.table.join(
-		awful.button({}, 1, function(t)
-			t:view_only()
-		end),
-		awful.button({ modkey }, 1, function(t)
-			if client.focus then
-				client.focus:move_to_tag(t)
-			end
-		end),
-		awful.button({}, 3, awful.tag.viewtoggle),
-		awful.button({ modkey }, 3, function(t)
-			if client.focus then
-				client.focus:toggle_tag(t)
-			end
-		end),
-		awful.button({}, 4, function(t)
-			awful.tag.viewnext(t.screen)
-		end),
-		awful.button({}, 5, function(t)
-			awful.tag.viewprev(t.screen)
-		end)
-	)
+    local widget = wibox.widget({
+      widget = wibox.container.margin,
+      margins = {
+        top = dpi(5),
+        bottom = dpi(5)
+      },
+      wbutton.elevated.normal({
+        child = icon,
+        normal_bg = beautiful.widget_bg,
+        hover_bg = beautiful.one_bg,
+        paddings = dpi(5),
+        margins = {
+          top = 0,
+          left = 0,
+          right = 0,
+          bottom = 0
+        },
+        on_release = function(self)
+          awful.spawn.with_shell(apps.default.app_launcher)
+        end,
+      })
+    })
 
-	local function tag_list(s)
-		local taglist = awful.widget.taglist({
-			screen = s,
-			filter = awful.widget.taglist.filter.all,
-			layout = { layout = wibox.layout.fixed.horizontal },
-			widget_template = {
-				widget = wibox.container.margin,
-				forced_width = dpi(40),
-				forced_height = dpi(40),
-				create_callback = function(self, c3, _)
-					local indicator = wibox.widget({
-						widget = wibox.container.place,
-						valign = "center",
-						{
-							widget = wibox.container.background,
-							forced_height = dpi(8),
-							shape = gears.shape.rounded_bar,
-						},
-					})
+    return widget
+  end
 
-					self.indicator_animation = animation:new({
-						duration = 0.125,
-						easing = animation.easing.linear,
-						update = function(self, pos)
-							indicator.children[1].forced_width = pos
-						end,
-					})
+  --- Animated tag list
+  --- ~~~~~~~~~~~~~~~~~
 
-					self:set_widget(indicator)
+  --- Taglist buttons
+  local modkey = "Mod4"
+  local taglist_buttons = gears.table.join(
+    awful.button({}, 1, function(t)
+      t:view_only()
+    end),
+    awful.button({ modkey }, 1, function(t)
+      if client.focus then
+        client.focus:move_to_tag(t)
+      end
+    end),
+    awful.button({}, 3, awful.tag.viewtoggle),
+    awful.button({ modkey }, 3, function(t)
+      if client.focus then
+        client.focus:toggle_tag(t)
+      end
+    end),
+    awful.button({}, 4, function(t)
+      awful.tag.viewnext(t.screen)
+    end),
+    awful.button({}, 5, function(t)
+      awful.tag.viewprev(t.screen)
+    end)
+  )
 
-					if c3.selected then
-						self.widget.children[1].bg = beautiful.accent
-						self.indicator_animation:set(dpi(32))
-					elseif #c3:clients() == 0 then
-						self.widget.children[1].bg = beautiful.color8
-						self.indicator_animation:set(dpi(8))
-					else
-						self.widget.children[1].bg = beautiful.accent
-						self.indicator_animation:set(dpi(16))
-					end
+  local function tag_list(s)
+    local taglist = awful.widget.taglist({
+      screen = s,
+      filter = awful.widget.taglist.filter.all,
+      layout = { layout = wibox.layout.fixed.horizontal },
+      widget_template = {
+        widget = wibox.container.margin,
+        forced_width = dpi(40),
+        forced_height = dpi(40),
+        create_callback = function(self, c3, _)
+          local indicator = wibox.widget({
+            widget = wibox.container.place,
+            valign = "center",
+            {
+              widget = wibox.container.background,
+              forced_height = dpi(8),
+              shape = gears.shape.rounded_bar,
+            },
+          })
 
-					--- Tag preview
-					self:connect_signal("mouse::enter", function()
-						if #c3:clients() > 0 then
-							awesome.emit_signal("bling::tag_preview::update", c3)
-							awesome.emit_signal("bling::tag_preview::visibility", s, true)
-						end
-					end)
+          self.indicator_animation = animation:new({
+            duration = 0.125,
+            easing = animation.easing.linear,
+            update = function(self, pos)
+              indicator.children[1].forced_width = pos
+            end,
+          })
 
-					self:connect_signal("mouse::leave", function()
-						awesome.emit_signal("bling::tag_preview::visibility", s, false)
-					end)
-				end,
-				update_callback = function(self, c3, _)
-					if c3.selected then
-						self.widget.children[1].bg = beautiful.accent
-						self.indicator_animation:set(dpi(32))
-					elseif #c3:clients() == 0 then
-						self.widget.children[1].bg = beautiful.color8
-						self.indicator_animation:set(dpi(8))
-					else
-						self.widget.children[1].bg = beautiful.accent
-						self.indicator_animation:set(dpi(16))
-					end
-				end,
-			},
-			buttons = taglist_buttons,
-		})
+          self:set_widget(indicator)
 
-		local widget = widgets.button.elevated.state({
-			normal_bg = beautiful.widget_bg,
-			normal_shape = gears.shape.rounded_bar,
-			child = {
-				taglist,
-				margins = { left = dpi(10), right = dpi(10) },
-				widget = wibox.container.margin,
-			},
-			on_release = function()
-				awesome.emit_signal("central_panel::toggle", s)
-			end,
-		})
+          if c3.selected then
+            self.widget.children[1].bg = beautiful.accent
+            self.indicator_animation:set(dpi(32))
+          elseif #c3:clients() == 0 then
+            self.widget.children[1].bg = beautiful.color8
+            self.indicator_animation:set(dpi(8))
+          else
+            self.widget.children[1].bg = beautiful.accent
+            self.indicator_animation:set(dpi(16))
+          end
 
-		return wibox.widget({
-			widget,
-			margins = dpi(5),
-			widget = wibox.container.margin,
-		})
-	end
+          --- Tag preview
+          self:connect_signal("mouse::enter", function()
+            if #c3:clients() > 0 then
+              awesome.emit_signal("bling::tag_preview::update", c3)
+              awesome.emit_signal("bling::tag_preview::visibility", s, true)
+            end
+          end)
 
-	--- Systray
-	--- ~~~~~~~
-	local function system_tray()
-		local mysystray = wibox.widget.systray()
-		mysystray.base_size = beautiful.systray_icon_size
+          self:connect_signal("mouse::leave", function()
+            awesome.emit_signal("bling::tag_preview::visibility", s, false)
+          end)
+        end,
+        update_callback = function(self, c3, _)
+          if c3.selected then
+            self.widget.children[1].bg = beautiful.accent
+            self.indicator_animation:set(dpi(32))
+          elseif #c3:clients() == 0 then
+            self.widget.children[1].bg = beautiful.color8
+            self.indicator_animation:set(dpi(8))
+          else
+            self.widget.children[1].bg = beautiful.accent
+            self.indicator_animation:set(dpi(16))
+          end
+        end,
+      },
+      buttons = taglist_buttons,
+    })
 
-		local widget = wibox.widget({
-			widget = wibox.container.constraint,
-			strategy = "max",
-			width = dpi(0),
-			{
-				widget = wibox.container.margin,
-				margins = dpi(10),
-				mysystray,
-			},
-		})
+    local widget = widgets.button.elevated.state({
+      normal_bg = beautiful.widget_bg,
+      child = {
+        taglist,
+        margins = { left = dpi(10), right = dpi(10) },
+        widget = wibox.container.margin,
+      },
+      on_release = function()
+        awesome.emit_signal("central_panel::toggle", s)
+      end,
+    })
 
-		local system_tray_animation = animation:new({
-			easing = animation.easing.linear,
-			duration = 0.125,
-			update = function(self, pos)
-				widget.width = pos
-			end,
-		})
+    return wibox.widget({
+      widget,
+      margins = dpi(5),
+      widget = wibox.container.margin,
+    })
+  end
 
-		local arrow = wbutton.text.state({
-			text_normal_bg = beautiful.accent,
-			normal_bg = beautiful.wibar_bg,
-			font = beautiful.icon_font .. "Round ",
-			size = 18,
-			text = "",
-			on_turn_on = function(self)
-				system_tray_animation:set(400)
-				self:set_text("")
-			end,
-			on_turn_off = function(self)
-				system_tray_animation:set(0)
-				self:set_text("")
-			end,
-		})
+  --- Battery
+  --- ~~~~~~~
+  local battery = function()
+    local icon = require("ui.panels.top-panel.battery")()
 
-		return wibox.widget({
-			layout = wibox.layout.fixed.horizontal,
-			arrow,
-			widget,
-		})
-	end
+    local widget = wibox.widget({
+      widget = wibox.container.margin,
+      margins = {
+        top = dpi(5),
+        bottom = dpi(5)
+      },
+      wbutton.elevated.normal({
+        child = icon,
+        normal_bg = beautiful.widget_bg,
+        hover_bg = beautiful.one_bg,
+        paddings = dpi(5),
+        margins = {
+          top = 0,
+          left = 0,
+          right = 0,
+          bottom = 0
+        },
+        on_release = function(self)
+          awful.spawn(apps.default.power_manager, false)
+        end,
+      })
+    })
 
-	--- Notif panel
-	--- ~~~~~~~~~~~
-	local function notif_panel()
-		local icon = wibox.widget({
-			markup = helpers.ui.colorize_text("", beautiful.accent),
-			align = "center",
-			valign = "center",
-			font = beautiful.icon_font .. "Round 18",
-			widget = wibox.widget.textbox,
-		})
+    return widget
+  end
 
-		local widget = wbutton.elevated.state({
-			child = icon,
-			normal_bg = beautiful.wibar_bg,
-			on_release = function()
-				awesome.emit_signal("notification_panel::toggle", s)
-			end,
-		})
+  --- Systray
+  --- ~~~~~~~
+  local function system_tray()
+    local mysystray = wibox.widget.systray()
+    mysystray.base_size = beautiful.systray_icon_size
 
-		return widget
-	end
+    local widget = wibox.widget({
+      widget = wibox.container.constraint,
+      strategy = "max",
+      {
+        widget = wibox.container.margin,
+        margins = dpi(10),
+        mysystray,
+      },
+    })
 
-	--- Layoutbox
-	--- ~~~~~~~~~
-	local function layoutbox()
-		local layoutbox_buttons = gears.table.join(
-			--- Left click
-			awful.button({}, 1, function(c)
-				awful.layout.inc(1)
-			end),
+    return wibox.widget({
+      layout = wibox.layout.fixed.horizontal,
+      widget,
+    })
+  end
 
-			--- Right click
-			awful.button({}, 3, function(c)
-				awful.layout.inc(-1)
-			end),
+  --- Notif panel
+  --- ~~~~~~~~~~~
+  local function notif_panel()
+    local icon = wibox.widget({
+      markup = helpers.ui.colorize_text("", beautiful.fg_normal),
+      align = "center",
+      valign = "center",
+      font = beautiful.icon_font .. "Round 16",
+      widget = wibox.widget.textbox,
+    })
 
-			--- Scrolling
-			awful.button({}, 4, function()
-				awful.layout.inc(-1)
-			end),
-			awful.button({}, 5, function()
-				awful.layout.inc(1)
-			end)
-		)
+    local widget = wibox.widget({
+      widget = wibox.container.margin,
+      margins = {
+        top = dpi(5),
+        bottom = dpi(5)
+      },
+      wbutton.elevated.normal({
+        child = icon,
+        normal_bg = beautiful.widget_bg,
+        hover_bg = beautiful.one_bg,
+        paddings = dpi(5),
+        margins = {
+          top = 0,
+          left = 0,
+          right = 0,
+          bottom = 0
+        },
+        on_release = function()
+          awesome.emit_signal("notification_panel::toggle", s)
+        end,
+      })
+    })
+    return widget
+  end
 
-		s.mylayoutbox = awful.widget.layoutbox()
-		s.mylayoutbox:buttons(layoutbox_buttons)
+  --- Clock
+  --- ~~~~~~~~~
+  local clock = function()
+    local icon = require("ui.panels.top-panel.clock")()
 
-		local widget = wbutton.elevated.state({
-			child = s.mylayoutbox,
-			normal_bg = beautiful.wibar_bg,
-		})
+    local widget = wibox.widget({
+      widget = wibox.container.margin,
+      margins = {
+        top = dpi(5),
+        bottom = dpi(5)
+      },
+      wbutton.elevated.normal({
+        child = icon,
+        normal_bg = beautiful.widget_bg,
+        hover_bg = beautiful.one_bg,
+        paddings = dpi(5),
+        margins = {
+          top = 0,
+          left = 0,
+          right = 0,
+          bottom = 0
+        },
+        on_release = function(self)
+          awesome.emit_signal("info_panel::toggle", s)
+        end,
+      })
+    })
 
-		return widget
-	end
+    return widget
+  end
 
-	--- Create the top_panel
-	--- ~~~~~~~~~~~~~~~~~~~~~~~
-	s.top_panel = awful.popup({
-		screen = s,
-		type = "dock",
-		maximum_height = beautiful.wibar_height,
-		minimum_width = s.geometry.width,
-		maximum_width = s.geometry.width,
-		placement = function(c)
-			awful.placement.top(c)
-		end,
-		bg = beautiful.transparent,
-		widget = {
-			{
-				{
-					layout = wibox.layout.align.horizontal,
-					expand = "none",
-					s.clock,
-					tag_list(s),
-					{
-						system_tray(),
-						s.battery,
-						s.network,
-						notif_panel(),
-						layoutbox(),
-						layout = wibox.layout.fixed.horizontal,
-					},
-				},
-				left = dpi(10),
-				right = dpi(10),
-				widget = wibox.container.margin,
-			},
-			bg = beautiful.wibar_bg,
-			widget = wibox.container.background,
-		},
-	})
+  --- Layoutbox
+  --- ~~~~~~~~~
+  local function layoutbox()
+    local layoutbox_buttons = gears.table.join(
+    --- Left click
+      awful.button({}, 1, function(c)
+        awful.layout.inc(1)
+      end),
 
-	s.top_panel:struts({
-		top = s.top_panel.maximum_height,
-	})
+      --- Right click
+      awful.button({}, 3, function(c)
+        awful.layout.inc(-1)
+      end),
 
-	--- Remove top_panel on full screen
-	local function remove_top_panel(c)
-		if c.fullscreen or c.maximized then
-			c.screen.top_panel.visible = false
-		else
-			c.screen.top_panel.visible = true
-		end
-	end
+      --- Scrolling
+      awful.button({}, 4, function()
+        awful.layout.inc(-1)
+      end),
+      awful.button({}, 5, function()
+        awful.layout.inc(1)
+      end)
+    )
 
-	--- Remove top_panel on full screen
-	local function add_top_panel(c)
-		if c.fullscreen or c.maximized then
-			c.screen.top_panel.visible = true
-		end
-	end
+    s.mylayoutbox = awful.widget.layoutbox()
+    s.mylayoutbox:buttons(layoutbox_buttons)
 
-	--- Hide bar when a splash widget is visible
-	awesome.connect_signal("widgets::splash::visibility", function(vis)
-		screen.primary.top_panel.visible = not vis
-	end)
+    local widget = wibox.widget({
+      widget = wibox.container.margin,
+      margins = {
+        top = dpi(5),
+        bottom = dpi(5)
+      },
+      wbutton.elevated.state({
+        child = s.mylayoutbox,
+        normal_bg = beautiful.widget_bg,
+        hover_bg = beautiful.one_bg,
+        paddings = dpi(5),
+        margins = {
+          top = 0,
+          left = 0,
+          right = 0,
+          bottom = 0
+        },
 
-	client.connect_signal("property::fullscreen", remove_top_panel)
-	client.connect_signal("request::unmanage", add_top_panel)
+      })
+    })
+
+    return widget
+  end
+
+  --- Network
+  --- ~~~~~~~~~
+  local function network()
+    local icon = wibox.widget({
+      {
+        id = "icon",
+        text = "",
+        align = "center",
+        valign = "center",
+        font = beautiful.icon_font .. "Round 16",
+        widget = wibox.widget.textbox,
+      },
+      layout = wibox.layout.align.horizontal,
+    })
+
+    watch(
+      [[sh -c "
+		nmcli g | tail -n 1 | awk '{ print $1 }'
+		"]],
+      5,
+      function(_, stdout)
+        local net_ssid = stdout
+        net_ssid = string.gsub(net_ssid, "^%s*(.-)%s*$", "%1")
+
+        if not net_ssid:match("disconnected") then
+          local getstrength = [[
+					awk '/^\s*w/ { print  int($3 * 100 / 70) }' /proc/net/wireless
+					]]
+          awful.spawn.easy_async_with_shell(getstrength, function(stdout)
+            if not tonumber(stdout) then
+              return
+            end
+            local strength = tonumber(stdout)
+            if strength <= 20 then
+              icon.icon:set_text("")
+            elseif strength <= 40 then
+              icon.icon:set_text("")
+            elseif strength <= 60 then
+              icon.icon:set_text("")
+            elseif strength <= 80 then
+              icon.icon:set_text("")
+            else
+              icon.icon:set_text("")
+            end
+          end)
+        else
+          icon.icon:set_text("")
+        end
+      end
+    )
+
+    local widget = wibox.widget({
+      widget = wibox.container.margin,
+      margins = {
+        top = dpi(5),
+        bottom = dpi(5)
+      },
+      wbutton.elevated.normal({
+        child = icon,
+        normal_bg = beautiful.widget_bg,
+        hover_bg = beautiful.one_bg,
+        paddings = dpi(5),
+        margins = {
+          top = 0,
+          left = 0,
+          right = 0,
+          bottom = 0
+        },
+        on_release = function()
+          awful.spawn(apps.default.network_manager, false)
+        end,
+      })
+    })
+
+    return widget
+  end
+
+
+  --- Create the top_panel
+  --- ~~~~~~~~~~~~~~~~~~~~~~~
+  s.top_panel = awful.popup({
+    screen = s,
+    type = "dock",
+    maximum_height = beautiful.wibar_height,
+    minimum_width = s.geometry.width,
+    maximum_width = s.geometry.width,
+    placement = function(c)
+      awful.placement.top(c)
+    end,
+    bg = beautiful.transparent,
+    widget = {
+      {
+        {
+          layout = wibox.layout.align.horizontal,
+          expand = "none",
+          {
+            launcher(),
+            layout = wibox.layout.fixed.horizontal,
+          }
+          ,
+          tag_list(s),
+          {
+            system_tray(),
+            battery(),
+            network(),
+            notif_panel(),
+            clock(),
+            layoutbox(),
+            spacing = dpi(5),
+            layout = wibox.layout.fixed.horizontal,
+          },
+        },
+        left = dpi(10),
+        right = dpi(10),
+        widget = wibox.container.margin,
+      },
+      bg = beautiful.wibar_bg,
+      widget = wibox.container.background,
+    },
+  })
+
+  s.top_panel:struts({
+    top = s.top_panel.maximum_height,
+  })
+
+  --- Remove top_panel on full screen
+  local function remove_top_panel(c)
+    if c.fullscreen or c.maximized then
+      c.screen.top_panel.visible = false
+    else
+      c.screen.top_panel.visible = true
+    end
+  end
+
+  --- Remove top_panel on full screen
+  local function add_top_panel(c)
+    if c.fullscreen or c.maximized then
+      c.screen.top_panel.visible = true
+    end
+  end
+
+  --- Hide bar when a splash widget is visible
+  awesome.connect_signal("widgets::splash::visibility", function(vis)
+    screen.primary.top_panel.visible = not vis
+  end)
+
+  client.connect_signal("property::fullscreen", remove_top_panel)
+  client.connect_signal("request::unmanage", add_top_panel)
 end

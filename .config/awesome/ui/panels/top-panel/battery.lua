@@ -75,9 +75,9 @@ return function()
 		widget = wibox.widget.textbox,
 	})
 
-	local battery_widget = wibox.widget({
+	local widget = wibox.widget({
 		layout = wibox.layout.fixed.horizontal,
-		spacing = dpi(5),
+		spacing = dpi(3),
 		{
 			battery,
 			top = dpi(1),
@@ -85,14 +85,6 @@ return function()
 			widget = wibox.container.margin,
 		},
 		battery_percentage_text,
-	})
-
-	local widget = wbutton.elevated.state({
-		child = battery_widget,
-		normal_bg = beautiful.wibar_bg,
-		on_release = function()
-			awful.spawn(apps.default.power_manager, false)
-		end,
 	})
 
 	local last_value = 100

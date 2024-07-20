@@ -83,6 +83,10 @@ return {
       "nvim-neotest/nvim-nio",
       -- language specific
       "haydenmeade/neotest-jest",
+      "nvim-neotest/neotest-python",
+      "nvim-neotest/neotest-plenary",
+      "nvim-neotest/neotest-go",
+      "alfaix/neotest-gtest"
     },
     config = function()
       require "plugins.configs.lsp.neotest"

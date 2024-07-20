@@ -30,7 +30,7 @@ theme.icon_font     = "Material Icons "
 --- Special
 theme.white         = "#edeff0"
 theme.darker_black  = "#0b0d12"
-theme.black         = "#0e1319"
+theme.black         = "#101213"
 theme.lighter_black = "#171b21"
 theme.one_bg        = "#2d373e"
 theme.one_bg2       = "#333d4b"
@@ -89,12 +89,12 @@ theme.fg_minimize   = theme.color0
 --- Accent colors
 function theme.random_accent_color()
   local accents = {
-    theme.color9,
-    theme.color10,
-    theme.color11,
-    theme.color12,
-    theme.color13,
-    theme.color14,
+    theme.color1,
+    theme.color2,
+    theme.color3,
+    theme.color4,
+    theme.color5,
+    theme.color6,
   }
 
   local i = math.random(1, #accents)
@@ -110,7 +110,7 @@ theme.press_event = "#ffffff" .. "15"
 theme.release_event = "#ffffff" .. "10"
 
 --- Widgets
-theme.widget_bg = "#1b1d1e"
+theme.widget_bg = theme.lighter_black
 
 --- Titlebars
 theme.titlebar_enabled = true
@@ -118,7 +118,7 @@ theme.titlebar_bg = theme.lighter_black
 theme.titlebar_fg = theme.white
 
 --- Wibar
-theme.wibar_bg = "#101213"
+theme.wibar_bg = theme.black
 theme.wibar_height = dpi(40)
 
 --- Music
@@ -135,6 +135,7 @@ theme.wallpaper = gears.surface.load_uncached(gfs.get_configuration_dir() .. "Wa
 
 --- Image Assets
 theme.pfp = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/pfp.png")
+theme.distro = gears.surface.load_uncached(gfs.get_configuration_dir() .. "icons/awesomewm.svg")
 theme.music = gears.surface.load_uncached(gfs.get_configuration_dir() .. "theme/assets/music.png")
 
 --- Layout
@@ -166,7 +167,7 @@ theme.border_color_maximized = theme.titlebar_bg
 theme.border_color_fullscreen = theme.titlebar_bg
 
 --- Corner Radius
-theme.border_radius = dpi(8)
+theme.border_radius = dpi(4)
 
 --- Edge snap
 theme.snap_bg = theme.color8
@@ -211,7 +212,7 @@ theme.layoutlist_shape_selected = helpers.ui.rrect(theme.border_radius)
 theme.layoutlist_bg_selected = theme.widget_bg
 
 --- Gaps
-theme.useless_gap = dpi(8)
+theme.useless_gap = dpi(10)
 
 --- Systray
 theme.systray_icon_size = dpi(20)
