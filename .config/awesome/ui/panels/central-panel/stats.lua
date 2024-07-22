@@ -10,11 +10,45 @@ local icons = require("icons")
 --- Stats Widget
 --- ~~~~~~~~~~~~
 local stats_text = wibox.widget({
+  visible = true,
+  top_only = true,
+  layout = wibox.layout.stack,
+})
+
+local stats_default_text = wibox.widget({
   font = beautiful.font_name .. "Medium 10",
   markup = helpers.ui.colorize_text("Stats", "#666c79"),
   valign = "center",
   widget = wibox.widget.textbox,
 })
+
+local text_counter = 1
+stats_text:insert(text_counter, stats_default_text)
+
+local function create_text(w)
+  local text = wibox.widget({
+    font = beautiful.font_name .. "Medium 10",
+    valign = "center",
+    widget = wibox.widget.textbox,
+  })
+
+  text_counter = text_counter + 1
+  local index = text_counter
+
+  stats_text:insert(index, text)
+
+  w:connect_signal("mouse::enter", function()
+    -- Raise tooltip to the top of the stack
+    stats_text:set(1, text)
+  end)
+  w:connect_signal("mouse::leave", function()
+    stats_text:set(1, stats_default_text)
+  end)
+
+  return text
+end
+
+---
 
 local stats_tooltip = wibox.widget({
   visible = false,
@@ -62,16 +96,12 @@ local function create_boxed_widget(widget_to_be_boxed, width, height, bg_color)
       {
         --- The actual widget goes here
         widget_to_be_boxed,
-        top = dpi(9),
-        bottom = dpi(9),
-        left = dpi(10),
-        right = dpi(10),
+        margins = dpi(10),
         widget = wibox.container.margin,
       },
       widget = box_container,
     },
     margins = dpi(10),
-    color = "#FF000000",
     widget = wibox.container.margin,
   })
 
@@ -92,6 +122,7 @@ local function cpu()
   })
 
   local tooltip = create_tooltip(stats)
+  local text = create_text(stats);
 
   watch(
     [[sh -c "
@@ -106,6 +137,7 @@ local function cpu()
 
       stats:set_value(cpu_value)
       tooltip:set_markup_silently(helpers.ui.colorize_text(cpu_value .. "%", beautiful.color2))
+      text:set_markup_silently(helpers.ui.colorize_text("CPU", beautiful.color2))
 
       collectgarbage("collect")
     end
@@ -130,6 +162,7 @@ local function temperature()
   })
 
   local tooltip = create_tooltip(stats)
+  local text = create_text(stats);
 
   local max_temp = 80
 
@@ -164,6 +197,7 @@ local function temperature()
 
         stats:set_value(temp_value)
         tooltip:set_markup_silently(helpers.ui.colorize_text(temp_value .. "°C", beautiful.color3))
+        text:set_markup_silently(helpers.ui.colorize_text("TEMP", beautiful.color3))
         collectgarbage("collect")
       end)
     end
@@ -188,6 +222,7 @@ local function ram()
   })
 
   local tooltip = create_tooltip(stats)
+  local text = create_text(stats);
 
   watch(
     [[sh -c "
@@ -203,6 +238,7 @@ local function ram()
 
       stats:set_value(used_ram_percentage)
       tooltip:set_markup_silently(helpers.ui.colorize_text(string.format("%.1f", used / 1000) .. "G", beautiful.color9))
+      text:set_markup_silently(helpers.ui.colorize_text("RAM", beautiful.color9))
       collectgarbage("collect")
     end
   )
@@ -210,7 +246,7 @@ local function ram()
   return stats
 end
 
-local function hdd()
+local function disk()
   local stats = wibox.widget({
     widget = wibox.container.arcchart,
     max_value = 100,
@@ -219,19 +255,21 @@ local function hdd()
     thickness = dpi(20),
     paddings = dpi(10),
     rounded_edge = false,
-    bg = beautiful.color5.."33",
+    bg = beautiful.color5 .. "33",
     colors = { beautiful.color13 },
     start_angle = math.pi + math.pi / 2,
     ram(),
   })
 
   local tooltip = create_tooltip(stats)
+  local text = create_text(stats);
 
   watch([[bash -c "df -h /home|grep '^/' | awk '{print $5}'"]], 180, function(_, stdout)
     local space_consumed = stdout:match("(%d+)")
 
     stats:set_value(tonumber(space_consumed))
-    tooltip:set_markup_silently(helpers.ui.colorize_text(space_consumed .. "%", "#6791c9"))
+    tooltip:set_markup_silently(helpers.ui.colorize_text(space_consumed .. "%", beautiful.color5))
+    text:set_markup_silently(helpers.ui.colorize_text("DISK", beautiful.color5))
     collectgarbage("collect")
   end)
 
@@ -240,32 +278,23 @@ end
 
 local stats = wibox.widget({
   {
-    stats_text,
+    {
+      stats_text,
+      nil,
+      stats_tooltip,
+      expand = "none",
+      layout = wibox.layout.align.horizontal,
+    },
     nil,
-    stats_tooltip,
-    expand = "none",
-    layout = wibox.layout.align.horizontal,
+    nil,
+    layout = wibox.layout.align.vertical,
   },
   {
-    nil,
-    {
-      nil,
-      {
-        {
-          hdd(),
-          reflection = { horizontal = true, vertical = false },
-          widget = wibox.container.mirror,
-        },
-        margins = dpi(10),
-        widget = wibox.container.margin,
-      },
-      layout = wibox.layout.fixed.vertical,
-    },
-    expand = "none",
-    layout = wibox.layout.align.horizontal,
+    disk(),
+    margins = dpi(10),
+    widget = wibox.container.margin,
   },
-  spacing = dpi(10),
-  layout = wibox.layout.fixed.vertical,
+  layout = wibox.layout.stack
 })
 
-return create_boxed_widget(stats, dpi(200), dpi(300), beautiful.widget_bg)
+return create_boxed_widget(stats, dpi(300), dpi(300), beautiful.widget_bg)

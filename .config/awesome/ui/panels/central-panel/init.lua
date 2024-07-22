@@ -13,11 +13,17 @@ local icons = require("icons")
 return function(s)
   --- Header
   local function header()
-    local dashboard_text = wibox.widget({
-      markup = helpers.ui.colorize_text("Dashboard -", "#666c79"),
-      font = beautiful.font_name .. "Black 14",
-      valign = "center",
-      widget = wibox.widget.textbox,
+    local awesomewm = wibox.widget({
+      {
+        image = gears.color.recolor_image(icons.awesome_logo, beautiful.accent),
+        resize = true,
+        halign = "center",
+        valign = "center",
+        widget = wibox.widget.imagebox,
+      },
+      strategy = "exact",
+      height = dpi(30),
+      widget = wibox.container.constraint,
     })
 
     local function search_box()
@@ -52,12 +58,11 @@ return function(s)
             },
             layout = wibox.layout.fixed.horizontal,
           },
-          left = dpi(15),
+          left = dpi(10),
           widget = wibox.container.margin,
         },
         forced_height = dpi(35),
-        forced_width = dpi(420),
-        shape = gears.shape.rounded_bar,
+        shape = helpers.ui.rrect(beautiful.border_radius),
         bg = beautiful.wibar_bg,
         widget = wibox.container.background(),
       })
@@ -92,12 +97,13 @@ return function(s)
     end
 
     local widget = wibox.widget({
-      {
-        dashboard_text,
-        nil,
+      wibox.widget({
+        awesomewm,
         search_box(),
-        layout = wibox.layout.align.horizontal,
-      },
+        spacing = dpi(20),
+        fill_space = true,
+        layout = wibox.layout.fixed.horizontal,
+      }),
       margins = dpi(10),
       widget = wibox.container.margin,
     })
@@ -105,26 +111,8 @@ return function(s)
     return widget
   end
 
-  s.awesomewm = wibox.widget({
-    {
-      {
-        image = gears.color.recolor_image(icons.awesome_logo, beautiful.accent),
-        resize = true,
-        halign = "center",
-        valign = "center",
-        widget = wibox.widget.imagebox,
-      },
-      strategy = "exact",
-      height = dpi(40),
-      widget = wibox.container.constraint,
-    },
-    margins = dpi(10),
-    widget = wibox.container.margin,
-  })
-
   --- Widgets
   s.stats = require("ui.panels.central-panel.stats")
-  s.user_profile = require("ui.panels.central-panel.user-profile")
   s.quick_settings = require("ui.panels.central-panel.quick-settings")
   s.slider = require("ui.panels.central-panel.slider")
   s.music_player = require("ui.panels.central-panel.music-player")
@@ -134,8 +122,6 @@ return function(s)
     screen = s,
     minimum_height = dpi(700),
     maximum_height = dpi(700),
-    minimum_width = dpi(700),
-    maximum_width = dpi(700),
     bg = beautiful.transparent,
     ontop = true,
     visible = false,
@@ -154,23 +140,17 @@ return function(s)
         {
           {
             {
-              nil,
               {
                 {
-                  s.user_profile,
-                  s.quick_settings,
                   s.slider,
+                  s.quick_settings,
                   layout = wibox.layout.fixed.vertical,
                 },
-                {
-                  s.stats,
-                  s.music_player,
-                  s.awesomewm,
-                  layout = wibox.layout.fixed.vertical,
-                },
-                layout = wibox.layout.align.horizontal,
+                s.stats,
+                layout = wibox.layout.fixed.horizontal
               },
-              layout = wibox.layout.align.vertical,
+              -- s.music_player,
+              layout = wibox.layout.fixed.vertical,
             },
             margins = dpi(10),
             widget = wibox.container.margin,

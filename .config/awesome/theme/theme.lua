@@ -31,7 +31,7 @@ theme.icon_font     = "Material Icons "
 theme.white         = "#edeff0"
 theme.darker_black  = "#0b0d12"
 theme.black         = "#101213"
-theme.lighter_black = "#171b21"
+theme.lighter_black = "#1e232c"
 theme.one_bg        = "#2d373e"
 theme.one_bg2       = "#333d4b"
 theme.one_bg3       = "#3c404c"
@@ -167,7 +167,7 @@ theme.border_color_maximized = theme.titlebar_bg
 theme.border_color_fullscreen = theme.titlebar_bg
 
 --- Corner Radius
-theme.border_radius = dpi(4)
+theme.border_radius = dpi(5)
 
 --- Edge snap
 theme.snap_bg = theme.color8
@@ -202,10 +202,17 @@ theme.tag_preview_client_border_radius = theme.border_radius / 2
 theme.tag_preview_client_opacity = 1
 theme.tag_preview_client_bg = theme.wibar_bg
 theme.tag_preview_client_border_color = theme.wibar_bg
-theme.tag_preview_client_border_width = 0
+theme.tag_preview_client_border_width = dpi(2)
 theme.tag_preview_widget_bg = theme.wibar_bg
 theme.tag_preview_widget_border_color = theme.wibar_bg
-theme.tag_preview_widget_border_width = 0
+theme.tag_preview_widget_border_width = dpi(3)
+
+--- Task preview
+theme.task_preview_widget_margin = dpi(10)
+theme.task_preview_widget_border_radius = theme.border_radius
+theme.task_preview_widget_bg = theme.wibar_bg
+theme.task_preview_widget_border_color = theme.wibar_bg
+theme.task_preview_widget_border_width = dpi(3)
 
 --- Layout List
 theme.layoutlist_shape_selected = helpers.ui.rrect(theme.border_radius)
@@ -215,9 +222,9 @@ theme.layoutlist_bg_selected = theme.widget_bg
 theme.useless_gap = dpi(10)
 
 --- Systray
-theme.systray_icon_size = dpi(20)
-theme.systray_icon_spacing = dpi(10)
-theme.bg_systray = theme.wibar_bg
+theme.systray_icon_size = dpi(25)
+theme.systray_icon_spacing = dpi(5)
+theme.bg_systray = theme.widget_bg.."00"
 --- theme.systray_max_rows = 2
 
 --- Tabs

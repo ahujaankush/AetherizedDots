@@ -10,7 +10,6 @@ local wbutton    = require("ui.widgets.button")
 local animation  = require("modules.animation")
 local apps       = require("configuration.apps")
 local gcolor     = require("gears.color")
-local watch      = awful.widget.watch
 
 --- Modern Top Panel
 --- ~~~~~~~~~~~~~~~~~~~
@@ -80,7 +79,7 @@ return function(s)
     end)
   )
 
-  local function tag_list(s)
+  local function taglist(s)
     local taglist = awful.widget.taglist({
       screen = s,
       filter = awful.widget.taglist.filter.all,
@@ -168,6 +167,22 @@ return function(s)
     })
   end
 
+  local tasklist = require("ui.panels.top-panel.tasklist")
+
+  --- Keyboard
+  --- ~~~~~~~
+  local function keyboard_layout()
+  end
+
+  --- Power & Nvidia
+  --- ~~~~~~~
+  local function power()
+  end
+
+  --- Systemtray
+  --- ~~~~~~~
+  local systray = require("ui.panels.top-panel.systray")
+
   --- Battery
   --- ~~~~~~~
   local battery = function()
@@ -199,27 +214,6 @@ return function(s)
     return widget
   end
 
-  --- Systray
-  --- ~~~~~~~
-  local function system_tray()
-    local mysystray = wibox.widget.systray()
-    mysystray.base_size = beautiful.systray_icon_size
-
-    local widget = wibox.widget({
-      widget = wibox.container.constraint,
-      strategy = "max",
-      {
-        widget = wibox.container.margin,
-        margins = dpi(10),
-        mysystray,
-      },
-    })
-
-    return wibox.widget({
-      layout = wibox.layout.fixed.horizontal,
-      widget,
-    })
-  end
 
   --- Notif panel
   --- ~~~~~~~~~~~
@@ -242,7 +236,7 @@ return function(s)
         child = icon,
         normal_bg = beautiful.widget_bg,
         hover_bg = beautiful.one_bg,
-        paddings = dpi(5),
+        paddings = dpi(4),
         margins = {
           top = 0,
           left = 0,
@@ -280,7 +274,7 @@ return function(s)
           bottom = 0
         },
         on_release = function(self)
-          awesome.emit_signal("info_panel::toggle", s)
+          awful.spawn(apps.default.calendar, false)
         end,
       })
     })
@@ -338,84 +332,6 @@ return function(s)
     return widget
   end
 
-  --- Network
-  --- ~~~~~~~~~
-  local function network()
-    local icon = wibox.widget({
-      {
-        id = "icon",
-        text = "",
-        align = "center",
-        valign = "center",
-        font = beautiful.icon_font .. "Round 16",
-        widget = wibox.widget.textbox,
-      },
-      layout = wibox.layout.align.horizontal,
-    })
-
-    watch(
-      [[sh -c "
-		nmcli g | tail -n 1 | awk '{ print $1 }'
-		"]],
-      5,
-      function(_, stdout)
-        local net_ssid = stdout
-        net_ssid = string.gsub(net_ssid, "^%s*(.-)%s*$", "%1")
-
-        if not net_ssid:match("disconnected") then
-          local getstrength = [[
-					awk '/^\s*w/ { print  int($3 * 100 / 70) }' /proc/net/wireless
-					]]
-          awful.spawn.easy_async_with_shell(getstrength, function(stdout)
-            if not tonumber(stdout) then
-              return
-            end
-            local strength = tonumber(stdout)
-            if strength <= 20 then
-              icon.icon:set_text("")
-            elseif strength <= 40 then
-              icon.icon:set_text("")
-            elseif strength <= 60 then
-              icon.icon:set_text("")
-            elseif strength <= 80 then
-              icon.icon:set_text("")
-            else
-              icon.icon:set_text("")
-            end
-          end)
-        else
-          icon.icon:set_text("")
-        end
-      end
-    )
-
-    local widget = wibox.widget({
-      widget = wibox.container.margin,
-      margins = {
-        top = dpi(5),
-        bottom = dpi(5)
-      },
-      wbutton.elevated.normal({
-        child = icon,
-        normal_bg = beautiful.widget_bg,
-        hover_bg = beautiful.one_bg,
-        paddings = dpi(5),
-        margins = {
-          top = 0,
-          left = 0,
-          right = 0,
-          bottom = 0
-        },
-        on_release = function()
-          awful.spawn(apps.default.network_manager, false)
-        end,
-      })
-    })
-
-    return widget
-  end
-
-
   --- Create the top_panel
   --- ~~~~~~~~~~~~~~~~~~~~~~~
   s.top_panel = awful.popup({
@@ -435,14 +351,14 @@ return function(s)
           expand = "none",
           {
             launcher(),
+            taglist(s),
+            tasklist(s),
             layout = wibox.layout.fixed.horizontal,
-          }
-          ,
-          tag_list(s),
+          },
+          nil,
           {
-            system_tray(),
             battery(),
-            network(),
+            systray(s),
             notif_panel(),
             clock(),
             layoutbox(),
