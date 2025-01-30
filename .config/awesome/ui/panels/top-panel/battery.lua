@@ -15,18 +15,55 @@ return function()
   local happy_color = beautiful.color2
   local sad_color = beautiful.color1
   local ok_color = beautiful.color3
-  local charging_color = beautiful.color4
+  local charging_color = beautiful.color6
+
+  local charging_icon = wibox.widget({
+    markup = helpers.ui.colorize_text("", beautiful.white),
+    font = beautiful.icon_font .. "Round 14",
+    align = "center",
+    valign = "center",
+    widget = wibox.widget.textbox,
+  })
+
+  local battery_bar = wibox.widget({
+    max_value = 100,
+    value = 50,
+    forced_width = dpi(35),
+    border_width = dpi(1),
+    paddings = dpi(2),
+    bar_shape = helpers.ui.rrect(2),
+    shape = helpers.ui.rrect(5),
+    color = beautiful.white,
+    background_color = beautiful.transparent,
+    border_color = beautiful.white,
+    widget = wibox.widget.progressbar,
+  })
+
+  local battery_decoration = wibox.widget({
+    {
+      wibox.widget.textbox,
+      widget = wibox.container.background,
+      bg = beautiful.white,
+      forced_width = dpi(8.2),
+      forced_height = dpi(8.2),
+      shape = function(cr, width, height)
+        gears.shape.pie(cr, width, height, 0, math.pi)
+      end,
+    },
+    direction = "east",
+    widget = wibox.container.rotate(),
+  })
 
   local battery = wibox.widget({
-    widget = wibox.container.arcchart,
-    max_value = 100,
-    min_value = 0,
-    value = 50,
-    thickness = dpi(4),
-    rounded_edge = true,
-    bg = happy_color .. "44",
-    colors = { happy_color },
-    start_angle = 0,
+    charging_icon,
+    {
+      battery_bar,
+      battery_decoration,
+      layout = wibox.layout.fixed.horizontal,
+      spacing = dpi(-1.6),
+    },
+    layout = wibox.layout.fixed.horizontal,
+    spacing = dpi(1),
   })
 
   local battery_percentage_text = wibox.widget({
@@ -35,53 +72,80 @@ return function()
     font = beautiful.font_name .. "Medium 12",
     align = "center",
     valign = "center",
+    visible = false,
     widget = wibox.widget.textbox,
   })
 
   local battery_layout = wibox.widget({
     layout = wibox.layout.fixed.horizontal,
-    spacing = dpi(5),
-    battery,
+    spacing = 0,
+    {
+      battery,
+      top = dpi(1),
+      bottom = dpi(1),
+      widget = wibox.container.margin,
+    },
     battery_percentage_text,
   })
 
-  local widget = wbutton.elevated.normal({
+  local locked = false
+
+  local widget = wbutton.elevated.state({
     child = battery_layout,
     normal_bg = beautiful.widget_bg,
     hover_bg = beautiful.one_bg,
-    paddings = 0,
-    margins = 0,
+    paddings = dpi(5),
+    margins = {
+      top = dpi(5),
+      bottom = dpi(5)
+    },
+    on_hover = function(self)
+      battery_percentage_text.visible = true
+      battery_layout.spacing = dpi(5)
+    end,
+    on_leave = function(self)
+      battery_percentage_text.visible = locked or false
+      battery_layout.spacing = locked and dpi(5) or 0
+    end,
     on_release = function(self)
-      battery_percentage_text.visible = not battery_percentage_text.visible
-      if battery_percentage_text.visible then
-        battery_layout.spacing = dpi(5)
-      else
-        battery_layout.spacing = 0
-      end
+      locked = not locked
     end,
   })
+
+  local last_value = 100
 
   upower_daemon:connect_signal("no_devices", function(_)
     widget.visible = false
   end)
 
   upower_daemon:connect_signal("update", function(self, value, state)
-    battery:set_value(value)
+    battery_bar.value = value
+    last_value = value
 
     battery_percentage_text:set_text(math.floor(value) .. "%")
 
-    if state == 1 then
-      battery.bg = charging_color .. "44"
-      battery.colors = { charging_color }
+    if charging_icon.visible then
+      battery_bar.color = charging_color
     elseif value <= 15 then
-      battery.bg = sad_color .. "44"
-      battery.colors = { sad_color }
+      battery_bar.color = sad_color
     elseif value <= 30 then
-      battery.bg = ok_color .. "44"
-      battery.colors = { ok_color }
+      battery_bar.color = ok_color
     else
-      battery.bg = happy_color .. "44"
-      battery.colors = { happy_color }
+      battery_bar.color = happy_color
+    end
+
+    if state == 1 then
+      charging_icon.visible = true
+      battery_bar.color = charging_color
+    elseif last_value <= 15 then
+      charging_icon.visible = false
+      battery_bar.color = sad_color
+    elseif last_value <= 30 then
+      charging_icon.visible = false
+      battery_bar.color = ok_color
+    else
+      charging_icon.visible = false
+      battery_bar.color = happy_color
     end
   end)
 

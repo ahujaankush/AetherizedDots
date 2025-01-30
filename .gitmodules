@@ -10,3 +10,6 @@
 [submodule ".config/awesome/modules/layout-machi"]
 	path = .config/awesome/modules/layout-machi
 	url = https://github.com/xinhaoyuan/layout-machi
+[submodule "aether"]
+	path = .themes/aether
+	url = git@github.com:ahujaankush/aether-gtk.git

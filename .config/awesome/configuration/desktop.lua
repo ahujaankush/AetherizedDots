@@ -54,10 +54,6 @@ awful.screen.connect_for_each_screen(function(s)
   end
 end)
 
---- Flash focus
---- ~~~~~~~~~~~
-bling.module.flash_focus.enable()
-
 --- Tag preview
 --- ~~~~~~~~~~~
 bling.widget.tag_preview.enable({
@@ -79,7 +75,7 @@ bling.widget.tag_preview.enable({
 --- ~~~~~~~~~~~
 
 bling.widget.task_preview.enable({
-  x = #require("configuration.tags") * dpi(50) + beautiful.useless_gap * 2,
+  x = beautiful.useless_gap * 2,
   y = beautiful.wibar_height + beautiful.useless_gap * 2,
   height = dpi(300),
   width = dpi(500),

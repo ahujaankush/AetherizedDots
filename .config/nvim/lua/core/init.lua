@@ -16,7 +16,7 @@ opt.linebreak = true
 opt.conceallevel = 2
 opt.splitkeep = "screen"
 vim.g.markdown_fenced_languages = {
-  "ts=typescript",
+    "ts=typescript",
 }
 
 opt.clipboard = "unnamedplus"
@@ -25,10 +25,10 @@ opt.relativenumber = true
 
 -- Indenting
 opt.expandtab = true
-opt.shiftwidth = 2
+opt.shiftwidth = 4
 opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
+opt.tabstop = 4
+opt.softtabstop = 4
 
 opt.fillchars = { eob = " " }
 opt.ignorecase = true
@@ -106,17 +106,17 @@ g.lazygit_use_neovim_remote = 1 -- fallback to 0 if neovim-remote is not install
 -- Use icons instead of letters in signcolumn
 local signs = { Error = " ", Warn = " ", Info = "󰋼 ", Hint = "󰛩 " }
 for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 vim.diagnostic.config {
-  virtual_text = {
-    prefix = "",
-  },
-  signs = true,
-  underline = true,
-  update_in_insert = false,
+    virtual_text = {
+        prefix = "",
+    },
+    signs = true,
+    underline = true,
+    update_in_insert = false,
 }
 
 -- g.lazygit_use_custom_config_file_path = 0 -- config file path is evaluated if this value is 1
@@ -133,41 +133,41 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- dont list quickfix buffers
 autocmd("FileType", {
-  pattern = "qf",
-  callback = function()
-    vim.opt_local.buflisted = false
-  end,
+    pattern = "qf",
+    callback = function()
+        vim.opt_local.buflisted = false
+    end,
 })
 
 -- reload some chadrc options on-save
 vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = vim.tbl_map(
-    vim.fs.normalize,
-    vim.fn.glob(vim.fn.stdpath "config" .. "/lua/custom/**/*.lua", true, true, true)
-  ),
-  group = vim.api.nvim_create_augroup("ReloadNvChad", {}),
+    pattern = vim.tbl_map(
+        vim.fs.normalize,
+        vim.fn.glob(vim.fn.stdpath "config" .. "/lua/custom/**/*.lua", true, true, true)
+    ),
+    group = vim.api.nvim_create_augroup("ReloadNvChad", {}),
 
-  callback = function(opts)
-    local fp = vim.fn.fnamemodify(vim.fs.normalize(vim.api.nvim_buf_get_name(opts.buf)), ":r") --[[@as string]]
-    local app_name = vim.env.NVIM_APPNAME and vim.env.NVIM_APPNAME or "nvim"
-    local module = string.gsub(fp, "^.*/" .. app_name .. "/lua/", ""):gsub("/", ".")
+    callback = function(opts)
+        local fp = vim.fn.fnamemodify(vim.fs.normalize(vim.api.nvim_buf_get_name(opts.buf)), ":r") --[[@as string]]
+        local app_name = vim.env.NVIM_APPNAME and vim.env.NVIM_APPNAME or "nvim"
+        local module = string.gsub(fp, "^.*/" .. app_name .. "/lua/", ""):gsub("/", ".")
 
-    require("plenary.reload").reload_module "base46"
-    require("plenary.reload").reload_module(module)
-    require("plenary.reload").reload_module "custom.chadrc"
+        require("plenary.reload").reload_module "base46"
+        require("plenary.reload").reload_module(module)
+        require("plenary.reload").reload_module "custom.chadrc"
 
-    config = require("core.utils").load_config()
+        config = require("core.utils").load_config()
 
-    vim.g.nvchad_theme = config.ui.theme
-    vim.g.transparency = config.ui.transparency
+        vim.g.nvchad_theme = config.ui.theme
+        vim.g.transparency = config.ui.transparency
 
-    -- statusline
-    require("plenary.reload").reload_module("custom.ui.statusline." .. config.ui.statusline.theme)
-    vim.opt.statusline = "%!v:lua.require('custom.ui.statusline." .. config.ui.statusline.theme .. "').run()"
+        -- statusline
+        require("plenary.reload").reload_module("custom.ui.statusline." .. config.ui.statusline.theme)
+        vim.opt.statusline = "%!v:lua.require('custom.ui.statusline." .. config.ui.statusline.theme .. "').run()"
 
-    require("plenary.reload").reload_module "custom.ui.tabufline.modules"
-    vim.opt.tabline = "%!v:lua.require('custom.ui.tabufline.modules').run()"
+        require("plenary.reload").reload_module "custom.ui.tabufline.modules"
+        vim.opt.tabline = "%!v:lua.require('custom.ui.tabufline.modules').run()"
 
-    require("base46").load_all_highlights()
-  end,
+        require("base46").load_all_highlights()
+    end,
 })

@@ -32,8 +32,8 @@ local bundles = {
 for _, bundle in ipairs(vim.split(vim.fn.glob(home .. "/.config/nvim/jars/vscode-java-test/server/*.jar", 1), "\n")) do
   --These two jars are not bundles, therefore don't put them in the table
   if
-    not vim.endswith(bundle, "com.microsoft.java.test.runner-jar-with-dependencies.jar")
-    and not vim.endswith(bundle, "com.microsoft.java.test.runner.jar")
+      not vim.endswith(bundle, "com.microsoft.java.test.runner-jar-with-dependencies.jar")
+      and not vim.endswith(bundle, "com.microsoft.java.test.runner.jar")
   then
     table.insert(bundles, bundle)
   end
@@ -41,7 +41,7 @@ end
 
 --Decompiler
 for _, bundle in
-  ipairs(vim.split(vim.fn.glob(home .. "/.config/nvim/jars/vscode-java-decompiler/server/*.jar", 1), "\n"))
+ipairs(vim.split(vim.fn.glob(home .. "/.config/nvim/jars/vscode-java-decompiler/server/*.jar", 1), "\n"))
 do
   table.insert(bundles, bundle)
 end

@@ -18,7 +18,7 @@ return {
     --- Default calendar app
     calendar = "firefox https://calendar.google.com/",
     --- Default file manager
-    file_manager = "dolphin",
+    file_manager = "nemo",
     --- Default network manager
     network_manager = "kitty -e nmtui",
     --- Default bluetooth manager

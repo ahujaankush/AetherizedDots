@@ -8,7 +8,7 @@ return function()
 	local color = beautiful.white
 	local widget = wibox.widget({
 		widget = wibox.widget.textclock,
-		format = "%I:%M %p",
+		format = "%a %b %d, %I:%M %p",
 		align = "center",
 		valign = "center",
 		font = beautiful.font_name .. "Medium 12",

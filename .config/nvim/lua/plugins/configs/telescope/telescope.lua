@@ -63,7 +63,9 @@ local options = {
       use_delta = true,
       use_custom_command = nil,
       side_by_side = true,
-      diff_context_lines = vim.o.scrolloff,
+      vim_diff_opts = {
+        ctxlen = vim.o.scrolloff,
+      },
       entry_format = "state #$ID, $STAT, $TIME",
       time_format = "",
       mappings = {
@@ -84,7 +86,6 @@ local options = {
     "themes",
     "terms",
     "media",
-    "projects",
     "ui-select",
     "refactoring",
     "undo",

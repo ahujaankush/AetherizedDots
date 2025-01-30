@@ -10,7 +10,7 @@ local helpers = require("helpers")
 
 return function(s)
   s.notification_panel = awful.popup({
-    type = "dock",
+    type = "popup",
     screen = s,
     minimum_height = s.geometry.height - (beautiful.wibar_height + dpi(10)),
     maximum_height = s.geometry.height - (beautiful.wibar_height + dpi(10)),

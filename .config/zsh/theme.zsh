@@ -2,40 +2,40 @@
 ## Changes may be overwritten the next time 
 ## configs are re-generated
 
-# Colors
-# black
+
+export background='#101317'
 export foreground='#dddddd'
-export background='#0e1319'
 
-export base00='#2d373e'
-export base08='#3c404c'
+# Black
+export base00='#171b21'
+export base08='#2d373e'
 
-# red
+# Red
 export base01='#f7467b'
-export base09='#ff62a4'
+export base09='#ff62c1'
+         
+# Green  
+export base02='#00ffb1'
+export base10='#1addb0'
 
-# green
-export base02='#1addb0'
-export base10='#00ffb1'
-
-# yellow
-export base03='#ff8a30'
+# Yellow
+export base03='#f99e44'
 export base11='#ffc857'
- 
-# blue
-export base04='#2798e4'
-export base12='#53befc'
 
-# magenta
-export base05='#9554ff'
-export base13='#B467F9'
+# Blue
+export base04='#53befc'
+export base12='#2798e4'
 
-# cyan
-export base06='#2BCAFC'
-export base14='#2bfcfc'
+# Magenta
+export base05='#B467F9'
+export base13='#9554ff'
 
-# white
+# Cyan
+export base06='#2bfcfc'
+export base14='#2BCAFC'
+
+# White
 export base07='#8e8e8e'
-export base15='#ffffff'
+export base15='#f2f4f5'
 
 # vim:filetype=zsh

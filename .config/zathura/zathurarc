@@ -1,0 +1,49 @@
+set font                        "JetBrainsMono Nerd Font 12"
+set adjust-open                 "best-fit"
+set smooth-scroll               "true"
+set window-title-basename       "true"
+set selection-clipboard         "clipboard"
+
+
+set notification-error-bg       rgba(247,70,123,1)
+set notification-error-fg       rgba(22,26,29,1)
+set notification-warning-bg     rgba(249,158,67,1)
+set notification-warning-fg     rgba(22,26,29,1)
+set notification-bg             rgba(22,26,29,1)
+set notification-fg             rgba(221,221,221,1)
+
+
+set default-bg 			      rgba(10,12,16,0.7)
+set default-fg                rgba(205,214,244,1)
+
+
+set completion-bg               rgba(22,26,29,0)
+set completion-fg               rgba(221,221,221,1)
+set completion-highlight-bg     rgba(180,103,249,1)
+set completion-highlight-fg     rgba(22,26,29,1)
+set completion-group-bg         rgba(45,55,62,1)
+set completion-group-fg         rgba(180,103,249,1)
+
+
+set statusbar-fg		          rgba(205,214,244,1)
+set statusbar-bg		          rgba(10,12,16,0)
+
+
+set inputbar-fg			          rgba(205,214,244,1)
+set inputbar-bg 		          rgba(10,12,16,0)
+
+set recolor                       "true"
+set recolor-lightcolor		    rgba(30,30,46,0)
+set recolor-darkcolor		      rgba(205,214,244,1)
+
+set index-fg			            rgba(205,214,244,1)
+set index-bg			            rgba(10,12,16,0)
+set index-active-fg		        rgba(205,214,244,1)
+set index-active-bg		        rgba(10,12,16,0)
+
+set render-loading-bg		      rgba(10,12,16,0)
+set render-loading-fg		      rgba(205,214,244,1)
+
+set highlight-color		        rgba(10,12,16,0.5)
+set highlight-fg              rgba(245,194,231,0.5)
+set highlight-active-color	  rgba(245,194,231,0.5)

@@ -1,8 +1,8 @@
 return {
   TelescopePromptPrefix = {
-    fg = "red",
+    fg = "purple",
   },
   TelescopePromptTitle = {
-    bg = "red",
+    bg = "purple",
   },
 }

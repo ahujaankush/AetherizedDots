@@ -108,7 +108,7 @@ command_execution_time  # duration of the last command
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=0
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=4
   # Custom icon. הּ ﮼  
-  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='󰊠'
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
 
   ##################################[ dir: current directory ]##################################
   # Current directory background color.

@@ -15,7 +15,7 @@ local formatting_style = {
 
   format = function(_, item)
     local icons = require("core.utils").load_config().ui.icons.lspkind
-    local icon = (cmp_ui.icons and icons[item.kind]) or ""
+    local icon = cmp_ui.icons and icons[item.kind] or ""
 
     if cmp_style == "atom" or cmp_style == "atom_colored" then
       icon = " " .. icon .. " "

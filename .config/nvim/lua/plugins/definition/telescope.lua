@@ -21,14 +21,6 @@ return {
     end,
   },
   {
-    "ahmedkhalf/project.nvim",
-    lazy = false,
-    config = function()
-      require "plugins.configs.telescope.project"
-    end,
-  },
-
-  {
     "ziontee113/icon-picker.nvim",
     cmd = { "IconPickerInsert", "IconPickerNormal", "IconPickerYank" },
     dependencies = {

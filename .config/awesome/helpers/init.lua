@@ -5,4 +5,5 @@ return {
 	misc = require(... .. ".misc"),
 	run = require(... .. ".run"),
 	ui = require(... .. ".ui"),
+  keyboard = require(... .. ".keyboard")
 }
