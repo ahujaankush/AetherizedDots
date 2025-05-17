@@ -101,7 +101,7 @@ function theme.random_accent_color()
     return accents[i]
 end
 
-theme.accent = theme.color4
+theme.accent = theme.white
 
 --- UI events
 theme.leave_event = theme.transparent
@@ -110,7 +110,7 @@ theme.press_event = "#ffffff" .. "15"
 theme.release_event = "#ffffff" .. "10"
 
 --- Widgets
-theme.widget_bg = theme.lighter_black .. "AA"
+theme.widget_bg = theme.lighter_black
 
 --- Titlebars
 theme.titlebar_enabled = true
@@ -118,8 +118,8 @@ theme.titlebar_bg = theme.darker_black
 theme.titlebar_fg = theme.white
 
 --- Wibar
-theme.wibar_bg = theme.black .. "AA"
-theme.wibar_height = dpi(40)
+theme.wibar_bg = theme.darker_black .. "AA"
+theme.wibar_height = dpi(45)
 
 --- Music
 theme.music_bg = theme.black
@@ -223,7 +223,7 @@ theme.layoutlist_bg_selected = theme.widget_bg
 theme.useless_gap = dpi(10)
 
 --- Systray
-theme.systray_icon_size = dpi(25)
+theme.systray_icon_size = dpi(27)
 theme.systray_icon_spacing = dpi(5)
 theme.bg_systray = theme.widget_bg .. "00"
 --- theme.systray_max_rows = 2

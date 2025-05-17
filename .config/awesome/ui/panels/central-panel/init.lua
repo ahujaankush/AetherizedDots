@@ -110,11 +110,42 @@ return function(s)
         return widget
     end
 
-    --- Widgets
-    s.stats = require("ui.panels.central-panel.stats")
-    s.quick_settings = require("ui.panels.central-panel.quick-settings")
-    -- s.slider = require("ui.panels.central-panel.slider")
-    s.music_player = require("ui.panels.central-panel.music-player")
+    local widget_contents = wibox.widget {
+        {
+            {
+                header(),
+                margins = { top = dpi(10), bottom = dpi(10), right = dpi(20), left = dpi(20) },
+                widget = wibox.container.margin,
+            },
+            {
+                {
+                    {
+                        {
+                            {
+                                -- s.slider,
+                                require("ui.panels.central-panel.quick-settings"),
+                                forced_height = dpi(300),
+                                layout = wibox.layout.fixed.vertical,
+                            },
+                            require("ui.panels.central-panel.stats"),
+                            layout = wibox.layout.fixed.horizontal
+                        },
+                         require("ui.panels.central-panel.music-player"),
+                        layout = wibox.layout.fixed.vertical,
+                    },
+                    margins = dpi(10),
+                    widget = wibox.container.margin,
+                },
+                shape = helpers.ui.prrect(beautiful.border_radius * 2, true, true, false, false),
+                bg = beautiful.wibar_bg,
+                widget = wibox.container.background,
+            },
+            layout = wibox.layout.align.vertical,
+        },
+        bg = beautiful.widget_bg,
+        shape = helpers.ui.rrect(beautiful.window_rounded and beautiful.border_radius or 0),
+        widget = wibox.container.background,
+    }
 
     s.central_panel = awful.popup({
         type = "popup",
@@ -123,46 +154,11 @@ return function(s)
         ontop = true,
         visible = false,
         placement = function(w)
-            awful.placement.top_left(w, {
-                margins = { top = beautiful.wibar_height + 2 * beautiful.useless_gap, left = 2 * beautiful.useless_gap },
+            awful.placement.bottom_left(w, {
+                margins = { bottom = beautiful.wibar_height + 2 * beautiful.useless_gap, left = 2 * beautiful.useless_gap },
             })
         end,
-        widget = {
-            {
-                {
-                    header(),
-                    margins = { top = dpi(10), bottom = dpi(10), right = dpi(20), left = dpi(20) },
-                    widget = wibox.container.margin,
-                },
-                {
-                    {
-                        {
-                            {
-                                {
-                                    -- s.slider,
-                                    s.quick_settings,
-                                    forced_height = dpi(300),
-                                    layout = wibox.layout.fixed.vertical,
-                                },
-                                s.stats,
-                                layout = wibox.layout.fixed.horizontal
-                            },
-                            s.music_player,
-                            layout = wibox.layout.fixed.vertical,
-                        },
-                        margins = dpi(10),
-                        widget = wibox.container.margin,
-                    },
-                    shape = helpers.ui.prrect(beautiful.border_radius * 2, true, true, false, false),
-                    bg = beautiful.wibar_bg,
-                    widget = wibox.container.background,
-                },
-                layout = wibox.layout.align.vertical,
-            },
-            bg = beautiful.widget_bg,
-            shape = helpers.ui.rrect(beautiful.window_rounded and beautiful.border_radius or 0),
-            widget = wibox.container.background,
-        },
+        widget = widget_contents
     })
 
     --- Toggle container visibility

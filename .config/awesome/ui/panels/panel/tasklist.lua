@@ -90,7 +90,8 @@ return function(s)
                 margins = {
                     top = dpi(5),
                     bottom = dpi(5),
-                    right = dpi(5)
+                    right = dpi(2.5),
+                    left = dpi(2.5)
                 },
                 widget = wibox.container.margin,
 

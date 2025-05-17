@@ -3,7 +3,7 @@ require(... .. ".notifications")
 local decorations = require(... .. ".decorations")
 decorations.init()
 
-local top_panel = require(... .. ".panels.top-panel")
+local top_panel = require(... .. ".panels.panel")
 local central_panel = require(... .. ".panels.central-panel")
 local notification_panel = require(... .. ".panels.notification-panel")
 

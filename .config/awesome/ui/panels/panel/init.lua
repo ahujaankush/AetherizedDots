@@ -35,7 +35,7 @@ return function(s)
                 child = icon,
                 normal_bg = beautiful.widget_bg,
                 hover_bg = beautiful.one_bg,
-                paddings = dpi(5),
+                paddings = dpi(7),
                 margins = {
                     top = 0,
                     left = 0,
@@ -165,11 +165,11 @@ return function(s)
         return widget
     end
 
-    local tasklist = require("ui.panels.top-panel.tasklist")
+    local tasklist = require("ui.panels.panel.tasklist")
 
     --- Keyboard
     --- ~~~~~~~
-    local keyboard = require("ui.panels.top-panel.keyboard")
+    local keyboard = require("ui.panels.panel.keyboard")
 
     --- Power & Nvidia
     --- ~~~~~~~
@@ -178,27 +178,27 @@ return function(s)
 
     --- Systemtray
     --- ~~~~~~~
-    local systray = require("ui.panels.top-panel.systray")
+    local systray = require("ui.panels.panel.systray")
 
 
     --- Volume
     --- ~~~~~~~
-    local volume = require("ui.panels.top-panel.volume")
+    local volume = require("ui.panels.panel.volume")
 
 
     --- Microphone
     --- ~~~~~~~
-    local mic = require("ui.panels.top-panel.microphone")
+    local mic = require("ui.panels.panel.microphone")
 
 
     --- Brightness
     --- ~~~~~~~
-    local brightness = require("ui.panels.top-panel.brightness")
+    local brightness = require("ui.panels.panel.brightness")
 
 
     --- Battery
     --- ~~~~~~~
-    local battery = require("ui.panels.top-panel.battery")
+    local battery = require("ui.panels.panel.battery")
 
     --- Notif panel
     --- ~~~~~~~~~~~
@@ -221,7 +221,7 @@ return function(s)
                 child = icon,
                 normal_bg = beautiful.widget_bg,
                 hover_bg = beautiful.one_bg,
-                paddings = dpi(4),
+                paddings = dpi(7),
                 margins = {
                     top = 0,
                     left = 0,
@@ -239,7 +239,7 @@ return function(s)
     --- Clock
     --- ~~~~~~~~~
     local clock = function()
-        local icon = require("ui.panels.top-panel.clock")()
+        local icon = require("ui.panels.panel.clock")()
 
         local widget = wibox.widget({
             widget = wibox.container.margin,
@@ -303,7 +303,7 @@ return function(s)
                 child = s.mylayoutbox,
                 normal_bg = beautiful.widget_bg,
                 hover_bg = beautiful.one_bg,
-                paddings = dpi(5),
+                paddings = dpi(7),
                 margins = {
                     top = 0,
                     left = 0,
@@ -319,14 +319,13 @@ return function(s)
 
     --- Create the top_panel
     --- ~~~~~~~~~~~~~~~~~~~~~~~
-    s.top_panel = awful.wibar({
+    s.panel = awful.wibar({
         screen = s,
         maximum_height = beautiful.wibar_height,
         minimum_width = s.geometry.width,
         maximum_width = s.geometry.width,
-        placement = function(c)
-            awful.placement.top(c)
-        end,
+        position = "bottom",
+        ontop = false,
         widget = {
             {
                 layout = wibox.layout.align.horizontal,
@@ -335,11 +334,11 @@ return function(s)
                     launcher(),
                     layoutbox(),
                     taglist(s),
-                    tasklist(s),
+                    clock(),
                     spacing = dpi(5),
                     layout = wibox.layout.fixed.horizontal,
                 },
-                clock(),
+                tasklist(s),
                 {
                     battery(),
                     systray(s),

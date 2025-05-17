@@ -10,7 +10,7 @@ local function emit_volume_info()
       local muted = output() == "true" and 1 or 0
       local volume = tonumber(output())
       if volume ~= volume_old or muted ~= muted_old then
-        awesome.emit_signal("widget::volume", volume, muted == 1 and true or false)
+        awesome.emit_signal("widget::volume", volume, (muted == 1 or volume == 0)  and true or false)
         ---@diagnostic disable-next-line: cast-local-type
         volume_old = volume
         muted_old = muted

@@ -3,7 +3,7 @@
   background:     #10121388;
   background-alt: #252525AA;
   foreground:     #FFFFFFFF;
-  selected:       #53befcFF;
+  selected:       #FFFFFFFF;
   active:         #18cfa6FF;
   urgent:         #f7467bFF;
   font: "JetbrainsMono Nerd Font 10";
@@ -54,10 +54,10 @@ mainbox {
 inputbar {
   enabled:                     true;
   spacing:                     10px;
-  margin:                      0px 500px 0px 0px;
+  margin:                      0px 0px 0px 0px;
   padding:                     12px;
   border:                      0px 0px 0px 4px;
-  border-radius:               0px 100% 100% 0px;
+  border-radius:               5px;
   border-color:                @selected;
   background-color:            @background-alt;
   text-color:                  @foreground;
@@ -125,7 +125,7 @@ element {
   margin:                      0px;
   padding:                     15px 10px;
   border:                      0px solid;
-  border-radius:               0px;
+  border-radius:               10px;
   border-color:                @selected;
   background-color:            transparent;
   text-color:                  @foreground;
@@ -139,8 +139,8 @@ element normal.normal {
 }
 
 element selected.normal {
-  border:                      0px 0px 0px 4px;
-  border-radius:               0px;
+  border:                      2px;
+  border-radius:               5px;
   border-color:                @selected;
   background-color:            @background-alt;
   text-color:                  @foreground;

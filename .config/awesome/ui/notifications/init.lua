@@ -19,7 +19,7 @@ naughty.persistence_enabled = true
 naughty.config.defaults.ontop = true
 naughty.config.defaults.timeout = 6
 naughty.config.defaults.title = "System Notification"
-naughty.config.defaults.position = "top_right"
+naughty.config.defaults.position = "bottom_right"
 
 local function get_oldest_notification()
   for _, notification in ipairs(naughty.active) do
